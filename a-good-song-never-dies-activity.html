@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+LESSON-META
+title: "A Good Song Never Dies: Song Activity"
+source_type: song / fill-in-the-blank
+level: B1-B2
+theme: music's staying power vs. the music industry's cynicism
+artist: Saint Motel
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Class Song Activity: A Good Song Never Dies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+/* ── RESET ───────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── TOKENS ──────────────────────────────────────────────────── */
+:root {
+  --ink:            #241014;
+  --paper:          #f6ead2;
+  --card:           #efe0bd;
+  --marquee:        #4a1220;
+  --marquee2:       #74223a;
+  --gold:           #e3a83e;
+  --rose:           #c96a55;
+  --forest:         #336655;
+  --rule:           #b9a687;
+  --correct:        #2f7d46;
+  --wrong:          #b23b2e;
+  --light-correct:  #e5f2e8;
+  --light-wrong:    #fbe5e0;
+  --shadow:         74, 18, 32;
+
+  --font-display: 'Big Shoulders Display', 'Impact', sans-serif;
+  --font-body:    'Source Serif 4', Georgia, serif;
+  --font-mono:    'Space Mono', 'Courier New', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.04rem;
+  line-height: 1.7;
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+::selection { background: var(--gold); color: var(--ink); }
+
+/* ── ACCESSIBILITY ───────────────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--forest);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── BULB STRAND ─────────────────────────────────────────────── */
+.bulbstrand {
+  display: flex;
+  background: #1a0a0e;
+  padding: 7px 0;
+  overflow: hidden;
+}
+.bulbstrand svg { flex: 0 0 auto; }
+
+/* ── MASTHEAD ────────────────────────────────────────────────── */
+.masthead {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(155deg, var(--marquee) 0%, var(--marquee2) 100%);
+  padding: 3rem 1rem 2.8rem;
+  text-align: center;
+  color: #f6ead2;
+}
+.masthead-record {
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  opacity: 0.9;
+}
+@media (max-width: 700px) {
+  .masthead-record { width: 130px; height: 130px; top: -20px; right: -20px; }
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 1.1rem;
+}
+.headline {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 7vw, 4.4rem);
+  line-height: 0.98;
+  color: #faf3e2;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.005em;
+}
+.artist {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+.deck {
+  font-size: 1.06rem;
+  max-width: 600px;
+  margin: 0 auto 1.4rem;
+  color: #e9dcc8;
+  font-style: italic;
+  line-height: 1.65;
+}
+.factrow {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.7rem;
+}
+.fact {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  background: rgba(246,234,210,0.08);
+  border: 1px solid rgba(246,234,210,0.3);
+  color: #f6ead2;
+  border-radius: 3px;
+  padding: 0.38rem 0.85rem;
+  font-weight: 400;
+}
+
+/* ── LAYOUT ──────────────────────────────────────────────────── */
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2.2rem 20px 1rem;
+}
+.intro-block { max-width: 860px; margin: 0 auto 1.8rem; }
+
+.sectitle {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--marquee);
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.005em;
+}
+.subtitle { color: #4d3b3f; margin-bottom: 1.3rem; font-size: 0.95rem; line-height: 1.6; }
+
+.howto {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-top: 4px solid var(--gold);
+  padding: 1.7rem 1.8rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 6px 6px 0 rgba(var(--shadow), 0.12);
+}
+.howto h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; margin-bottom: 1.15rem; color: var(--marquee); }
+.howto-steps { display: flex; flex-direction: column; gap: 1rem; }
+.step { display: flex; align-items: flex-start; gap: 1rem; }
+.step-num {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--marquee);
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.1rem;
+}
+.step-text { font-size: 0.94rem; line-height: 1.55; }
+.howto .note {
+  margin-top: 1.2rem;
+  padding: 0.85rem 1.05rem;
+  background: var(--paper);
+  border-radius: 3px;
+  font-size: 0.85rem;
+  color: #4d3b3f;
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  line-height: 1.55;
+}
+.howto .note-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--forest);
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+
+/* ── TWO-COLUMN ACTIVITY GRID ───────────────────────────────── */
+.activity-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.8rem;
+  align-items: start;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.board-col { position: sticky; top: 1rem; }
+.board-panel {
+  background: var(--marquee);
+  border: 1px solid rgba(246,234,210,0.15);
+  padding: 1.1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  box-shadow: 6px 6px 0 rgba(var(--shadow), 0.25);
+}
+.board-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #f6ead2;
+  margin-bottom: 0.2rem;
+}
+.board-sub { font-size: 0.75rem; color: #d9c4b0; margin-bottom: 0.9rem; }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.8rem;
+  margin-bottom: 0.9rem;
+  font-size: 0.72rem;
+  color: #f0e5d3;
+}
+.legend-item { display: flex; align-items: center; gap: 0.35rem; }
+.swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+
+#board {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-bottom: 0.75rem;
+}
+.tile {
+  background: var(--paper);
+  border: 1px solid rgba(36,16,20,0.15);
+  border-radius: 3px;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s;
+  box-shadow: 3px 3px 0 rgba(36,16,20,0.18);
+  position: relative;
+}
+.tile:hover:not(.used) { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 rgba(36,16,20,0.28); }
+.tile.adj { border-left: 4px solid var(--rose); }
+.tile.noun { border-left: 4px solid var(--gold); }
+.tile.verb { border-left: 4px solid var(--forest); }
+.tile-word { font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; margin-bottom: 0.05rem; letter-spacing: 0.01em; }
+.tile-pos { font-family: var(--font-mono); font-size: 0.58rem; color: var(--rule); margin-bottom: 0.2rem; }
+.tile-def { font-size: 0.72rem; color: #4d3b3f; line-height: 1.35; }
+.tile-count {
+  display: inline-block;
+  margin-top: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--forest);
+  background: #fff;
+  border: 1px solid var(--forest);
+  border-radius: 3px;
+  padding: 0.08rem 0.35rem;
+}
+.tile.selected { outline: 2.5px solid var(--gold); outline-offset: 1px; box-shadow: 0 0 0 5px rgba(227,168,62,0.25); }
+.tile.used { opacity: 0.35; cursor: not-allowed; box-shadow: none; }
+.tile.used .tile-tag { display: inline; }
+.tile-tag {
+  display: none;
+  font-family: var(--font-mono); font-size: 0.56rem; color: var(--forest); font-weight: 700;
+  position: absolute; top: 0.4rem; right: 0.5rem;
+}
+
+.board-status {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--ink);
+  background: var(--gold);
+  border-radius: 3px;
+  padding: 0.45rem;
+  font-weight: 700;
+}
+
+/* ── LYRICS SHEET ────────────────────────────────────────────── */
+.songsheet {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-left: 5px solid var(--marquee);
+  padding: 1.9rem 2rem;
+  margin-bottom: 1.6rem;
+  box-shadow: 7px 7px 0 rgba(var(--shadow), 0.1);
+}
+.verselabel {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--forest);
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  display: block;
+}
+.lyric-line {
+  margin-bottom: 0.4rem;
+  font-size: 1.06rem;
+}
+.lyric-block { margin-bottom: 1.8rem; }
+.lyric-block:last-child { margin-bottom: 0; }
+
+.blank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 118px;
+  min-height: 2.2rem;
+  text-align: center;
+  background: var(--paper);
+  border: 1.5px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.25rem 0.7rem;
+  margin: 0.15rem 0.2rem;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #8a7a68;
+  box-shadow: 2px 2px 0 rgba(36,16,20,0.12);
+  transition: all 0.14s ease;
+  vertical-align: middle;
+}
+.blank:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 rgba(36,16,20,0.2); background: #fff; border-color: var(--forest); }
+.blank:active { transform: translate(0, 0); box-shadow: 1px 1px 0 rgba(36,16,20,0.15); }
+.blank.filled { color: var(--marquee); background: #fff; border-color: var(--gold); font-style: normal; }
+.blank.correct { color: var(--correct); background: var(--light-correct); border-color: var(--correct); }
+.blank.wrong { color: var(--wrong); background: var(--light-wrong); border-color: var(--wrong); }
+.blank-hint {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--wrong);
+  background: var(--light-wrong);
+  border: 1.5px dashed var(--wrong);
+  border-radius: 3px;
+  padding: 0.15rem 0.5rem;
+  margin: 0.15rem 0.2rem;
+  vertical-align: middle;
+}
+
+/* ── CONTROLS ────────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  gap: 0.9rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2.2rem 0;
+}
+.btn {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 0.75rem 1.7rem;
+  border-radius: 3px;
+  border: 2px solid var(--marquee);
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--paper);
+  color: var(--marquee);
+}
+.btn.primary { background: var(--marquee); color: var(--gold); box-shadow: 4px 4px 0 rgba(var(--shadow), 0.3); }
+.btn.primary:hover { background: var(--marquee2); transform: translate(-1px, -1px); box-shadow: 5px 5px 0 rgba(var(--shadow), 0.35); }
+.btn.ghost:hover { background: var(--card); transform: translate(-1px, -1px); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+#score-bar {
+  display: none;
+  text-align: center;
+  background: var(--marquee);
+  color: #fff;
+  border-radius: 3px;
+  padding: 2rem;
+  margin: 1rem 0 2.4rem;
+  box-shadow: 7px 7px 0 rgba(var(--shadow), 0.2);
+}
+#score-bar.show { display: block; }
+#score-num { font-family: var(--font-display); font-weight: 800; font-size: 3.2rem; color: var(--gold); line-height: 1; }
+#score-title { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; margin: 0.5rem 0; }
+#score-msg { font-size: 0.92rem; margin-bottom: 0.3rem; color: #e9dcc8; }
+
+/* ── GLOSSARY RECAP ──────────────────────────────────────────── */
+.glossary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.gcard {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--forest);
+  padding: 1.1rem 1.3rem;
+  box-shadow: 4px 4px 0 rgba(var(--shadow), 0.1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.gcard:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 rgba(var(--shadow), 0.15); }
+.gterm { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; color: var(--marquee); }
+.gpos { font-family: var(--font-mono); font-size: 0.66rem; color: var(--rule); margin-bottom: 0.35rem; }
+.gdef { font-size: 0.86rem; color: #4d3b3f; margin-bottom: 0.5rem; line-height: 1.5; }
+.gline { font-size: 0.83rem; font-style: italic; color: var(--forest); }
+
+.about {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-left: 5px solid var(--gold);
+  padding: 1.3rem 1.6rem;
+  font-size: 0.92rem;
+  margin-top: 2rem;
+  line-height: 1.65;
+}
+.about strong { color: var(--marquee); }
+
+.tail { max-width: 860px; margin: 0 auto; }
+
+footer {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--rule);
+  margin-top: 3rem;
+}
+
+@media (max-width: 860px) {
+  .activity-grid { grid-template-columns: 1fr; }
+  .board-col { position: static; order: -1; margin-bottom: 1.6rem; }
+  .board-panel { max-height: none; }
+  #board { flex-direction: row; flex-wrap: wrap; }
+  .tile { flex: 1 1 200px; }
+}
+@media (max-width: 600px) {
+  .headline { font-size: 2.5rem; }
+  .songsheet { padding: 1.4rem 1.2rem; }
+  .blank { min-width: 84px; font-size: 0.9rem; }
+  .howto { padding: 1.3rem 1.3rem; }
+  .howto .note { flex-direction: column; gap: 0.2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="bulbstrand" aria-hidden="true">
+  <svg width="100%" height="18" viewBox="0 0 800 18" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="bulbs" width="34" height="18" patternUnits="userSpaceOnUse">
+        <circle cx="17" cy="9" r="5.5" fill="#e3a83e"/>
+        <circle cx="17" cy="9" r="5.5" fill="none" stroke="#f6ead2" stroke-width="0.6" opacity="0.4"/>
+      </pattern>
+    </defs>
+    <rect width="800" height="18" fill="url(#bulbs)"/>
+  </svg>
+</div>
+
+<header class="masthead">
+  <svg class="masthead-record" width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <circle cx="90" cy="90" r="88" fill="#1a0a0e"/>
+    <circle cx="90" cy="90" r="76" fill="none" stroke="#33141c" stroke-width="1.5"/>
+    <circle cx="90" cy="90" r="64" fill="none" stroke="#33141c" stroke-width="1.5"/>
+    <circle cx="90" cy="90" r="52" fill="none" stroke="#33141c" stroke-width="1.5"/>
+    <circle cx="90" cy="90" r="40" fill="none" stroke="#33141c" stroke-width="1.5"/>
+    <circle cx="90" cy="90" r="26" fill="#e3a83e"/>
+    <circle cx="90" cy="90" r="5" fill="#1a0a0e"/>
+  </svg>
+  <p class="eyebrow">English language class · song activity · B1-B2</p>
+  <h1 class="headline">A Good Song<br>Never Dies</h1>
+  <p class="artist">by Saint Motel</p>
+  <p class="deck">A song that pushes back on the music industry's cash-and-hype machine, insisting that what actually lasts is the moment a song first made you feel something. Fill in the lyrics using the word board on the right.</p>
+  <div class="factrow">
+    <span class="fact">Genre: Indie Pop / Rock</span>
+    <span class="fact">Theme: Authenticity vs. hype</span>
+    <span class="fact">Level: B1-B2</span>
+  </div>
+</header>
+
+<main class="page">
+
+<div class="intro-block">
+  <h2 class="sectitle">Fill in the Blanks</h2>
+  <p class="subtitle">Listen to the song with your teacher, then complete the lyrics using the words on the board. The blanks are spread across the whole song, so keep an eye out all the way to the end. The board stays on the right so you can check it while you scroll.</p>
+
+  <div class="howto">
+    <h3>How to play</h3>
+    <div class="howto-steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <p class="step-text">Read the short definition on each tile in the word board first, so you know what a word means before you use it.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <p class="step-text">Click a word tile to select it. It lights up in gold to show it's ready to go.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <p class="step-text">Click a blank in the lyrics to drop that word in. A few words come up more than once, so their tile stays active until every one of its blanks is filled.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <p class="step-text">Changed your mind? Click a filled blank again and the word hops right back to the board.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">5</span>
+        <p class="step-text">Click "Check Answers" whenever you're ready, even with a few blanks still empty. Those just count as incorrect, and you'll see the right word appear beside them.</p>
+      </div>
+    </div>
+    <p class="note"><span class="note-label">Tip</span> The board holds more words than the song has blanks. A handful are distractors that don't belong anywhere in the lyrics, so trust the definitions, not just the vibe.</p>
+  </div>
+</div>
+
+<div class="activity-grid">
+
+  <div class="lyrics-col">
+    <div class="songsheet">
+
+      <div class="lyric-block">
+        <span class="verselabel">Verse 1</span>
+        <div class="lyric-line">Stop, now let's begin</div>
+        <div class="lyric-line">You're in too deep to go back again</div>
+        <div class="lyric-line">Cash, it's pay-to-play</div>
+        <div class="lyric-line">You want more hits than a lemonade</div>
+        <div class="lyric-line">No, you don't own me</div>
+        <div class="lyric-line">You don't even know me</div>
+        <div class="lyric-line">Who, this <span class="blank" data-answer="vagabond" data-blank="vag1"></span></div>
+        <div class="lyric-line">With a two part path to the great beyond</div>
+        <div class="lyric-line">How, stay <span class="blank" data-answer="genuine" data-blank="gen1"></span></div>
+        <div class="lyric-line">A ground floor opp, I can help you find</div>
+        <div class="lyric-line">You're a <span class="blank" data-answer="dreamer" data-blank="dream1"></span></div>
+        <div class="lyric-line">Call me when you're Bieber</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Chorus 1</span>
+        <div class="lyric-line">And when they play it, you can't help but sing along</div>
+        <div class="lyric-line">That's nothin' <span class="blank" data-answer="odd" data-blank="odd1"></span>, that's nothin' wrong</div>
+        <div class="lyric-line">'Cause a good song never <span class="blank" data-answer="dies" data-blank="dies1"></span></div>
+        <div class="lyric-line">It just <span class="blank" data-answer="reminds" data-blank="rem1"></span> of where you were</div>
+        <div class="lyric-line">The first time it made you cry</div>
+        <div class="lyric-line">The first time you felt alive</div>
+        <div class="lyric-line">No, a good song never</div>
+        <div class="lyric-line">No, a good song never</div>
+        <div class="lyric-line">The first time it made you cry</div>
+        <div class="lyric-line">The first time you felt alive</div>
+        <div class="lyric-line">No, a good song never</div>
+        <div class="lyric-line">Dies</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Verse 2</span>
+        <div class="lyric-line">Hope, the wonder drug</div>
+        <div class="lyric-line">Don't book no more, think it took too much</div>
+        <div class="lyric-line">Sweat, your <span class="blank" data-answer="equity" data-blank="eq1"></span></div>
+        <div class="lyric-line">Make the caffeine be your <span class="blank" data-answer="weaponry" data-blank="weap1"></span></div>
+        <div class="lyric-line">What, is the reason</div>
+        <div class="lyric-line">There never was one needed</div>
+        <div class="lyric-line">Fear, it's all around</div>
+        <div class="lyric-line">But it <span class="blank" data-answer="weighs" data-blank="weigh1"></span> too much too slow you down</div>
+        <div class="lyric-line">Now, is the time to act</div>
+        <div class="lyric-line">'Cause the best defence is a <span class="blank" data-answer="timeless" data-blank="time1"></span> track</div>
+        <div class="lyric-line">No, you don't own me</div>
+        <div class="lyric-line">You don't even know me</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Chorus 2</span>
+        <div class="lyric-line">But when they play it, you can't help but sing along</div>
+        <div class="lyric-line">That's nothin' odd, that's nothin' wrong</div>
+        <div class="lyric-line">'Cause a good song never <span class="blank" data-answer="dies" data-blank="dies2"></span></div>
+        <div class="lyric-line">It just <span class="blank" data-answer="reminds" data-blank="rem2"></span> you of where you were</div>
+        <div class="lyric-line">The first time it made you cry</div>
+        <div class="lyric-line">The first time you felt alive</div>
+        <div class="lyric-line">No, a good song never</div>
+        <div class="lyric-line">No, a good song never</div>
+        <div class="lyric-line">The first time it made you cry</div>
+        <div class="lyric-line">The first time you felt alive</div>
+        <div class="lyric-line">No, a good song never</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Bridge</span>
+        <div class="lyric-line">There was a moment, a hole opened in the sky</div>
+        <div class="lyric-line">A chance to join that <span class="blank" data-answer="pantheon" data-blank="pan1"></span></div>
+        <div class="lyric-line">For all the times they never heard your battle cry</div>
+        <div class="lyric-line">Now even angels sing along</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Outro</span>
+        <div class="lyric-line">'Cause a good song never dies</div>
+        <div class="lyric-line">It just <span class="blank" data-answer="reminds" data-blank="rem3"></span> you of where you were</div>
+        <div class="lyric-line">The first time it made you cry</div>
+        <div class="lyric-line">The first time you felt alive</div>
+        <div class="lyric-line">No, a good song never <span class="blank" data-answer="dies" data-blank="dies3"></span></div>
+        <div class="lyric-line">Like a lover who won't <span class="blank" data-answer="back down" data-blank="back1"></span></div>
+        <div class="lyric-line">They'll pull you over to the side</div>
+        <div class="lyric-line">Look you straight into the eyes</div>
+        <div class="lyric-line">No, a good song never</div>
+        <div class="lyric-line">No, a good song never</div>
+        <div class="lyric-line">The first time it made you cry</div>
+        <div class="lyric-line">The first time you felt alive</div>
+        <div class="lyric-line">No, a good song never</div>
+      </div>
+
+    </div>
+
+    <div class="controls">
+      <button class="btn primary" id="check-btn" onclick="checkAnswers()">Check Answers</button>
+      <button class="btn ghost" onclick="resetAll()">Reset</button>
+    </div>
+
+    <div id="score-bar" aria-live="polite">
+      <div id="score-num">0/16</div>
+      <div id="score-title"></div>
+      <div id="score-msg"></div>
+    </div>
+
+    <div class="about">
+      <strong>About the song:</strong> "A Good Song Never Dies" is by the Los Angeles indie pop band Saint Motel, known for pairing catchy, theatrical hooks with a wry take on fame and the music business. This track argues against the industry's obsession with hits and cash, insisting that a song's real worth is measured by the moment it made you feel something, not by how it charts.
+    </div>
+  </div>
+
+  <aside class="board-col">
+    <div class="board-panel">
+      <div class="board-title">Word Board</div>
+      <div class="board-sub">Click a word, then click a blank.</div>
+      <div class="legend">
+        <div class="legend-item"><span class="swatch" style="background:var(--rose)"></span>Adjective</div>
+        <div class="legend-item"><span class="swatch" style="background:var(--gold)"></span>Noun</div>
+        <div class="legend-item"><span class="swatch" style="background:var(--forest)"></span>Verb / Phrase</div>
+      </div>
+      <div id="board"></div>
+      <div class="board-status" id="board-status" aria-live="polite">0 / 16 blanks filled</div>
+    </div>
+  </aside>
+
+</div>
+
+<div class="tail">
+  <h2 class="sectitle" style="margin-top:2.6rem;">Vocabulary Recap</h2>
+  <p class="subtitle">Once you've finished the activity, review the words you placed and the distractors you managed to avoid.</p>
+  <div class="glossary" id="glossary"></div>
+</div>
+
+</main>
+
+<footer>Song Activity Worksheet · Fill in the Blanks · For classroom use</footer>
+
+<script>
+const WORDS = [
+  { word: "vagabond", pos: "noun", type: "noun", def: "Someone who travels from place to place with no permanent home.", slots: 1, line: "Who, this vagabond." },
+  { word: "genuine", pos: "adjective", type: "adj", def: "Honest and real, not fake or put on for show.", slots: 1, line: "How, stay genuine." },
+  { word: "dreamer", pos: "noun", type: "noun", def: "Someone full of hopeful, ambitious ideas about the future.", slots: 1, line: "You're a dreamer." },
+  { word: "odd", pos: "adjective", type: "adj", def: "Strange or out of the ordinary.", slots: 1, line: "That's nothin' odd, that's nothin' wrong." },
+  { word: "dies", pos: "verb", type: "verb", def: "Stops existing or comes to an end.", slots: 3, line: "'Cause a good song never dies." },
+  { word: "reminds", pos: "verb", type: "verb", def: "Brings a memory back to someone's mind.", slots: 3, line: "It just reminds you of where you were." },
+  { word: "equity", pos: "noun", type: "noun", def: "The value you build up in something over time, your fair share.", slots: 1, line: "Sweat, your equity." },
+  { word: "weaponry", pos: "noun", type: "noun", def: "The tools you use to fight for or defend something.", slots: 1, line: "Make the caffeine be your weaponry." },
+  { word: "weighs", pos: "verb", type: "verb", def: "Presses down heavily, in a way that slows something down.", slots: 1, line: "But it weighs too much too slow you down." },
+  { word: "timeless", pos: "adjective", type: "adj", def: "Not affected by trends, still meaningful no matter the era.", slots: 1, line: "'Cause the best defence is a timeless track." },
+  { word: "pantheon", pos: "noun", type: "noun", def: "The group of people most celebrated or respected in a field.", slots: 1, line: "A chance to join that pantheon." },
+  { word: "back down", pos: "phrasal verb", type: "verb", def: "To give up a position instead of continuing to hold it.", slots: 1, line: "Like a lover who won't back down." },
+  { word: "nostalgic", pos: "adjective", type: "adj", def: "Feeling a fond longing for something from the past.", slots: 0 },
+  { word: "relentless", pos: "adjective", type: "adj", def: "Not stopping or slowing down, even under pressure.", slots: 0 },
+  { word: "legacy", pos: "noun", type: "noun", def: "What someone or something is remembered for after it's gone.", slots: 0 },
+  { word: "surrender", pos: "verb", type: "verb", def: "To stop resisting and give in.", slots: 0 }
+];
+
+// Board sorted alphabetically
+const board = [...WORDS].sort((a, b) => a.word.localeCompare(b.word));
+
+const boardEl = document.getElementById('board');
+board.forEach((w, i) => {
+  const tile = document.createElement('div');
+  tile.className = `tile ${w.type}`;
+  tile.dataset.word = w.word;
+  tile.dataset.remaining = w.slots;
+  tile.dataset.slots = w.slots;
+  tile.id = `tile-${i}`;
+  tile.tabIndex = 0;
+  tile.setAttribute('role', 'button');
+  tile.setAttribute('aria-label', `${w.word}, ${w.pos}. ${w.def}`);
+  const countBadge = w.slots > 1 ? `<div class="tile-count" id="count-${w.word.replace(/\s+/g,'-')}">used in ${w.slots} places</div>` : '';
+  tile.innerHTML = `
+    <span class="tile-tag">placed</span>
+    <div class="tile-word">${w.word}</div>
+    <div class="tile-pos">${w.pos}</div>
+    <div class="tile-def">${w.def}</div>
+    ${countBadge}
+  `;
+  tile.addEventListener('click', () => selectTile(tile));
+  tile.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectTile(tile); }
+  });
+  boardEl.appendChild(tile);
+});
+
+let selectedTile = null;
+const TOTAL_BLANKS = document.querySelectorAll('.blank').length;
+let filledCount = 0;
+
+function selectTile(tile) {
+  if (tile.classList.contains('used')) return;
+  if (selectedTile === tile) {
+    tile.classList.remove('selected');
+    tile.setAttribute('aria-pressed', 'false');
+    selectedTile = null;
+    return;
+  }
+  document.querySelectorAll('.tile.selected').forEach(t => { t.classList.remove('selected'); t.setAttribute('aria-pressed', 'false'); });
+  tile.classList.add('selected');
+  tile.setAttribute('aria-pressed', 'true');
+  selectedTile = tile;
+}
+
+function updateTileBadge(tile) {
+  const word = tile.dataset.word;
+  const badge = document.getElementById(`count-${word.replace(/\s+/g,'-')}`);
+  if (!badge) return;
+  const remaining = parseInt(tile.dataset.remaining, 10);
+  const slots = parseInt(tile.dataset.slots, 10);
+  const used = slots - remaining;
+  badge.textContent = remaining > 0 ? `${used}/${slots} placed` : `all ${slots} placed`;
+}
+
+document.querySelectorAll('.blank').forEach(blank => {
+  blank.tabIndex = 0;
+  blank.setAttribute('role', 'button');
+  blank.setAttribute('aria-label', 'Empty blank. Select a word tile, then press Enter here to fill it.');
+  blank.addEventListener('click', () => handleBlankClick(blank));
+  blank.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleBlankClick(blank); }
+  });
+});
+
+function handleBlankClick(blank) {
+  removeHint(blank);
+  if (blank.classList.contains('filled')) {
+    const word = blank.dataset.word;
+    const tile = [...document.querySelectorAll('.tile')].find(t => t.dataset.word === word);
+    if (tile) {
+      tile.dataset.remaining = parseInt(tile.dataset.remaining, 10) + 1;
+      tile.classList.remove('used');
+      updateTileBadge(tile);
+    }
+    blank.textContent = '';
+    blank.classList.remove('filled', 'correct', 'wrong');
+    blank.setAttribute('aria-label', 'Empty blank. Select a word tile, then press Enter here to fill it.');
+    delete blank.dataset.word;
+    filledCount--;
+    updateStatus();
+    return;
+  }
+  if (!selectedTile) {
+    blank.style.background = '#f3d7c9';
+    setTimeout(() => { if (!blank.classList.contains('filled')) blank.style.background = ''; }, 350);
+    return;
+  }
+  const word = selectedTile.dataset.word;
+  blank.textContent = word;
+  blank.dataset.word = word;
+  blank.classList.add('filled');
+  blank.setAttribute('aria-label', `Filled with ${word}. Press Enter to clear this blank.`);
+
+  const remaining = parseInt(selectedTile.dataset.remaining, 10) - 1;
+  selectedTile.dataset.remaining = remaining;
+  updateTileBadge(selectedTile);
+  if (remaining <= 0) selectedTile.classList.add('used');
+  selectedTile.classList.remove('selected');
+  selectedTile.setAttribute('aria-pressed', 'false');
+  selectedTile = null;
+  filledCount++;
+  updateStatus();
+}
+
+function removeHint(blank) {
+  const id = blank.dataset.blank;
+  const existing = document.getElementById(`hint-${id}`);
+  if (existing) existing.remove();
+  blank.classList.remove('correct', 'wrong');
+}
+
+function updateStatus() {
+  document.getElementById('board-status').textContent = `${filledCount} / ${TOTAL_BLANKS} blanks filled`;
+}
+
+function checkAnswers() {
+  let score = 0;
+  document.querySelectorAll('.blank').forEach(blank => {
+    removeHint(blank);
+    const isCorrect = !!blank.dataset.word && blank.dataset.word === blank.dataset.answer;
+    blank.classList.add(isCorrect ? 'correct' : 'wrong');
+    if (isCorrect) {
+      score++;
+      blank.setAttribute('aria-label', `Correct: ${blank.dataset.word}.`);
+    } else {
+      const hint = document.createElement('span');
+      hint.className = 'blank-hint';
+      hint.id = `hint-${blank.dataset.blank}`;
+      hint.textContent = `correct: ${blank.dataset.answer}`;
+      blank.insertAdjacentElement('afterend', hint);
+      blank.setAttribute('aria-label', `Incorrect. The correct word is ${blank.dataset.answer}. Press Enter to clear and try again.`);
+    }
+  });
+  document.getElementById('score-num').textContent = `${score}/${TOTAL_BLANKS}`;
+  let title, msg;
+  if (score === TOTAL_BLANKS) { title = 'Cleared for the Pantheon'; msg = "Every word landed exactly where it belonged. That's the kind of first listen you don't forget."; }
+  else if (score >= TOTAL_BLANKS * 0.75) { title = 'Sing Along Ready'; msg = "Strong work. Check the red blanks and see if the surrounding lines give it away."; }
+  else if (score >= TOTAL_BLANKS * 0.5) { title = 'Still Finding the Hook'; msg = "Good attempt. Reread the tile definitions and try the red blanks again."; }
+  else { title = 'One More Spin'; msg = 'Reset the board and read each definition carefully before placing a word.'; }
+  document.getElementById('score-title').textContent = title;
+  document.getElementById('score-msg').textContent = msg;
+  document.getElementById('score-bar').classList.add('show');
+  renderGlossary();
+  document.getElementById('score-bar').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function renderGlossary() {
+  const g = document.getElementById('glossary');
+  g.innerHTML = '';
+  WORDS.filter(w => w.slots > 0).forEach(w => {
+    const card = document.createElement('div');
+    card.className = 'gcard';
+    card.innerHTML = `
+      <div class="gterm">${w.word}</div>
+      <div class="gpos">${w.pos}</div>
+      <div class="gdef">${w.def}</div>
+      <div class="gline">"${w.line}"</div>
+    `;
+    g.appendChild(card);
+  });
+}
+
+function resetAll() {
+  document.querySelectorAll('.blank-hint').forEach(h => h.remove());
+  document.querySelectorAll('.blank').forEach(blank => {
+    blank.textContent = '';
+    blank.classList.remove('filled', 'correct', 'wrong');
+    blank.setAttribute('aria-label', 'Empty blank. Select a word tile, then press Enter here to fill it.');
+    delete blank.dataset.word;
+  });
+  document.querySelectorAll('.tile').forEach(t => {
+    t.classList.remove('used', 'selected');
+    t.setAttribute('aria-pressed', 'false');
+    t.dataset.remaining = t.dataset.slots;
+    updateTileBadge(t);
+  });
+  selectedTile = null;
+  filledCount = 0;
+  updateStatus();
+  document.getElementById('score-bar').classList.remove('show');
+  document.getElementById('glossary').innerHTML = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+updateStatus();
+</script>
+</body>
+</html>
