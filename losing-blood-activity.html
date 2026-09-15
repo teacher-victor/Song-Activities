@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+LESSON-META
+title: "Losing Blood: Song Activity"
+source_type: song / fill-in-the-blank
+level: B1-B2
+theme: still hurting over someone who never fully showed up
+artist: Weathers
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Class Song Activity: Losing Blood</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+/* ── RESET ───────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── TOKENS ──────────────────────────────────────────────────── */
+:root {
+  --ink:            #241019;
+  --paper:          #f5eef0;
+  --card:           #e8dade;
+  --night:          #2b0f1a;
+  --night2:         #4a1628;
+  --crimson:        #c4344a;
+  --violet:         #7c6fd9;
+  --steel:          #7a8599;
+  --rule:           #b39aa4;
+  --correct:        #2f8f5c;
+  --wrong:          #c2403f;
+  --light-correct:  #e2f3ea;
+  --light-wrong:    #fbe4e3;
+  --shadow:         36, 16, 25;
+
+  --font-display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+  --font-body:    'Manrope', Arial, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.03rem;
+  line-height: 1.7;
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+::selection { background: var(--crimson); color: #fff; }
+
+/* ── ACCESSIBILITY ───────────────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--violet);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── MASTHEAD ────────────────────────────────────────────────── */
+.masthead {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--night) 0%, var(--night2) 100%);
+  padding: 3.4rem 1rem 3rem;
+  text-align: center;
+  color: #f3e9ec;
+}
+.masthead-reflect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.5;
+}
+.masthead-drips {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.75;
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--crimson);
+  font-weight: 400;
+  margin-bottom: 1.1rem;
+  position: relative;
+}
+.headline {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 7.5vw, 4.6rem);
+  color: #faf3f5;
+  line-height: 0.98;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.01em;
+  position: relative;
+}
+.artist {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--violet);
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+.deck {
+  font-size: 1.03rem;
+  max-width: 610px;
+  margin: 0 auto 1.4rem;
+  color: #dcc7cf;
+  font-style: italic;
+  line-height: 1.6;
+  position: relative;
+}
+.factrow {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.9rem;
+  position: relative;
+}
+.fact {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  background: rgba(243,233,236,0.08);
+  border: 1px solid rgba(243,233,236,0.24);
+  color: #f3e9ec;
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  font-weight: 400;
+}
+
+/* ── LAYOUT ──────────────────────────────────────────────────── */
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2.2rem 20px 1rem;
+}
+.intro-block { max-width: 880px; margin: 0 auto 1.8rem; }
+
+.sectitle {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 2.1rem;
+  color: var(--night2);
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.01em;
+}
+.subtitle { color: #55414a; margin-bottom: 1.3rem; font-size: 0.95rem; line-height: 1.6; }
+
+.howto {
+  background: var(--card);
+  border-radius: 4px;
+  padding: 1.7rem 1.8rem;
+  margin-bottom: 0.5rem;
+  border-left: 4px solid var(--violet);
+}
+.howto h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.7rem; margin-bottom: 1.1rem; color: var(--night2); letter-spacing: 0.01em; }
+.howto-steps { display: flex; flex-direction: column; gap: 1rem; }
+.step { display: flex; align-items: flex-start; gap: 1rem; }
+.step-num {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--night2);
+  color: var(--crimson);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.76rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.1rem;
+}
+.step-text { font-size: 0.93rem; line-height: 1.55; }
+.howto .note {
+  margin-top: 1.2rem;
+  padding: 0.85rem 1.05rem;
+  background: var(--paper);
+  border-radius: 4px;
+  font-size: 0.84rem;
+  color: #55414a;
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  line-height: 1.55;
+}
+.howto .note-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--correct);
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+
+/* ── TWO-COLUMN ACTIVITY GRID ───────────────────────────────── */
+.activity-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.8rem;
+  align-items: start;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.board-col { position: sticky; top: 1rem; }
+.board-panel {
+  background: var(--night);
+  border-radius: 4px;
+  padding: 1.1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+.board-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #f3e9ec;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.01em;
+}
+.board-sub { font-size: 0.74rem; color: #c9a9b3; margin-bottom: 0.85rem; }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.8rem;
+  margin-bottom: 0.85rem;
+  font-size: 0.72rem;
+  color: #ecdde1;
+}
+.legend-item { display: flex; align-items: center; gap: 0.35rem; }
+.swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+
+#board {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.7rem;
+}
+.tile {
+  background: var(--paper);
+  border: 1px solid rgba(36,16,25,0.12);
+  border-radius: 3px;
+  padding: 0.48rem 0.68rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s;
+  position: relative;
+}
+.tile:hover:not(.used) { transform: translateY(-2px); }
+.tile.adj { border-left: 4px solid var(--violet); }
+.tile.noun { border-left: 4px solid var(--crimson); }
+.tile.verb { border-left: 4px solid var(--steel); }
+.tile-word { font-family: var(--font-display); font-weight: 400; font-size: 1.08rem; margin-bottom: 0.05rem; letter-spacing: 0.005em; }
+.tile-pos { font-family: var(--font-mono); font-size: 0.56rem; text-transform: uppercase; color: var(--rule); margin-bottom: 0.2rem; }
+.tile-def { font-size: 0.71rem; color: #55414a; line-height: 1.35; }
+.tile-count {
+  display: inline-block;
+  margin-top: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--correct);
+  background: #fff;
+  border: 1px solid var(--correct);
+  border-radius: 3px;
+  padding: 0.08rem 0.35rem;
+}
+.tile.selected { outline: 2.5px solid var(--crimson); outline-offset: 1px; box-shadow: 0 0 0 5px rgba(196,52,74,0.2); }
+.tile.used { opacity: 0.35; cursor: not-allowed; }
+.tile.used .tile-tag { display: inline; }
+.tile-tag {
+  display: none;
+  font-family: var(--font-mono); font-size: 0.56rem; color: var(--correct); font-weight: 700;
+  position: absolute; top: 0.4rem; right: 0.5rem;
+}
+
+.board-status {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--night);
+  background: var(--violet);
+  border-radius: 20px;
+  padding: 0.42rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ── LYRICS SHEET ────────────────────────────────────────────── */
+.songsheet {
+  background: var(--paper);
+  border-radius: 4px;
+  padding: 1.9rem 2rem;
+  margin-bottom: 1.6rem;
+  border-left: 4px solid var(--night2);
+}
+.verselabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--correct);
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  display: block;
+}
+.lyric-line {
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+}
+.lyric-line.adlib { color: #a08d94; font-style: italic; font-size: 0.94rem; }
+.lyric-block { margin-bottom: 1.7rem; }
+.lyric-block:last-child { margin-bottom: 0; }
+
+.blank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 122px;
+  min-height: 2.1rem;
+  text-align: center;
+  background: var(--card);
+  border: 1.5px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.25rem 0.7rem;
+  margin: 0.15rem 0.2rem;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #8a7178;
+  transition: all 0.14s ease;
+  vertical-align: middle;
+}
+.blank:hover { transform: translateY(-2px); background: #fff; border-color: var(--violet); }
+.blank:active { transform: translateY(0); }
+.blank.filled { color: var(--night2); background: #fff; border-color: var(--crimson); font-style: normal; }
+.blank.correct { color: var(--correct); background: var(--light-correct); border-color: var(--correct); }
+.blank.wrong { color: var(--wrong); background: var(--light-wrong); border-color: var(--wrong); }
+.blank-hint {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--wrong);
+  background: var(--light-wrong);
+  border: 1.5px dashed var(--wrong);
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+  margin: 0.15rem 0.2rem;
+  vertical-align: middle;
+}
+
+/* ── CONTROLS ────────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  gap: 0.9rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2.2rem 0;
+}
+.btn {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.86rem;
+  padding: 0.75rem 1.6rem;
+  border-radius: 24px;
+  border: 1.5px solid var(--night2);
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--paper);
+  color: var(--night2);
+}
+.btn.primary { background: var(--night2); color: #f3e9ec; border-color: var(--night2); }
+.btn.primary:hover { background: var(--night); transform: translateY(-1px); }
+.btn.ghost:hover { background: var(--card); transform: translateY(-1px); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+#score-bar {
+  display: none;
+  text-align: center;
+  background: var(--night);
+  color: #fff;
+  border-radius: 4px;
+  padding: 1.9rem;
+  margin: 1rem 0 2.4rem;
+}
+#score-bar.show { display: block; }
+#score-num { font-family: var(--font-display); font-weight: 400; font-size: 3.1rem; color: var(--crimson); }
+#score-title { font-family: var(--font-display); font-weight: 400; font-size: 1.5rem; margin: 0.4rem 0; letter-spacing: 0.01em; }
+#score-msg { font-size: 0.9rem; margin-bottom: 0.3rem; color: #dcc7cf; }
+
+/* ── GLOSSARY RECAP ──────────────────────────────────────────── */
+.glossary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.gcard {
+  background: var(--paper);
+  border-radius: 3px;
+  padding: 1.05rem 1.25rem;
+  border-top: 3px solid var(--steel);
+}
+.gterm { font-family: var(--font-display); font-weight: 400; font-size: 1.25rem; color: var(--night2); letter-spacing: 0.005em; }
+.gpos { font-family: var(--font-mono); font-size: 0.65rem; color: var(--rule); text-transform: uppercase; margin-bottom: 0.35rem; }
+.gdef { font-size: 0.86rem; color: #55414a; margin-bottom: 0.5rem; line-height: 1.5; }
+.gline { font-size: 0.83rem; font-style: italic; color: var(--correct); }
+
+.about {
+  background: var(--card);
+  border-radius: 4px;
+  padding: 1.25rem 1.6rem;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+  line-height: 1.65;
+}
+.about strong { color: var(--night2); }
+
+.tail { max-width: 880px; margin: 0 auto; }
+
+footer {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--rule);
+  margin-top: 3rem;
+}
+
+@media (max-width: 860px) {
+  .activity-grid { grid-template-columns: 1fr; }
+  .board-col { position: static; order: -1; margin-bottom: 1.6rem; }
+  .board-panel { max-height: none; }
+  #board { flex-direction: row; flex-wrap: wrap; }
+  .tile { flex: 1 1 200px; }
+}
+@media (max-width: 600px) {
+  .headline { font-size: 2.6rem; }
+  .songsheet { padding: 1.4rem 1.2rem; }
+  .blank { min-width: 88px; font-size: 0.9rem; }
+  .howto { padding: 1.3rem 1.3rem; }
+  .howto .note { flex-direction: column; gap: 0.2rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="masthead-reflect" width="100%" height="70" viewBox="0 0 900 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <polyline points="0,20 90,4 180,24 270,8 360,22 450,6 540,24 630,10 720,22 810,6 900,20" fill="none" stroke="#7c6fd9" stroke-width="1.5" opacity="0.6"/>
+    <polyline points="0,50 90,66 180,46 270,62 360,48 450,64 540,46 630,60 720,48 810,64 900,50" fill="none" stroke="#7c6fd9" stroke-width="1.5" opacity="0.35"/>
+  </svg>
+  <svg class="masthead-drips" width="100%" height="90" viewBox="0 0 900 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <g fill="#c4344a">
+      <path d="M120 0 q6 40 0 52 q-6 -12 0 -52 Z"/>
+      <path d="M260 0 q5 26 0 34 q-5 -8 0 -34 Z"/>
+      <path d="M430 0 q7 54 0 70 q-7 -16 0 -70 Z"/>
+      <path d="M600 0 q5 20 0 26 q-5 -6 0 -26 Z"/>
+      <path d="M760 0 q6 42 0 56 q-6 -14 0 -56 Z"/>
+    </g>
+  </svg>
+  <p class="eyebrow">English language class · song activity · B1-B2</p>
+  <h1 class="headline">Losing Blood</h1>
+  <p class="artist">by Weathers</p>
+  <p class="deck">A song about someone who never really shows up, and the exhausting work of staying afloat while you wait for them anyway. Fill in the lyrics using the word board on the right.</p>
+  <div class="factrow">
+    <span class="fact">Genre: Alt-Rock</span>
+    <span class="fact">Theme: Heartbreak &amp; Exhaustion</span>
+    <span class="fact">Level: B1-B2</span>
+  </div>
+</header>
+
+<main class="page">
+
+<div class="intro-block">
+  <h2 class="sectitle">Fill in the Blanks</h2>
+  <p class="subtitle">Listen to the song with your teacher, then complete the lyrics using the words on the board. The blanks are spread across the whole song, so keep an eye out all the way to the end. The board stays on the right so you can check it while you scroll.</p>
+
+  <div class="howto">
+    <h3>How to play</h3>
+    <div class="howto-steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <p class="step-text">Read the short definition on each tile in the word board first, so you know what a word means before you use it.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <p class="step-text">Click a word tile to select it. It lights up in red to show it's ready to go.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <p class="step-text">Click a blank in the lyrics to drop that word in. One word comes up twice, so its tile stays active until both blanks are filled.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <p class="step-text">Changed your mind? Click a filled blank again and the word hops right back to the board.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">5</span>
+        <p class="step-text">Click "Check Answers" whenever you're ready, even with a few blanks still empty. Those just count as incorrect, and you'll see the right word appear beside them.</p>
+      </div>
+    </div>
+    <p class="note"><span class="note-label">Tip</span> The board holds more words than the song has blanks. A few are distractors that don't belong anywhere in the lyrics, so trust the definitions, not just the vibe.</p>
+  </div>
+</div>
+
+<div class="activity-grid">
+
+  <div class="lyrics-col">
+    <div class="songsheet">
+
+      <div class="lyric-block">
+        <span class="verselabel">Verse 1</span>
+        <div class="lyric-line">You've been living in the upside-down</div>
+        <div class="lyric-line">And I never see your face around</div>
+        <div class="lyric-line">So call me when you come back down</div>
+        <div class="lyric-line">I'm still losing–</div>
+        <div class="lyric-line">It's been tough</div>
+        <div class="lyric-line">Out here <span class="blank" data-answer="treading water" data-blank="tread1"></span></div>
+        <div class="lyric-line">Head up, trying to <span class="blank" data-answer="float" data-blank="float1"></span></div>
+        <div class="lyric-line">Are we done?</div>
+        <div class="lyric-line">Legs are getting tired</div>
+        <div class="lyric-line">And I can't clear my throat</div>
+        <div class="lyric-line">I was never good at being <span class="blank" data-answer="honest" data-blank="hon1"></span></div>
+        <div class="lyric-line">But you were never good at keeping <span class="blank" data-answer="promises" data-blank="prom1"></span></div>
+        <div class="lyric-line">'Cause I'm still losing blood</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Chorus</span>
+        <div class="lyric-line">You've been living in the <span class="blank" data-answer="upside-down" data-blank="up1"></span></div>
+        <div class="lyric-line">And I never see your face around</div>
+        <div class="lyric-line">So call me when you come back down</div>
+        <div class="lyric-line">'Cause I'm still losing blood</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Chorus (cont.)</span>
+        <div class="lyric-line">We said that we would never change</div>
+        <div class="lyric-line">And we'd save it for a <span class="blank" data-answer="rainy day" data-blank="rain1"></span></div>
+        <div class="lyric-line">Knew that you would never stay</div>
+        <div class="lyric-line">'Cause I'm still losing blood</div>
+        <div class="lyric-line adlib">(I'm still losing)</div>
+        <div class="lyric-line adlib">(I'm-I'm still losing)</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Bridge</span>
+        <div class="lyric-line"><span class="blank" data-answer="seeing stars" data-blank="star1"></span></div>
+        <div class="lyric-line">At the edges of my <span class="blank" data-answer="vision" data-blank="vis1"></span></div>
+        <div class="lyric-line">And I'm losing my <span class="blank" data-answer="grip" data-blank="grip1"></span></div>
+        <div class="lyric-line adlib">(And I'm losing my grip)</div>
+        <div class="lyric-line"><span class="blank" data-answer="outta touch" data-blank="out1"></span></div>
+        <div class="lyric-line"><span class="blank" data-answer="slipping" data-blank="slip1"></span> through my fingers</div>
+        <div class="lyric-line">And <span class="blank" data-answer="creeping" data-blank="creep1"></span> off the <span class="blank" data-answer="script" data-blank="scr1"></span></div>
+        <div class="lyric-line adlib">(Creeping off the script)</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Verse (reprise)</span>
+        <div class="lyric-line">I was never good at being honest</div>
+        <div class="lyric-line">But you were never good at keeping promises</div>
+        <div class="lyric-line">'Cause I'm still losing blood</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Chorus</span>
+        <div class="lyric-line">You've been living in the <span class="blank" data-answer="upside-down" data-blank="up2"></span></div>
+        <div class="lyric-line">And I never see your face around</div>
+        <div class="lyric-line">So call me when you come back down</div>
+        <div class="lyric-line">'Cause I'm still losing blood</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Chorus (cont.)</span>
+        <div class="lyric-line">We said that we would never change</div>
+        <div class="lyric-line">And we'd save it for a rainy day</div>
+        <div class="lyric-line">Knew that you would never stay</div>
+        <div class="lyric-line">'Cause I'm still losing blood (blood)</div>
+        <div class="lyric-line">I'm still losing blood</div>
+        <div class="lyric-line">I'm still losing blood (blood)</div>
+        <div class="lyric-line">I'm still losing blood</div>
+        <div class="lyric-line">'Cause I'm still losing blood</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Outro</span>
+        <div class="lyric-line">You've been living in the upside-down</div>
+        <div class="lyric-line">And I never see your face around</div>
+        <div class="lyric-line">So call me when you come back down</div>
+        <div class="lyric-line">'Cause I'm still losing blood</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Outro (cont.)</span>
+        <div class="lyric-line">We said that we would never change</div>
+        <div class="lyric-line">And we'd save it for a rainy day</div>
+        <div class="lyric-line">Knew that you would never stay</div>
+        <div class="lyric-line">'Cause I'm still losing blood (blood)</div>
+        <div class="lyric-line">I'm still losing blood</div>
+        <div class="lyric-line">I'm still losing blood (blood)</div>
+        <div class="lyric-line">'Cause I'm still losing blood</div>
+        <div class="lyric-line adlib">(I'm still losing)</div>
+      </div>
+
+    </div>
+
+    <div class="controls">
+      <button class="btn primary" id="check-btn" onclick="checkAnswers()">Check Answers</button>
+      <button class="btn ghost" onclick="resetAll()">Reset</button>
+    </div>
+
+    <div id="score-bar" aria-live="polite">
+      <div id="score-num">0/14</div>
+      <div id="score-title"></div>
+      <div id="score-msg"></div>
+    </div>
+
+    <div class="about">
+      <strong>About the song:</strong> "Losing Blood" comes from Weathers, an alternative rock trio from Los Angeles fronted by Cameron Boyer. The track appeared on their 2021 album and became one of its most streamed songs, pairing an anthemic, guitar-driven chorus with lyrics about the exhausting side of loving someone who keeps letting you down.
+    </div>
+  </div>
+
+  <aside class="board-col">
+    <div class="board-panel">
+      <div class="board-title">Word Board</div>
+      <div class="board-sub">Click a word, then click a blank.</div>
+      <div class="legend">
+        <div class="legend-item"><span class="swatch" style="background:var(--violet)"></span>Adjective</div>
+        <div class="legend-item"><span class="swatch" style="background:var(--crimson)"></span>Noun / Phrase</div>
+        <div class="legend-item"><span class="swatch" style="background:var(--steel)"></span>Verb / Phrase</div>
+      </div>
+      <div id="board"></div>
+      <div class="board-status" id="board-status" aria-live="polite">0 / 14 blanks filled</div>
+    </div>
+  </aside>
+
+</div>
+
+<div class="tail">
+  <h2 class="sectitle" style="margin-top:2.6rem;">Vocabulary Recap</h2>
+  <p class="subtitle">Once you've finished the activity, review the words you placed and the distractors you managed to avoid.</p>
+  <div class="glossary" id="glossary"></div>
+</div>
+
+</main>
+
+<footer>Song Activity Worksheet · Fill in the Blanks · For classroom use</footer>
+
+<script>
+const WORDS = [
+  { word: "treading water", pos: "phrase", type: "verb", def: "Working just hard enough to stay in place, without making real progress.", slots: 1, line: "Out here treading water." },
+  { word: "float", pos: "verb", type: "verb", def: "To stay on or near the surface, neither sinking nor moving forward.", slots: 1, line: "Head up, trying to float." },
+  { word: "honest", pos: "adjective", type: "adj", def: "Truthful, not hiding or twisting the facts.", slots: 1, line: "I was never good at being honest." },
+  { word: "promises", pos: "noun", type: "noun", def: "Firm commitments to do, or not do, something.", slots: 1, line: "But you were never good at keeping promises." },
+  { word: "upside-down", pos: "phrase", type: "adj", def: "Turned around completely, so everything feels reversed or chaotic.", slots: 2, line: "You've been living in the upside-down." },
+  { word: "rainy day", pos: "phrase", type: "noun", def: "A future time when things get hard and you'll need what you saved.", slots: 1, line: "And we'd save it for a rainy day." },
+  { word: "seeing stars", pos: "phrase", type: "noun", def: "A spell of dizziness or flashing lights in your vision, often from shock or strain.", slots: 1, line: "Seeing stars." },
+  { word: "vision", pos: "noun", type: "noun", def: "Your ability to see, or the field of what you can see.", slots: 1, line: "At the edges of my vision." },
+  { word: "grip", pos: "noun", type: "noun", def: "A firm hold or sense of control over something.", slots: 1, line: "And I'm losing my grip." },
+  { word: "outta touch", pos: "phrase", type: "adj", def: "Disconnected from what's really happening, informal for out of touch.", slots: 1, line: "Outta touch." },
+  { word: "slipping", pos: "verb", type: "verb", def: "Gradually losing hold of something, sliding out of your control.", slots: 1, line: "Slipping through my fingers." },
+  { word: "creeping", pos: "verb", type: "verb", def: "Moving slowly and gradually, often without being noticed.", slots: 1, line: "And creeping off the script." },
+  { word: "script", pos: "noun", type: "noun", def: "The expected plan or pattern something is supposed to follow.", slots: 1, line: "And creeping off the script." },
+  { word: "unraveling", pos: "verb", type: "verb", def: "Slowly coming apart, thread by thread.", slots: 0 },
+  { word: "drifting", pos: "verb", type: "verb", def: "Moving slowly, carried along without any real direction.", slots: 0 },
+  { word: "fracture", pos: "noun", type: "noun", def: "A crack or break in something that was once whole.", slots: 0 },
+  { word: "muted", pos: "adjective", type: "adj", def: "Quieted down or softened, not fully expressed.", slots: 0 }
+];
+
+// Board sorted alphabetically
+const board = [...WORDS].sort((a, b) => a.word.localeCompare(b.word));
+
+const boardEl = document.getElementById('board');
+board.forEach((w, i) => {
+  const tile = document.createElement('div');
+  tile.className = `tile ${w.type}`;
+  tile.dataset.word = w.word;
+  tile.dataset.remaining = w.slots;
+  tile.dataset.slots = w.slots;
+  tile.id = `tile-${i}`;
+  tile.tabIndex = 0;
+  tile.setAttribute('role', 'button');
+  tile.setAttribute('aria-label', `${w.word}, ${w.pos}. ${w.def}`);
+  const countBadge = w.slots > 1 ? `<div class="tile-count" id="count-${w.word.replace(/\s+/g,'-')}">used in ${w.slots} places</div>` : '';
+  tile.innerHTML = `
+    <span class="tile-tag">placed</span>
+    <div class="tile-word">${w.word}</div>
+    <div class="tile-pos">${w.pos}</div>
+    <div class="tile-def">${w.def}</div>
+    ${countBadge}
+  `;
+  tile.addEventListener('click', () => selectTile(tile));
+  tile.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectTile(tile); }
+  });
+  boardEl.appendChild(tile);
+});
+
+let selectedTile = null;
+const TOTAL_BLANKS = document.querySelectorAll('.blank').length;
+let filledCount = 0;
+
+function selectTile(tile) {
+  if (tile.classList.contains('used')) return;
+  if (selectedTile === tile) {
+    tile.classList.remove('selected');
+    tile.setAttribute('aria-pressed', 'false');
+    selectedTile = null;
+    return;
+  }
+  document.querySelectorAll('.tile.selected').forEach(t => { t.classList.remove('selected'); t.setAttribute('aria-pressed', 'false'); });
+  tile.classList.add('selected');
+  tile.setAttribute('aria-pressed', 'true');
+  selectedTile = tile;
+}
+
+function updateTileBadge(tile) {
+  const word = tile.dataset.word;
+  const badge = document.getElementById(`count-${word.replace(/\s+/g,'-')}`);
+  if (!badge) return;
+  const remaining = parseInt(tile.dataset.remaining, 10);
+  const slots = parseInt(tile.dataset.slots, 10);
+  const used = slots - remaining;
+  badge.textContent = remaining > 0 ? `${used}/${slots} placed` : `all ${slots} placed`;
+}
+
+document.querySelectorAll('.blank').forEach(blank => {
+  blank.tabIndex = 0;
+  blank.setAttribute('role', 'button');
+  blank.setAttribute('aria-label', 'Empty blank. Select a word tile, then press Enter here to fill it.');
+  blank.addEventListener('click', () => handleBlankClick(blank));
+  blank.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleBlankClick(blank); }
+  });
+});
+
+function handleBlankClick(blank) {
+  removeHint(blank);
+  if (blank.classList.contains('filled')) {
+    const word = blank.dataset.word;
+    const tile = [...document.querySelectorAll('.tile')].find(t => t.dataset.word === word);
+    if (tile) {
+      tile.dataset.remaining = parseInt(tile.dataset.remaining, 10) + 1;
+      tile.classList.remove('used');
+      updateTileBadge(tile);
+    }
+    blank.textContent = '';
+    blank.classList.remove('filled', 'correct', 'wrong');
+    blank.setAttribute('aria-label', 'Empty blank. Select a word tile, then press Enter here to fill it.');
+    delete blank.dataset.word;
+    filledCount--;
+    updateStatus();
+    return;
+  }
+  if (!selectedTile) {
+    blank.style.background = '#f6d6da';
+    setTimeout(() => { if (!blank.classList.contains('filled')) blank.style.background = ''; }, 350);
+    return;
+  }
+  const word = selectedTile.dataset.word;
+  blank.textContent = word;
+  blank.dataset.word = word;
+  blank.classList.add('filled');
+  blank.setAttribute('aria-label', `Filled with ${word}. Press Enter to clear this blank.`);
+
+  const remaining = parseInt(selectedTile.dataset.remaining, 10) - 1;
+  selectedTile.dataset.remaining = remaining;
+  updateTileBadge(selectedTile);
+  if (remaining <= 0) selectedTile.classList.add('used');
+  selectedTile.classList.remove('selected');
+  selectedTile.setAttribute('aria-pressed', 'false');
+  selectedTile = null;
+  filledCount++;
+  updateStatus();
+}
+
+function removeHint(blank) {
+  const id = blank.dataset.blank;
+  const existing = document.getElementById(`hint-${id}`);
+  if (existing) existing.remove();
+  blank.classList.remove('correct', 'wrong');
+}
+
+function updateStatus() {
+  document.getElementById('board-status').textContent = `${filledCount} / ${TOTAL_BLANKS} blanks filled`;
+}
+
+function checkAnswers() {
+  let score = 0;
+  document.querySelectorAll('.blank').forEach(blank => {
+    removeHint(blank);
+    const isCorrect = !!blank.dataset.word && blank.dataset.word === blank.dataset.answer;
+    blank.classList.add(isCorrect ? 'correct' : 'wrong');
+    if (isCorrect) {
+      score++;
+      blank.setAttribute('aria-label', `Correct: ${blank.dataset.word}.`);
+    } else {
+      const hint = document.createElement('span');
+      hint.className = 'blank-hint';
+      hint.id = `hint-${blank.dataset.blank}`;
+      hint.textContent = `correct: ${blank.dataset.answer}`;
+      blank.insertAdjacentElement('afterend', hint);
+      blank.setAttribute('aria-label', `Incorrect. The correct word is ${blank.dataset.answer}. Press Enter to clear and try again.`);
+    }
+  });
+  document.getElementById('score-num').textContent = `${score}/${TOTAL_BLANKS}`;
+  let title, msg;
+  if (score === TOTAL_BLANKS) { title = "Head Above Water"; msg = "Every word landed exactly where it belonged. That's real focus, even mid-spiral."; }
+  else if (score >= TOTAL_BLANKS * 0.75) { title = "Still Floating"; msg = "Strong work. Check the red blanks and see if the line around it gives the word away."; }
+  else if (score >= TOTAL_BLANKS * 0.5) { title = "Treading Water"; msg = "Good attempt. Reread the tile definitions and try the red blanks again."; }
+  else { title = "Losing Your Grip"; msg = "Reset the board and read each definition carefully before you place a word."; }
+  document.getElementById('score-title').textContent = title;
+  document.getElementById('score-msg').textContent = msg;
+  document.getElementById('score-bar').classList.add('show');
+  renderGlossary();
+  document.getElementById('score-bar').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function renderGlossary() {
+  const g = document.getElementById('glossary');
+  g.innerHTML = '';
+  WORDS.filter(w => w.slots > 0).forEach(w => {
+    const card = document.createElement('div');
+    card.className = 'gcard';
+    card.innerHTML = `
+      <div class="gterm">${w.word}</div>
+      <div class="gpos">${w.pos}</div>
+      <div class="gdef">${w.def}</div>
+      <div class="gline">"${w.line}"</div>
+    `;
+    g.appendChild(card);
+  });
+}
+
+function resetAll() {
+  document.querySelectorAll('.blank-hint').forEach(h => h.remove());
+  document.querySelectorAll('.blank').forEach(blank => {
+    blank.textContent = '';
+    blank.classList.remove('filled', 'correct', 'wrong');
+    blank.setAttribute('aria-label', 'Empty blank. Select a word tile, then press Enter here to fill it.');
+    delete blank.dataset.word;
+  });
+  document.querySelectorAll('.tile').forEach(t => {
+    t.classList.remove('used', 'selected');
+    t.setAttribute('aria-pressed', 'false');
+    t.dataset.remaining = t.dataset.slots;
+    updateTileBadge(t);
+  });
+  selectedTile = null;
+  filledCount = 0;
+  updateStatus();
+  document.getElementById('score-bar').classList.remove('show');
+  document.getElementById('glossary').innerHTML = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+updateStatus();
+</script>
+</body>
+</html>

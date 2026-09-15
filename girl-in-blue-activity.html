@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+LESSON-META
+title: "Girl in Blue: Song Activity"
+source_type: song / fill-in-the-blank
+level: B1-B2
+theme: a night out that's really a search for escape from pain no one else sees
+artist: Animal Sun
+content-note: touches on abuse and self-harm/despair, handled without graphic detail
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Class Song Activity: Girl in Blue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Karla:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+/* ── RESET ───────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── TOKENS ──────────────────────────────────────────────────── */
+:root {
+  --ink:            #1c2030;
+  --paper:          #eef0f5;
+  --card:           #dde1eb;
+  --night:          #10131f;
+  --night2:         #1f2a44;
+  --neon:           #4fb8e0;
+  --smoke:          #8b8fa3;
+  --ember:          #d8546b;
+  --rule:           #a3a9bd;
+  --correct:        #2f8f68;
+  --wrong:          #c2403f;
+  --light-correct:  #e2f2ea;
+  --light-wrong:    #fbe4e3;
+  --shadow:         16, 19, 31;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Karla', Arial, sans-serif;
+  --font-mono:    'Space Mono', 'Courier New', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.03rem;
+  line-height: 1.7;
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+::selection { background: var(--neon); color: var(--night); }
+
+/* ── ACCESSIBILITY ───────────────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--neon);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── MASTHEAD ────────────────────────────────────────────────── */
+.masthead {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 0%, rgba(79,184,224,0.16), transparent 55%),
+              linear-gradient(180deg, var(--night) 0%, var(--night2) 100%);
+  padding: 3.4rem 1rem 2.8rem;
+  text-align: center;
+  color: #e8eaf2;
+}
+.masthead-lamp {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.9;
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--neon);
+  font-weight: 400;
+  margin-bottom: 1.1rem;
+  position: relative;
+}
+.headline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(2.4rem, 6vw, 3.7rem);
+  color: #f4f5f9;
+  line-height: 1.05;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.005em;
+  position: relative;
+}
+.artist {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--smoke);
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+.deck {
+  font-size: 1.02rem;
+  max-width: 600px;
+  margin: 0 auto 1.4rem;
+  color: #c7cbdc;
+  font-style: italic;
+  line-height: 1.6;
+  position: relative;
+}
+.factrow {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.9rem;
+  position: relative;
+}
+.fact {
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  background: rgba(232,234,242,0.07);
+  border: 1px solid rgba(232,234,242,0.22);
+  color: #e8eaf2;
+  border-radius: 3px;
+  padding: 0.4rem 1rem;
+  font-weight: 400;
+}
+
+/* ── LAYOUT ──────────────────────────────────────────────────── */
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2.2rem 20px 1rem;
+}
+.intro-block { max-width: 880px; margin: 0 auto 1.8rem; }
+
+.sectitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 2rem;
+  color: var(--night2);
+  margin-bottom: 0.35rem;
+}
+.subtitle { color: #4a4e5e; margin-bottom: 1.3rem; font-size: 0.95rem; line-height: 1.6; }
+
+.contentnote {
+  background: #fbeceb;
+  border-left: 4px solid var(--ember);
+  border-radius: 4px;
+  padding: 0.95rem 1.2rem;
+  margin-bottom: 1.3rem;
+  font-size: 0.86rem;
+  color: #4a4e5e;
+  line-height: 1.55;
+}
+.contentnote strong { color: var(--ember); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.02em; display: block; margin-bottom: 0.3rem; }
+
+.howto {
+  background: var(--card);
+  border-radius: 4px;
+  padding: 1.7rem 1.8rem;
+  margin-bottom: 0.5rem;
+  border-left: 4px solid var(--neon);
+}
+.howto h3 { font-family: var(--font-display); font-style: italic; font-weight: 600; font-size: 1.5rem; margin-bottom: 1.15rem; color: var(--night2); }
+.howto-steps { display: flex; flex-direction: column; gap: 1rem; }
+.step { display: flex; align-items: flex-start; gap: 1rem; }
+.step-num {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--night2);
+  color: var(--neon);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.76rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.1rem;
+}
+.step-text { font-size: 0.93rem; line-height: 1.55; }
+.howto .note {
+  margin-top: 1.2rem;
+  padding: 0.85rem 1.05rem;
+  background: var(--paper);
+  border-radius: 3px;
+  font-size: 0.84rem;
+  color: #4a4e5e;
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  line-height: 1.55;
+}
+.howto .note-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--correct);
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+
+/* ── TWO-COLUMN ACTIVITY GRID ───────────────────────────────── */
+.activity-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.8rem;
+  align-items: start;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.board-col { position: sticky; top: 1rem; }
+.board-panel {
+  background: var(--night);
+  border-radius: 4px;
+  padding: 1.1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+.board-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #e8eaf2;
+  margin-bottom: 0.25rem;
+}
+.board-sub { font-size: 0.74rem; color: #9195a8; margin-bottom: 0.85rem; }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.8rem;
+  margin-bottom: 0.85rem;
+  font-size: 0.72rem;
+  color: #c7cbdc;
+}
+.legend-item { display: flex; align-items: center; gap: 0.35rem; }
+.swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+
+#board {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.7rem;
+}
+.tile {
+  background: var(--paper);
+  border: 1px solid rgba(28,32,48,0.12);
+  border-radius: 3px;
+  padding: 0.48rem 0.68rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s;
+  position: relative;
+}
+.tile:hover:not(.used) { transform: translateY(-2px); }
+.tile.adj { border-left: 4px solid var(--ember); }
+.tile.noun { border-left: 4px solid var(--neon); }
+.tile.verb { border-left: 4px solid var(--smoke); }
+.tile-word { font-family: var(--font-display); font-style: italic; font-weight: 600; font-size: 1rem; margin-bottom: 0.05rem; }
+.tile-pos { font-family: var(--font-mono); font-size: 0.56rem; text-transform: uppercase; color: var(--rule); margin-bottom: 0.2rem; }
+.tile-def { font-size: 0.71rem; color: #4a4e5e; line-height: 1.35; }
+.tile-count {
+  display: inline-block;
+  margin-top: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--correct);
+  background: #fff;
+  border: 1px solid var(--correct);
+  border-radius: 3px;
+  padding: 0.08rem 0.35rem;
+}
+.tile.selected { outline: 2.5px solid var(--neon); outline-offset: 1px; box-shadow: 0 0 0 5px rgba(79,184,224,0.2); }
+.tile.used { opacity: 0.35; cursor: not-allowed; }
+.tile.used .tile-tag { display: inline; }
+.tile-tag {
+  display: none;
+  font-family: var(--font-mono); font-size: 0.56rem; color: var(--correct); font-weight: 700;
+  position: absolute; top: 0.4rem; right: 0.5rem;
+}
+
+.board-status {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--night);
+  background: var(--neon);
+  border-radius: 3px;
+  padding: 0.42rem;
+  font-weight: 700;
+}
+
+/* ── LYRICS SHEET ────────────────────────────────────────────── */
+.songsheet {
+  background: var(--paper);
+  border-radius: 4px;
+  padding: 1.9rem 2rem;
+  margin-bottom: 1.6rem;
+  border-left: 4px solid var(--night2);
+}
+.verselabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--correct);
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  display: block;
+}
+.lyric-line {
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+}
+.lyric-line.adlib { color: #8a8ea1; font-style: italic; font-size: 0.94rem; }
+.lyric-block { margin-bottom: 1.7rem; }
+.lyric-block:last-child { margin-bottom: 0; }
+
+.blank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 118px;
+  min-height: 2.1rem;
+  text-align: center;
+  background: var(--card);
+  border: 1.5px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.25rem 0.7rem;
+  margin: 0.15rem 0.2rem;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #767b8f;
+  transition: all 0.14s ease;
+  vertical-align: middle;
+}
+.blank:hover { transform: translateY(-2px); background: #fff; border-color: var(--neon); }
+.blank:active { transform: translateY(0); }
+.blank.filled { color: var(--night2); background: #fff; border-color: var(--smoke); font-style: normal; }
+.blank.correct { color: var(--correct); background: var(--light-correct); border-color: var(--correct); }
+.blank.wrong { color: var(--wrong); background: var(--light-wrong); border-color: var(--wrong); }
+.blank-hint {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--wrong);
+  background: var(--light-wrong);
+  border: 1.5px dashed var(--wrong);
+  border-radius: 3px;
+  padding: 0.15rem 0.5rem;
+  margin: 0.15rem 0.2rem;
+  vertical-align: middle;
+}
+
+/* ── CONTROLS ────────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  gap: 0.9rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2.2rem 0;
+}
+.btn {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.86rem;
+  padding: 0.75rem 1.6rem;
+  border-radius: 3px;
+  border: 1.5px solid var(--night2);
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--paper);
+  color: var(--night2);
+}
+.btn.primary { background: var(--night2); color: #e8eaf2; border-color: var(--night2); }
+.btn.primary:hover { background: var(--night); transform: translateY(-1px); }
+.btn.ghost:hover { background: var(--card); transform: translateY(-1px); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+#score-bar {
+  display: none;
+  text-align: center;
+  background: var(--night);
+  color: #fff;
+  border-radius: 4px;
+  padding: 1.9rem;
+  margin: 1rem 0 2.4rem;
+}
+#score-bar.show { display: block; }
+#score-num { font-family: var(--font-display); font-style: italic; font-weight: 600; font-size: 2.8rem; color: var(--neon); }
+#score-title { font-family: var(--font-display); font-style: italic; font-weight: 600; font-size: 1.35rem; margin: 0.4rem 0; }
+#score-msg { font-size: 0.88rem; margin-bottom: 0.3rem; color: #c7cbdc; }
+
+/* ── GLOSSARY RECAP ──────────────────────────────────────────── */
+.glossary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.gcard {
+  background: var(--paper);
+  border-radius: 3px;
+  padding: 1.05rem 1.25rem;
+  border-top: 3px solid var(--smoke);
+}
+.gterm { font-family: var(--font-display); font-style: italic; font-weight: 600; font-size: 1.15rem; color: var(--night2); }
+.gpos { font-family: var(--font-mono); font-size: 0.65rem; color: var(--rule); text-transform: uppercase; margin-bottom: 0.35rem; }
+.gdef { font-size: 0.86rem; color: #4a4e5e; margin-bottom: 0.5rem; line-height: 1.5; }
+.gline { font-size: 0.83rem; font-style: italic; color: var(--correct); }
+
+.about {
+  background: var(--card);
+  border-radius: 4px;
+  padding: 1.25rem 1.6rem;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+  line-height: 1.65;
+}
+.about strong { color: var(--night2); }
+
+.tail { max-width: 880px; margin: 0 auto; }
+
+footer {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--rule);
+  margin-top: 3rem;
+}
+
+@media (max-width: 860px) {
+  .activity-grid { grid-template-columns: 1fr; }
+  .board-col { position: static; order: -1; margin-bottom: 1.6rem; }
+  .board-panel { max-height: none; }
+  #board { flex-direction: row; flex-wrap: wrap; }
+  .tile { flex: 1 1 200px; }
+}
+@media (max-width: 600px) {
+  .headline { font-size: 2.1rem; }
+  .songsheet { padding: 1.4rem 1.2rem; }
+  .blank { min-width: 84px; font-size: 0.9rem; }
+  .howto { padding: 1.3rem 1.3rem; }
+  .howto .note { flex-direction: column; gap: 0.2rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="masthead-lamp" width="220" height="140" viewBox="0 0 220 140" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <ellipse cx="110" cy="30" rx="80" ry="30" fill="#4fb8e0" opacity="0.14"/>
+    <ellipse cx="110" cy="30" rx="46" ry="18" fill="#4fb8e0" opacity="0.2"/>
+    <line x1="110" y1="0" x2="110" y2="44" stroke="#4fb8e0" stroke-width="1.5" opacity="0.4"/>
+    <path d="M96 30 C 100 10, 90 -4, 96 -20" stroke="#8b8fa3" stroke-width="1.5" fill="none" opacity="0.35" stroke-linecap="round"/>
+    <path d="M104 32 C 110 14, 100 2, 108 -14" stroke="#8b8fa3" stroke-width="1.5" fill="none" opacity="0.3" stroke-linecap="round"/>
+  </svg>
+  <p class="eyebrow">English language class · song activity · B1-B2</p>
+  <h1 class="headline">Girl in Blue</h1>
+  <p class="artist">by Animal Sun</p>
+  <p class="deck">A song about a night out that looks like a party from the outside, while the person at the center of it is quietly searching for a way to cope with pain no one else can see. Fill in the lyrics using the word board on the right.</p>
+  <div class="factrow">
+    <span class="fact">Genre: Alt-Rock</span>
+    <span class="fact">Theme: Hidden Pain</span>
+    <span class="fact">Level: B1-B2</span>
+  </div>
+</header>
+
+<main class="page">
+
+<div class="intro-block">
+  <h2 class="sectitle">Fill in the Blanks</h2>
+  <p class="subtitle">Listen to the song with your teacher, then complete the lyrics using the words on the board. The blanks are spread across the whole song, so keep an eye out all the way to the end. The board stays on the right so you can check it while you scroll.</p>
+
+  <div class="contentnote">
+    <strong>Content note</strong>
+    This song references abuse and a character in real distress, including a line that alludes to self-harm. The activity itself only asks students to practice vocabulary, and the two most explicit lines are left out of the exercise, but teachers may want to preview the full lyrics before using this with a class.
+  </div>
+
+  <div class="howto">
+    <h3>How to play</h3>
+    <div class="howto-steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <p class="step-text">Read the short definition on each tile in the word board first, so you know what a word means before you use it.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <p class="step-text">Click a word tile to select it. It lights up in blue to show it's ready to go.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <p class="step-text">Click a blank in the lyrics to drop that word in. One word comes up twice, so its tile stays active until both blanks are filled.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <p class="step-text">Changed your mind? Click a filled blank again and the word hops right back to the board.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">5</span>
+        <p class="step-text">Click "Check Answers" whenever you're ready, even with a few blanks still empty. Those just count as incorrect, and you'll see the right word appear beside them.</p>
+      </div>
+    </div>
+    <p class="note"><span class="note-label">Tip</span> The board holds more words than the song has blanks. A few are distractors that don't belong anywhere in the lyrics, so trust the definitions, not just the vibe.</p>
+  </div>
+</div>
+
+<div class="activity-grid">
+
+  <div class="lyrics-col">
+    <div class="songsheet">
+
+      <div class="lyric-block">
+        <span class="verselabel">Verse 1</span>
+        <div class="lyric-line">The night is young for a girl I knew</div>
+        <div class="lyric-line">Who spent her life all <span class="blank" data-answer="dressed" data-blank="dress1"></span> in blue</div>
+        <div class="lyric-line">Out among these <span class="blank" data-answer="restless" data-blank="rest1"></span> streets</div>
+        <div class="lyric-line">She's looking for the next <span class="blank" data-answer="release" data-blank="rel1"></span></div>
+        <div class="lyric-line">A <span class="blank" data-answer="sleepless" data-blank="sleep1"></span> <span class="blank" data-answer="siren" data-blank="siren1"></span>, eyes so cold</div>
+        <div class="lyric-line">Never fearing growing old</div>
+        <div class="lyric-line">Crying out a <span class="blank" data-answer="desperate" data-blank="desp1"></span> song</div>
+        <div class="lyric-line">Before she moves along</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Chorus</span>
+        <div class="lyric-line">She screams tonight: I wanna be like you!</div>
+        <div class="lyric-line">Dancing in the light to forget the <span class="blank" data-answer="abuse" data-blank="abuse1"></span></div>
+        <div class="lyric-line">Lost in the <span class="blank" data-answer="crowd" data-blank="crowd1"></span>, no one will ever know</div>
+        <div class="lyric-line">The girl in blue is all alone</div>
+        <div class="lyric-line">She's all alone</div>
+        <div class="lyric-line">She's all alone</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Verse 2</span>
+        <div class="lyric-line">Cigarettes blend with perfume</div>
+        <div class="lyric-line">A window down to hide the <span class="blank" data-answer="fumes" data-blank="fume1"></span></div>
+        <div class="lyric-line">She's got a heartbeat full of lead</div>
+        <div class="lyric-line">And she's aiming straight for the head</div>
+        <div class="lyric-line">Oh, she just wanted to be someone</div>
+        <div class="lyric-line">Find a reason to <span class="blank" data-answer="carry on" data-blank="carry1"></span></div>
+        <div class="lyric-line">She <span class="blank" data-answer="swears" data-blank="swear1"></span> today to find</div>
+        <div class="lyric-line">A way to stay <span class="blank" data-answer="alive" data-blank="alive1"></span></div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Chorus</span>
+        <div class="lyric-line">She screams tonight: I wanna be like you!</div>
+        <div class="lyric-line">Dancing in the light to forget the <span class="blank" data-answer="abuse" data-blank="abuse2"></span></div>
+        <div class="lyric-line">Lost in the crowd, no one will ever know</div>
+        <div class="lyric-line">The girl in blue is all alone</div>
+        <div class="lyric-line adlib">(The girl, the girl, the girl, she's all alone)</div>
+        <div class="lyric-line adlib">(The girl, the girl, the girl)</div>
+        <div class="lyric-line">She's all alone</div>
+        <div class="lyric-line adlib">(The girl, the girl, the girl, she's all alone)</div>
+        <div class="lyric-line adlib">(The girl, the girl, the girl)</div>
+        <div class="lyric-line">She's all alone</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Chorus</span>
+        <div class="lyric-line">She screams tonight: I wanna be like you!</div>
+        <div class="lyric-line">Dancing in the light to forget the abuse</div>
+        <div class="lyric-line">Lost in the crowd, no one will ever know</div>
+        <div class="lyric-line adlib">(The girl in blue is all alone)</div>
+        <div class="lyric-line adlib">(The girl, the girl, the girl, she's all alone)</div>
+        <div class="lyric-line adlib">(The girl, the girl, the girl)</div>
+        <div class="lyric-line">She's all alone</div>
+        <div class="lyric-line adlib">(The girl, the girl, the girl, she's all alone)</div>
+        <div class="lyric-line adlib">(The girl, the girl, the girl)</div>
+        <div class="lyric-line">She's all alone</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Outro</span>
+        <div class="lyric-line">She screams tonight: I wanna be like you!</div>
+        <div class="lyric-line">Dancing in the light to forget the abuse</div>
+        <div class="lyric-line">Lost in the crowd, no one will ever know</div>
+        <div class="lyric-line">The girl in blue is all alone</div>
+      </div>
+
+    </div>
+
+    <div class="controls">
+      <button class="btn primary" id="check-btn" onclick="checkAnswers()">Check Answers</button>
+      <button class="btn ghost" onclick="resetAll()">Reset</button>
+    </div>
+
+    <div id="score-bar" aria-live="polite">
+      <div id="score-num">0/13</div>
+      <div id="score-title"></div>
+      <div id="score-msg"></div>
+    </div>
+
+    <div class="about">
+      <strong>About the song:</strong> "Girl in Blue" is the breakout debut single from Animal Sun, an alt-rock band formed in Los Angeles by brothers Steven Blake and William Alton. The song's synth-driven verses and big group chorus helped it become one of the band's most streamed and most requested tracks, even as its lyrics sit with a much heavier subject than its sound might suggest.
+    </div>
+  </div>
+
+  <aside class="board-col">
+    <div class="board-panel">
+      <div class="board-title">Word Board</div>
+      <div class="board-sub">Click a word, then click a blank.</div>
+      <div class="legend">
+        <div class="legend-item"><span class="swatch" style="background:var(--ember)"></span>Adjective</div>
+        <div class="legend-item"><span class="swatch" style="background:var(--neon)"></span>Noun</div>
+        <div class="legend-item"><span class="swatch" style="background:var(--smoke)"></span>Verb / Phrase</div>
+      </div>
+      <div id="board"></div>
+      <div class="board-status" id="board-status" aria-live="polite">0 / 13 blanks filled</div>
+    </div>
+  </aside>
+
+</div>
+
+<div class="tail">
+  <h2 class="sectitle" style="margin-top:2.6rem;">Vocabulary Recap</h2>
+  <p class="subtitle">Once you've finished the activity, review the words you placed and the distractors you managed to avoid.</p>
+  <div class="glossary" id="glossary"></div>
+</div>
+
+</main>
+
+<footer>Song Activity Worksheet · Fill in the Blanks · For classroom use</footer>
+
+<script>
+const WORDS = [
+  { word: "dressed", pos: "verb", type: "verb", def: "Wearing a particular type or color of clothing.", slots: 1, line: "Who spent her life all dressed in blue." },
+  { word: "restless", pos: "adjective", type: "adj", def: "Unable to stay still or feel settled, always needing something more.", slots: 1, line: "Out among these restless streets." },
+  { word: "release", pos: "noun", type: "noun", def: "A way of letting go of tension or pressure.", slots: 1, line: "She's looking for the next release." },
+  { word: "sleepless", pos: "adjective", type: "adj", def: "Unable to sleep, staying awake through the night.", slots: 1, line: "A sleepless siren, eyes so cold." },
+  { word: "siren", pos: "noun", type: "noun", def: "Someone dangerously alluring who seems to invite trouble, from the mythical figures who lured sailors.", slots: 1, line: "A sleepless siren, eyes so cold." },
+  { word: "desperate", pos: "adjective", type: "adj", def: "Full of urgent need, willing to do almost anything.", slots: 1, line: "Crying out a desperate song." },
+  { word: "abuse", pos: "noun", type: "noun", def: "Cruel or harmful treatment of someone, often repeated over time.", slots: 2, line: "Dancing in the light to forget the abuse." },
+  { word: "crowd", pos: "noun", type: "noun", def: "A large group of people gathered together.", slots: 1, line: "Lost in the crowd, no one will ever know." },
+  { word: "fumes", pos: "noun", type: "noun", def: "Strong, often unpleasant smoke or gas in the air.", slots: 1, line: "A window down to hide the fumes." },
+  { word: "carry on", pos: "phrase", type: "verb", def: "To keep going despite difficulty.", slots: 1, line: "Find a reason to carry on." },
+  { word: "swears", pos: "verb", type: "verb", def: "Promises something firmly and seriously.", slots: 1, line: "She swears today to find." },
+  { word: "alive", pos: "adjective", type: "adj", def: "Continuing to live, not giving up, used here in the phrase stay alive.", slots: 1, line: "A way to stay alive." },
+  { word: "reckless", pos: "adjective", type: "adj", def: "Acting without thinking about the danger or consequences.", slots: 0 },
+  { word: "hollow", pos: "adjective", type: "adj", def: "Empty inside, lacking real substance or feeling.", slots: 0 },
+  { word: "wander", pos: "verb", type: "verb", def: "To walk around without a clear direction or purpose.", slots: 0 },
+  { word: "vacant", pos: "adjective", type: "adj", def: "Empty, or showing no sign of thought or feeling.", slots: 0 }
+];
+
+// Board sorted alphabetically
+const board = [...WORDS].sort((a, b) => a.word.localeCompare(b.word));
+
+const boardEl = document.getElementById('board');
+board.forEach((w, i) => {
+  const tile = document.createElement('div');
+  tile.className = `tile ${w.type}`;
+  tile.dataset.word = w.word;
+  tile.dataset.remaining = w.slots;
+  tile.dataset.slots = w.slots;
+  tile.id = `tile-${i}`;
+  tile.tabIndex = 0;
+  tile.setAttribute('role', 'button');
+  tile.setAttribute('aria-label', `${w.word}, ${w.pos}. ${w.def}`);
+  const countBadge = w.slots > 1 ? `<div class="tile-count" id="count-${w.word.replace(/\s+/g,'-')}">used in ${w.slots} places</div>` : '';
+  tile.innerHTML = `
+    <span class="tile-tag">placed</span>
+    <div class="tile-word">${w.word}</div>
+    <div class="tile-pos">${w.pos}</div>
+    <div class="tile-def">${w.def}</div>
+    ${countBadge}
+  `;
+  tile.addEventListener('click', () => selectTile(tile));
+  tile.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectTile(tile); }
+  });
+  boardEl.appendChild(tile);
+});
+
+let selectedTile = null;
+const TOTAL_BLANKS = document.querySelectorAll('.blank').length;
+let filledCount = 0;
+
+function selectTile(tile) {
+  if (tile.classList.contains('used')) return;
+  if (selectedTile === tile) {
+    tile.classList.remove('selected');
+    tile.setAttribute('aria-pressed', 'false');
+    selectedTile = null;
+    return;
+  }
+  document.querySelectorAll('.tile.selected').forEach(t => { t.classList.remove('selected'); t.setAttribute('aria-pressed', 'false'); });
+  tile.classList.add('selected');
+  tile.setAttribute('aria-pressed', 'true');
+  selectedTile = tile;
+}
+
+function updateTileBadge(tile) {
+  const word = tile.dataset.word;
+  const badge = document.getElementById(`count-${word.replace(/\s+/g,'-')}`);
+  if (!badge) return;
+  const remaining = parseInt(tile.dataset.remaining, 10);
+  const slots = parseInt(tile.dataset.slots, 10);
+  const used = slots - remaining;
+  badge.textContent = remaining > 0 ? `${used}/${slots} placed` : `all ${slots} placed`;
+}
+
+document.querySelectorAll('.blank').forEach(blank => {
+  blank.tabIndex = 0;
+  blank.setAttribute('role', 'button');
+  blank.setAttribute('aria-label', 'Empty blank. Select a word tile, then press Enter here to fill it.');
+  blank.addEventListener('click', () => handleBlankClick(blank));
+  blank.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleBlankClick(blank); }
+  });
+});
+
+function handleBlankClick(blank) {
+  removeHint(blank);
+  if (blank.classList.contains('filled')) {
+    const word = blank.dataset.word;
+    const tile = [...document.querySelectorAll('.tile')].find(t => t.dataset.word === word);
+    if (tile) {
+      tile.dataset.remaining = parseInt(tile.dataset.remaining, 10) + 1;
+      tile.classList.remove('used');
+      updateTileBadge(tile);
+    }
+    blank.textContent = '';
+    blank.classList.remove('filled', 'correct', 'wrong');
+    blank.setAttribute('aria-label', 'Empty blank. Select a word tile, then press Enter here to fill it.');
+    delete blank.dataset.word;
+    filledCount--;
+    updateStatus();
+    return;
+  }
+  if (!selectedTile) {
+    blank.style.background = '#f6d9d6';
+    setTimeout(() => { if (!blank.classList.contains('filled')) blank.style.background = ''; }, 350);
+    return;
+  }
+  const word = selectedTile.dataset.word;
+  blank.textContent = word;
+  blank.dataset.word = word;
+  blank.classList.add('filled');
+  blank.setAttribute('aria-label', `Filled with ${word}. Press Enter to clear this blank.`);
+
+  const remaining = parseInt(selectedTile.dataset.remaining, 10) - 1;
+  selectedTile.dataset.remaining = remaining;
+  updateTileBadge(selectedTile);
+  if (remaining <= 0) selectedTile.classList.add('used');
+  selectedTile.classList.remove('selected');
+  selectedTile.setAttribute('aria-pressed', 'false');
+  selectedTile = null;
+  filledCount++;
+  updateStatus();
+}
+
+function removeHint(blank) {
+  const id = blank.dataset.blank;
+  const existing = document.getElementById(`hint-${id}`);
+  if (existing) existing.remove();
+  blank.classList.remove('correct', 'wrong');
+}
+
+function updateStatus() {
+  document.getElementById('board-status').textContent = `${filledCount} / ${TOTAL_BLANKS} blanks filled`;
+}
+
+function checkAnswers() {
+  let score = 0;
+  document.querySelectorAll('.blank').forEach(blank => {
+    removeHint(blank);
+    const isCorrect = !!blank.dataset.word && blank.dataset.word === blank.dataset.answer;
+    blank.classList.add(isCorrect ? 'correct' : 'wrong');
+    if (isCorrect) {
+      score++;
+      blank.setAttribute('aria-label', `Correct: ${blank.dataset.word}.`);
+    } else {
+      const hint = document.createElement('span');
+      hint.className = 'blank-hint';
+      hint.id = `hint-${blank.dataset.blank}`;
+      hint.textContent = `correct: ${blank.dataset.answer}`;
+      blank.insertAdjacentElement('afterend', hint);
+      blank.setAttribute('aria-label', `Incorrect. The correct word is ${blank.dataset.answer}. Press Enter to clear and try again.`);
+    }
+  });
+  document.getElementById('score-num').textContent = `${score}/${TOTAL_BLANKS}`;
+  let title, msg;
+  if (score === TOTAL_BLANKS) { title = "Well Done"; msg = "Every word landed exactly where it belonged. Nicely read."; }
+  else if (score >= TOTAL_BLANKS * 0.75) { title = "Strong Work"; msg = "Check the red blanks and see if the line around it gives the word away."; }
+  else if (score >= TOTAL_BLANKS * 0.5) { title = "Good Progress"; msg = "Reread the tile definitions and try the red blanks again."; }
+  else { title = "Keep Going"; msg = "Reset the board and read each definition carefully before you place a word."; }
+  document.getElementById('score-title').textContent = title;
+  document.getElementById('score-msg').textContent = msg;
+  document.getElementById('score-bar').classList.add('show');
+  renderGlossary();
+  document.getElementById('score-bar').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function renderGlossary() {
+  const g = document.getElementById('glossary');
+  g.innerHTML = '';
+  WORDS.filter(w => w.slots > 0).forEach(w => {
+    const card = document.createElement('div');
+    card.className = 'gcard';
+    card.innerHTML = `
+      <div class="gterm">${w.word}</div>
+      <div class="gpos">${w.pos}</div>
+      <div class="gdef">${w.def}</div>
+      <div class="gline">"${w.line}"</div>
+    `;
+    g.appendChild(card);
+  });
+}
+
+function resetAll() {
+  document.querySelectorAll('.blank-hint').forEach(h => h.remove());
+  document.querySelectorAll('.blank').forEach(blank => {
+    blank.textContent = '';
+    blank.classList.remove('filled', 'correct', 'wrong');
+    blank.setAttribute('aria-label', 'Empty blank. Select a word tile, then press Enter here to fill it.');
+    delete blank.dataset.word;
+  });
+  document.querySelectorAll('.tile').forEach(t => {
+    t.classList.remove('used', 'selected');
+    t.setAttribute('aria-pressed', 'false');
+    t.dataset.remaining = t.dataset.slots;
+    updateTileBadge(t);
+  });
+  selectedTile = null;
+  filledCount = 0;
+  updateStatus();
+  document.getElementById('score-bar').classList.remove('show');
+  document.getElementById('glossary').innerHTML = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+updateStatus();
+</script>
+</body>
+</html>

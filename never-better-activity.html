@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+LESSON-META
+title: "Never Better: Song Activity"
+source_type: song / fill-in-the-blank
+level: B1-B2
+theme: insisting you're fine while quietly falling apart
+artist: Fuller
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Class Song Activity: Never Better</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+/* ── RESET ───────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── TOKENS ──────────────────────────────────────────────────── */
+:root {
+  --ink:            #2b2438;
+  --paper:          #f0f4fb;
+  --card:           #e3ddf5;
+  --night:          #241f33;
+  --night2:         #3b2f4e;
+  --bubblegum:      #ff8fbf;
+  --mint:           #5ecfa3;
+  --butter:         #ffcf56;
+  --rule:           #ab9fc4;
+  --correct:        #2f9060;
+  --wrong:          #d1495b;
+  --light-correct:  #e2f4ea;
+  --light-wrong:    #fbe3e6;
+  --shadow:         43, 36, 56;
+
+  --font-display: 'Fredoka', 'Arial Rounded MT Bold', sans-serif;
+  --font-body:    'Lora', Georgia, serif;
+  --font-mono:    'IBM Plex Mono', 'Courier New', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+::selection { background: var(--bubblegum); color: #fff; }
+
+/* ── ACCESSIBILITY ───────────────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--mint);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── MASTHEAD ────────────────────────────────────────────────── */
+.masthead {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--night) 0%, var(--night2) 78%, var(--butter) 100%);
+  padding: 3.2rem 1rem 2.4rem;
+  text-align: center;
+  color: #f4eef8;
+}
+.masthead-badge {
+  position: absolute;
+  top: -22px;
+  right: 6%;
+  opacity: 0.92;
+}
+@media (max-width: 700px) {
+  .masthead-badge { width: 90px; height: 90px; top: -14px; right: 4%; }
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--bubblegum);
+  font-weight: 400;
+  margin-bottom: 1.1rem;
+}
+.headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 6.5vw, 3.8rem);
+  color: #faf6fc;
+  line-height: 1.05;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+.artist {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--mint);
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+.deck {
+  font-size: 1.04rem;
+  max-width: 610px;
+  margin: 0 auto 1.4rem;
+  color: #d8ccea;
+  font-style: italic;
+  line-height: 1.6;
+}
+.factrow {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.9rem;
+}
+.fact {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  background: rgba(244,238,248,0.08);
+  border: 1px solid rgba(244,238,248,0.25);
+  color: #f4eef8;
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  font-weight: 400;
+}
+
+/* ── LAYOUT ──────────────────────────────────────────────────── */
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2.2rem 20px 1rem;
+}
+.intro-block { max-width: 880px; margin: 0 auto 1.8rem; }
+
+.sectitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.9rem;
+  color: var(--night2);
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.005em;
+}
+.subtitle { color: #564a6b; margin-bottom: 1.3rem; font-size: 0.95rem; line-height: 1.6; }
+
+.howto {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 1.7rem 1.8rem;
+  margin-bottom: 0.5rem;
+}
+.howto h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.35rem; margin-bottom: 1.15rem; color: var(--night2); }
+.howto-steps { display: flex; flex-direction: column; gap: 1rem; }
+.step { display: flex; align-items: flex-start; gap: 1rem; }
+.step-num {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--night2);
+  color: var(--butter);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.78rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.05rem;
+}
+.step-text { font-size: 0.94rem; line-height: 1.55; }
+.howto .note {
+  margin-top: 1.2rem;
+  padding: 0.85rem 1.05rem;
+  background: var(--paper);
+  border-radius: 12px;
+  font-size: 0.85rem;
+  color: #564a6b;
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  line-height: 1.55;
+}
+.howto .note-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--correct);
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+
+/* ── TWO-COLUMN ACTIVITY GRID ───────────────────────────────── */
+.activity-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.8rem;
+  align-items: start;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.board-col { position: sticky; top: 1rem; }
+.board-panel {
+  background: var(--night);
+  border-radius: 20px;
+  padding: 1.1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+.board-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #f4eef8;
+  margin-bottom: 0.25rem;
+}
+.board-sub { font-size: 0.74rem; color: #c3b6d6; margin-bottom: 0.85rem; }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.8rem;
+  margin-bottom: 0.85rem;
+  font-size: 0.72rem;
+  color: #ece3f5;
+}
+.legend-item { display: flex; align-items: center; gap: 0.35rem; }
+.swatch { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+
+#board {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.7rem;
+}
+.tile {
+  background: var(--paper);
+  border: 1px solid rgba(43,36,56,0.12);
+  border-radius: 14px;
+  padding: 0.48rem 0.68rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s;
+  position: relative;
+}
+.tile:hover:not(.used) { transform: translateY(-2px) rotate(-0.5deg); }
+.tile.adj { border-left: 4px solid var(--bubblegum); }
+.tile.noun { border-left: 4px solid var(--butter); }
+.tile.verb { border-left: 4px solid var(--mint); }
+.tile-word { font-family: var(--font-display); font-weight: 600; font-size: 0.94rem; margin-bottom: 0.05rem; }
+.tile-pos { font-family: var(--font-mono); font-size: 0.56rem; text-transform: uppercase; color: var(--rule); margin-bottom: 0.2rem; }
+.tile-def { font-size: 0.71rem; color: #564a6b; line-height: 1.35; }
+.tile-count {
+  display: inline-block;
+  margin-top: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: #2f9060;
+  background: #fff;
+  border: 1px solid #2f9060;
+  border-radius: 8px;
+  padding: 0.08rem 0.35rem;
+}
+.tile.selected { outline: 2.5px solid var(--bubblegum); outline-offset: 1px; box-shadow: 0 0 0 5px rgba(255,143,191,0.22); }
+.tile.used { opacity: 0.35; cursor: not-allowed; }
+.tile.used .tile-tag { display: inline; }
+.tile-tag {
+  display: none;
+  font-family: var(--font-mono); font-size: 0.56rem; color: #2f9060; font-weight: 700;
+  position: absolute; top: 0.4rem; right: 0.5rem;
+}
+
+.board-status {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink);
+  background: var(--butter);
+  border-radius: 20px;
+  padding: 0.42rem;
+  font-weight: 700;
+}
+
+/* ── LYRICS SHEET ────────────────────────────────────────────── */
+.songsheet {
+  background: var(--paper);
+  border-radius: 22px;
+  padding: 1.9rem 2rem;
+  margin-bottom: 1.6rem;
+}
+.verselabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--correct);
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  display: block;
+}
+.lyric-line {
+  margin-bottom: 0.4rem;
+  font-size: 1.06rem;
+}
+.lyric-line.adlib { color: #8579a0; font-style: italic; text-align: center; font-size: 0.95rem; }
+.lyric-block { margin-bottom: 1.7rem; }
+.lyric-block:last-child { margin-bottom: 0; }
+
+.blank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 128px;
+  min-height: 2.1rem;
+  text-align: center;
+  background: var(--card);
+  border: 1.5px solid var(--rule);
+  border-radius: 20px;
+  padding: 0.25rem 0.7rem;
+  margin: 0.15rem 0.2rem;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #8579a0;
+  transition: all 0.14s ease;
+  vertical-align: middle;
+}
+.blank:hover { transform: translateY(-2px); background: #fff; border-color: var(--mint); }
+.blank:active { transform: translateY(0); }
+.blank.filled { color: var(--night2); background: #fff; border-color: var(--bubblegum); font-style: normal; }
+.blank.correct { color: var(--correct); background: var(--light-correct); border-color: var(--correct); }
+.blank.wrong { color: var(--wrong); background: var(--light-wrong); border-color: var(--wrong); }
+.blank-hint {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--wrong);
+  background: var(--light-wrong);
+  border: 1.5px dashed var(--wrong);
+  border-radius: 10px;
+  padding: 0.15rem 0.5rem;
+  margin: 0.15rem 0.2rem;
+  vertical-align: middle;
+}
+
+/* ── CONTROLS ────────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  gap: 0.9rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2.2rem 0;
+}
+.btn {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.86rem;
+  padding: 0.75rem 1.6rem;
+  border-radius: 24px;
+  border: 1.5px solid var(--night2);
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--paper);
+  color: var(--night2);
+}
+.btn.primary { background: var(--night2); color: var(--butter); border-color: var(--night2); }
+.btn.primary:hover { background: var(--night); transform: translateY(-1px); }
+.btn.ghost:hover { background: var(--card); transform: translateY(-1px); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+#score-bar {
+  display: none;
+  text-align: center;
+  background: var(--night);
+  color: #fff;
+  border-radius: 20px;
+  padding: 1.9rem;
+  margin: 1rem 0 2.4rem;
+}
+#score-bar.show { display: block; }
+#score-num { font-family: var(--font-display); font-weight: 700; font-size: 2.8rem; color: var(--butter); }
+#score-title { font-family: var(--font-display); font-weight: 600; font-size: 1.35rem; margin: 0.4rem 0; }
+#score-msg { font-size: 0.9rem; margin-bottom: 0.3rem; color: #d8ccea; }
+
+/* ── GLOSSARY RECAP ──────────────────────────────────────────── */
+.glossary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.gcard {
+  background: var(--paper);
+  border-radius: 16px;
+  padding: 1.05rem 1.25rem;
+  border-top: 3px solid var(--mint);
+}
+.gterm { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; color: var(--night2); }
+.gpos { font-family: var(--font-mono); font-size: 0.65rem; color: var(--rule); text-transform: uppercase; margin-bottom: 0.35rem; }
+.gdef { font-size: 0.86rem; color: #564a6b; margin-bottom: 0.5rem; line-height: 1.5; }
+.gline { font-size: 0.83rem; font-style: italic; color: var(--correct); }
+
+.about {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 1.25rem 1.6rem;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+  line-height: 1.65;
+}
+.about strong { color: var(--night2); }
+
+.tail { max-width: 880px; margin: 0 auto; }
+
+footer {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--rule);
+  margin-top: 3rem;
+}
+
+@media (max-width: 860px) {
+  .activity-grid { grid-template-columns: 1fr; }
+  .board-col { position: static; order: -1; margin-bottom: 1.6rem; }
+  .board-panel { max-height: none; }
+  #board { flex-direction: row; flex-wrap: wrap; }
+  .tile { flex: 1 1 200px; }
+}
+@media (max-width: 600px) {
+  .headline { font-size: 2.2rem; }
+  .songsheet { padding: 1.4rem 1.2rem; }
+  .blank { min-width: 90px; font-size: 0.9rem; }
+  .howto { padding: 1.3rem 1.3rem; }
+  .howto .note { flex-direction: column; gap: 0.2rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="masthead-badge" width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" transform-origin="60 60">
+    <g transform="rotate(-8 60 60)">
+      <path d="M60 6 L68 20 L84 14 L84 31 L100 36 L90 50 L100 64 L84 69 L84 86 L68 80 L60 94 L52 80 L36 86 L36 69 L20 64 L30 50 L20 36 L36 31 L36 14 L52 20 Z" fill="#ffcf56" opacity="0.95"/>
+      <circle cx="60" cy="50" r="28" fill="#3b2f4e"/>
+      <path d="M44 50 L56 62 L78 38" stroke="#5ecfa3" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <line x1="30" y1="78" x2="42" y2="66" stroke="#241f33" stroke-width="2" opacity="0.5"/>
+      <line x1="88" y1="80" x2="78" y2="70" stroke="#241f33" stroke-width="2" opacity="0.5"/>
+    </g>
+  </svg>
+  <p class="eyebrow">English language class · song activity · B1-B2</p>
+  <h1 class="headline">Never Better</h1>
+  <p class="artist">by Fuller</p>
+  <p class="deck">A song that keeps insisting everything's fine while the details quietly say otherwise: late rent, sleepless nights, and a mind that won't stop running. Fill in the lyrics using the word board on the right.</p>
+  <div class="factrow">
+    <span class="fact">Genre: Alt-Pop</span>
+    <span class="fact">Theme: Forced Positivity</span>
+    <span class="fact">Level: B1-B2</span>
+  </div>
+</header>
+
+<main class="page">
+
+<div class="intro-block">
+  <h2 class="sectitle">Fill in the Blanks</h2>
+  <p class="subtitle">Listen to the song with your teacher, then complete the lyrics using the words on the board. The blanks are spread across the whole song, so keep an eye out all the way to the end. The board stays on the right so you can check it while you scroll.</p>
+
+  <div class="howto">
+    <h3>How to play</h3>
+    <div class="howto-steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <p class="step-text">Read the short definition on each tile in the word board first, so you know what a word means before you use it.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <p class="step-text">Click a word tile to select it. It lights up in pink to show it's ready to go.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <p class="step-text">Click a blank in the lyrics to drop that word in. A couple of words come up more than once, so their tile stays active until every one of its blanks is filled.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <p class="step-text">Changed your mind? Click a filled blank again and the word hops right back to the board.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">5</span>
+        <p class="step-text">Click "Check Answers" whenever you're ready, even with a few blanks still empty. Those just count as incorrect, and you'll see the right word appear beside them.</p>
+      </div>
+    </div>
+    <p class="note"><span class="note-label">Tip</span> The board holds more words than the song has blanks. A few are distractors that don't belong anywhere in the lyrics, so trust the definitions, not just the vibe.</p>
+  </div>
+</div>
+
+<div class="activity-grid">
+
+  <div class="lyrics-col">
+    <div class="songsheet">
+
+      <div class="lyric-block">
+        <span class="verselabel">Chorus</span>
+        <div class="lyric-line">Ooh, I think about the end sometimes</div>
+        <div class="lyric-line">I get so down, but I've found</div>
+        <div class="lyric-line">Overthinking is a <span class="blank" data-answer="waste" data-blank="waste1"></span></div>
+        <div class="lyric-line">Ooh, I think about the end sometimes</div>
+        <div class="lyric-line">I get so down, but I've found</div>
+        <div class="lyric-line">Overthinking is a waste of time</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Verse 1</span>
+        <div class="lyric-line">Watch me <span class="blank" data-answer="come undone" data-blank="undone1"></span></div>
+        <div class="lyric-line">I'm <span class="blank" data-answer="sleeping on the run" data-blank="sleep1"></span></div>
+        <div class="lyric-line">I wake to watch the sun</div>
+        <div class="lyric-line">Never been better</div>
+        <div class="lyric-line">My rent is two weeks late</div>
+        <div class="lyric-line">Spent the money on a date</div>
+        <div class="lyric-line">I'm pretty sure she's <span class="blank" data-answer="faked out" data-blank="fake1"></span></div>
+        <div class="lyric-line">But I've never been better</div>
+        <div class="lyric-line">Never been better (Hey!)</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Chorus</span>
+        <div class="lyric-line">Ooh, I think about the end sometimes</div>
+        <div class="lyric-line">I get so down, but I've found</div>
+        <div class="lyric-line">Overthinking is a waste</div>
+        <div class="lyric-line">Ooh, I think about the end sometimes</div>
+        <div class="lyric-line">I get so down, but I've found</div>
+        <div class="lyric-line">Overthinking is a waste of time</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Verse 2</span>
+        <div class="lyric-line">My mind just won't <span class="blank" data-answer="shut off" data-blank="shut1"></span></div>
+        <div class="lyric-line">A <span class="blank" data-answer="flood" data-blank="flood1"></span> of late night thoughts</div>
+        <div class="lyric-line">I'm <span class="blank" data-answer="treading" data-blank="tread1"></span> still it stops</div>
+        <div class="lyric-line">Will it ever get better?</div>
+        <div class="lyric-line">But I'm my father's son</div>
+        <div class="lyric-line">I'm the <span class="blank" data-answer="monster" data-blank="mon1"></span> you won't <span class="blank" data-answer="outrun" data-blank="outrun1"></span></div>
+        <div class="lyric-line">I'm the <span class="blank" data-answer="trigger" data-blank="trig1"></span> to the gun</div>
+        <div class="lyric-line">And I've never been better</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Interlude</span>
+        <div class="lyric-line adlib">♪</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Bridge</span>
+        <div class="lyric-line">My overthinking just <span class="blank" data-answer="gets in the way" data-blank="gets1"></span></div>
+        <div class="lyric-line">I'll take your money and <span class="blank" data-answer="call it a day" data-blank="call1"></span></div>
+        <div class="lyric-line">My neck's too heavy, I fall on my face</div>
+        <div class="lyric-line">But I <span class="blank" data-answer="laughed it off" data-blank="laugh1"></span> cause I've never been better</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Chorus</span>
+        <div class="lyric-line">Ooh, I think about the end sometimes</div>
+        <div class="lyric-line">I get so down, but I've found</div>
+        <div class="lyric-line">Overthinking is a waste</div>
+        <div class="lyric-line">Ooh, I think about the end sometimes</div>
+        <div class="lyric-line">I get so down, but I've found</div>
+        <div class="lyric-line">Overthinking is a waste of time</div>
+        <div class="lyric-line">Ooh, I think about the end sometimes</div>
+        <div class="lyric-line">I get so down, but I've found</div>
+        <div class="lyric-line">Overthinking is a waste</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Outro</span>
+        <div class="lyric-line">My overthinking just <span class="blank" data-answer="gets in the way" data-blank="gets2"></span> (Ooh, I)</div>
+        <div class="lyric-line">I'll take your money and <span class="blank" data-answer="call it a day" data-blank="call2"></span> (Ooh, I)</div>
+        <div class="lyric-line">My neck's too heavy, I fall on my face (Ooh, I)</div>
+        <div class="lyric-line">Overthinking is a <span class="blank" data-answer="waste" data-blank="waste2"></span> of time</div>
+      </div>
+
+    </div>
+
+    <div class="controls">
+      <button class="btn primary" id="check-btn" onclick="checkAnswers()">Check Answers</button>
+      <button class="btn ghost" onclick="resetAll()">Reset</button>
+    </div>
+
+    <div id="score-bar" aria-live="polite">
+      <div id="score-num">0/16</div>
+      <div id="score-title"></div>
+      <div id="score-msg"></div>
+    </div>
+
+    <div class="about">
+      <strong>About the song:</strong> "Never Better" builds its whole tone around a contradiction: the title sounds upbeat, but every verse quietly lists reasons that would say otherwise, unpaid rent, no sleep, a mind that won't quiet down. That gap between what's said and what's actually going on is the joke and the point at the same time.
+    </div>
+  </div>
+
+  <aside class="board-col">
+    <div class="board-panel">
+      <div class="board-title">Word Board</div>
+      <div class="board-sub">Click a word, then click a blank.</div>
+      <div class="legend">
+        <div class="legend-item"><span class="swatch" style="background:var(--bubblegum)"></span>Adjective</div>
+        <div class="legend-item"><span class="swatch" style="background:var(--butter)"></span>Noun / Phrase</div>
+        <div class="legend-item"><span class="swatch" style="background:var(--mint)"></span>Verb / Phrase</div>
+      </div>
+      <div id="board"></div>
+      <div class="board-status" id="board-status" aria-live="polite">0 / 16 blanks filled</div>
+    </div>
+  </aside>
+
+</div>
+
+<div class="tail">
+  <h2 class="sectitle" style="margin-top:2.6rem;">Vocabulary Recap</h2>
+  <p class="subtitle">Once you've finished the activity, review the words you placed and the distractors you managed to avoid.</p>
+  <div class="glossary" id="glossary"></div>
+</div>
+
+</main>
+
+<footer>Song Activity Worksheet · Fill in the Blanks · For classroom use</footer>
+
+<script>
+const WORDS = [
+  { word: "come undone", pos: "phrase", type: "verb", def: "To fall apart emotionally, losing your composure.", slots: 1, line: "Watch me come undone." },
+  { word: "sleeping on the run", pos: "phrase", type: "verb", def: "Getting rest here and there instead of one full, steady night's sleep.", slots: 1, line: "I'm sleeping on the run." },
+  { word: "faked out", pos: "phrase", type: "verb", def: "Tricked or deceived, especially by someone pretending to feel something they didn't.", slots: 1, line: "I'm pretty sure she's faked out." },
+  { word: "shut off", pos: "phrasal verb", type: "verb", def: "To stop, switch off, or go quiet completely.", slots: 1, line: "My mind just won't shut off." },
+  { word: "flood", pos: "noun", type: "noun", def: "An overwhelming rush of something arriving all at once.", slots: 1, line: "A flood of late night thoughts." },
+  { word: "treading", pos: "verb", type: "verb", def: "Working hard just to stay in place, like treading water so you don't sink.", slots: 1, line: "I'm treading still it stops." },
+  { word: "monster", pos: "noun", type: "noun", def: "A frightening, threatening version of someone, often used figuratively.", slots: 1, line: "I'm the monster you won't outrun." },
+  { word: "outrun", pos: "verb", type: "verb", def: "To run faster than something and get away from it.", slots: 1, line: "I'm the monster you won't outrun." },
+  { word: "trigger", pos: "noun", type: "noun", def: "The part of a gun that fires it, used here for whatever sets off the damage.", slots: 1, line: "I'm the trigger to the gun." },
+  { word: "gets in the way", pos: "phrase", type: "verb", def: "Blocks or interferes with something, becoming an obstacle.", slots: 2, line: "My overthinking just gets in the way." },
+  { word: "call it a day", pos: "phrase", type: "noun", def: "To stop doing something and consider it finished for now.", slots: 2, line: "I'll take your money and call it a day." },
+  { word: "laughed it off", pos: "phrase", type: "verb", def: "Treated something painful as a joke instead of dealing with it directly.", slots: 1, line: "But I laughed it off cause I've never been better." },
+  { word: "waste", pos: "noun", type: "noun", def: "Time or effort used up with nothing worthwhile to show for it.", slots: 2, line: "Overthinking is a waste of time." },
+  { word: "spiral", pos: "noun", type: "noun", def: "A pattern of thoughts or events that keeps getting worse and harder to stop.", slots: 0 },
+  { word: "numb", pos: "adjective", type: "adj", def: "Unable to feel anything, physically or emotionally.", slots: 0 },
+  { word: "unravel", pos: "verb", type: "verb", def: "To slowly come apart, thread by thread.", slots: 0 },
+  { word: "drained", pos: "adjective", type: "adj", def: "Completely out of energy, worn down.", slots: 0 }
+];
+
+// Board sorted alphabetically
+const board = [...WORDS].sort((a, b) => a.word.localeCompare(b.word));
+
+const boardEl = document.getElementById('board');
+board.forEach((w, i) => {
+  const tile = document.createElement('div');
+  tile.className = `tile ${w.type}`;
+  tile.dataset.word = w.word;
+  tile.dataset.remaining = w.slots;
+  tile.dataset.slots = w.slots;
+  tile.id = `tile-${i}`;
+  tile.tabIndex = 0;
+  tile.setAttribute('role', 'button');
+  tile.setAttribute('aria-label', `${w.word}, ${w.pos}. ${w.def}`);
+  const countBadge = w.slots > 1 ? `<div class="tile-count" id="count-${w.word.replace(/\s+/g,'-')}">used in ${w.slots} places</div>` : '';
+  tile.innerHTML = `
+    <span class="tile-tag">placed</span>
+    <div class="tile-word">${w.word}</div>
+    <div class="tile-pos">${w.pos}</div>
+    <div class="tile-def">${w.def}</div>
+    ${countBadge}
+  `;
+  tile.addEventListener('click', () => selectTile(tile));
+  tile.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectTile(tile); }
+  });
+  boardEl.appendChild(tile);
+});
+
+let selectedTile = null;
+const TOTAL_BLANKS = document.querySelectorAll('.blank').length;
+let filledCount = 0;
+
+function selectTile(tile) {
+  if (tile.classList.contains('used')) return;
+  if (selectedTile === tile) {
+    tile.classList.remove('selected');
+    tile.setAttribute('aria-pressed', 'false');
+    selectedTile = null;
+    return;
+  }
+  document.querySelectorAll('.tile.selected').forEach(t => { t.classList.remove('selected'); t.setAttribute('aria-pressed', 'false'); });
+  tile.classList.add('selected');
+  tile.setAttribute('aria-pressed', 'true');
+  selectedTile = tile;
+}
+
+function updateTileBadge(tile) {
+  const word = tile.dataset.word;
+  const badge = document.getElementById(`count-${word.replace(/\s+/g,'-')}`);
+  if (!badge) return;
+  const remaining = parseInt(tile.dataset.remaining, 10);
+  const slots = parseInt(tile.dataset.slots, 10);
+  const used = slots - remaining;
+  badge.textContent = remaining > 0 ? `${used}/${slots} placed` : `all ${slots} placed`;
+}
+
+document.querySelectorAll('.blank').forEach(blank => {
+  blank.tabIndex = 0;
+  blank.setAttribute('role', 'button');
+  blank.setAttribute('aria-label', 'Empty blank. Select a word tile, then press Enter here to fill it.');
+  blank.addEventListener('click', () => handleBlankClick(blank));
+  blank.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleBlankClick(blank); }
+  });
+});
+
+function handleBlankClick(blank) {
+  removeHint(blank);
+  if (blank.classList.contains('filled')) {
+    const word = blank.dataset.word;
+    const tile = [...document.querySelectorAll('.tile')].find(t => t.dataset.word === word);
+    if (tile) {
+      tile.dataset.remaining = parseInt(tile.dataset.remaining, 10) + 1;
+      tile.classList.remove('used');
+      updateTileBadge(tile);
+    }
+    blank.textContent = '';
+    blank.classList.remove('filled', 'correct', 'wrong');
+    blank.setAttribute('aria-label', 'Empty blank. Select a word tile, then press Enter here to fill it.');
+    delete blank.dataset.word;
+    filledCount--;
+    updateStatus();
+    return;
+  }
+  if (!selectedTile) {
+    blank.style.background = '#ffd6e8';
+    setTimeout(() => { if (!blank.classList.contains('filled')) blank.style.background = ''; }, 350);
+    return;
+  }
+  const word = selectedTile.dataset.word;
+  blank.textContent = word;
+  blank.dataset.word = word;
+  blank.classList.add('filled');
+  blank.setAttribute('aria-label', `Filled with ${word}. Press Enter to clear this blank.`);
+
+  const remaining = parseInt(selectedTile.dataset.remaining, 10) - 1;
+  selectedTile.dataset.remaining = remaining;
+  updateTileBadge(selectedTile);
+  if (remaining <= 0) selectedTile.classList.add('used');
+  selectedTile.classList.remove('selected');
+  selectedTile.setAttribute('aria-pressed', 'false');
+  selectedTile = null;
+  filledCount++;
+  updateStatus();
+}
+
+function removeHint(blank) {
+  const id = blank.dataset.blank;
+  const existing = document.getElementById(`hint-${id}`);
+  if (existing) existing.remove();
+  blank.classList.remove('correct', 'wrong');
+}
+
+function updateStatus() {
+  document.getElementById('board-status').textContent = `${filledCount} / ${TOTAL_BLANKS} blanks filled`;
+}
+
+function checkAnswers() {
+  let score = 0;
+  document.querySelectorAll('.blank').forEach(blank => {
+    removeHint(blank);
+    const isCorrect = !!blank.dataset.word && blank.dataset.word === blank.dataset.answer;
+    blank.classList.add(isCorrect ? 'correct' : 'wrong');
+    if (isCorrect) {
+      score++;
+      blank.setAttribute('aria-label', `Correct: ${blank.dataset.word}.`);
+    } else {
+      const hint = document.createElement('span');
+      hint.className = 'blank-hint';
+      hint.id = `hint-${blank.dataset.blank}`;
+      hint.textContent = `correct: ${blank.dataset.answer}`;
+      blank.insertAdjacentElement('afterend', hint);
+      blank.setAttribute('aria-label', `Incorrect. The correct word is ${blank.dataset.answer}. Press Enter to clear and try again.`);
+    }
+  });
+  document.getElementById('score-num').textContent = `${score}/${TOTAL_BLANKS}`;
+  let title, msg;
+  if (score === TOTAL_BLANKS) { title = "Never Actually Better"; msg = "Every word landed exactly where it belonged. Turns out you were paying attention the whole time."; }
+  else if (score >= TOTAL_BLANKS * 0.75) { title = "Mostly Fine, Honestly"; msg = "Strong work. Check the red blanks and see if the line around it gives the word away."; }
+  else if (score >= TOTAL_BLANKS * 0.5) { title = "Overthinking It A Little"; msg = "Good attempt. Reread the tile definitions and try the red blanks again."; }
+  else { title = "Rent's Still Late"; msg = "Reset the board and read each definition carefully before you place a word."; }
+  document.getElementById('score-title').textContent = title;
+  document.getElementById('score-msg').textContent = msg;
+  document.getElementById('score-bar').classList.add('show');
+  renderGlossary();
+  document.getElementById('score-bar').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function renderGlossary() {
+  const g = document.getElementById('glossary');
+  g.innerHTML = '';
+  WORDS.filter(w => w.slots > 0).forEach(w => {
+    const card = document.createElement('div');
+    card.className = 'gcard';
+    card.innerHTML = `
+      <div class="gterm">${w.word}</div>
+      <div class="gpos">${w.pos}</div>
+      <div class="gdef">${w.def}</div>
+      <div class="gline">"${w.line}"</div>
+    `;
+    g.appendChild(card);
+  });
+}
+
+function resetAll() {
+  document.querySelectorAll('.blank-hint').forEach(h => h.remove());
+  document.querySelectorAll('.blank').forEach(blank => {
+    blank.textContent = '';
+    blank.classList.remove('filled', 'correct', 'wrong');
+    blank.setAttribute('aria-label', 'Empty blank. Select a word tile, then press Enter here to fill it.');
+    delete blank.dataset.word;
+  });
+  document.querySelectorAll('.tile').forEach(t => {
+    t.classList.remove('used', 'selected');
+    t.setAttribute('aria-pressed', 'false');
+    t.dataset.remaining = t.dataset.slots;
+    updateTileBadge(t);
+  });
+  selectedTile = null;
+  filledCount = 0;
+  updateStatus();
+  document.getElementById('score-bar').classList.remove('show');
+  document.getElementById('glossary').innerHTML = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+updateStatus();
+</script>
+</body>
+</html>

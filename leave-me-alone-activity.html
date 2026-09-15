@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+LESSON-META
+title: "Leave Me Alone: Song Activity"
+source_type: song / fill-in-the-blank
+level: B1-B2
+theme: drawing a hard line with a toxic, self-important person
+artist: I DONT KNOW HOW BUT THEY FOUND ME
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Class Song Activity: Leave Me Alone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Sora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+/* ── RESET ───────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── TOKENS ──────────────────────────────────────────────────── */
+:root {
+  --ink:            #1a1224;
+  --paper:          #f5f1fa;
+  --card:           #e8e0f5;
+  --night:          #120a1a;
+  --night2:         #2d1240;
+  --magenta:        #ff3d9a;
+  --cyan:           #35e6d9;
+  --gold:           #d9b25a;
+  --rule:           #a898c0;
+  --correct:        #2f9060;
+  --wrong:          #c2403f;
+  --light-correct:  #e2f4ea;
+  --light-wrong:    #fbe3e6;
+  --shadow:         18, 10, 26;
+
+  --font-display: 'Bungee', 'Arial Black', sans-serif;
+  --font-body:    'Sora', Arial, sans-serif;
+  --font-mono:    'Space Mono', 'Courier New', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.03rem;
+  line-height: 1.7;
+  min-height: 100vh;
+  padding-bottom: 60px;
+}
+
+::selection { background: var(--magenta); color: #fff; }
+
+/* ── ACCESSIBILITY ───────────────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── MASTHEAD ────────────────────────────────────────────────── */
+.masthead {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--night) 0%, var(--night2) 100%);
+  padding: 3.4rem 1rem 2.8rem;
+  text-align: center;
+  color: #f2ecfa;
+}
+.masthead-rays {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.5;
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--cyan);
+  font-weight: 400;
+  margin-bottom: 1.1rem;
+  position: relative;
+}
+.headline {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.1rem, 5.8vw, 3.4rem);
+  color: #f8f4fc;
+  line-height: 1.08;
+  margin-bottom: 0.6rem;
+  position: relative;
+}
+.artist {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--magenta);
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+.deck {
+  font-size: 1.02rem;
+  max-width: 610px;
+  margin: 0 auto 1.4rem;
+  color: #d4c4e8;
+  font-style: italic;
+  line-height: 1.6;
+  position: relative;
+}
+.factrow {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.9rem;
+  position: relative;
+}
+.fact {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  background: rgba(242,236,250,0.07);
+  border: 1px solid rgba(242,236,250,0.22);
+  color: #f2ecfa;
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  font-weight: 400;
+}
+
+/* ── LAYOUT ──────────────────────────────────────────────────── */
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2.2rem 20px 1rem;
+}
+.intro-block { max-width: 880px; margin: 0 auto 1.8rem; }
+
+.sectitle {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: var(--night2);
+  margin-bottom: 0.4rem;
+}
+.subtitle { color: #4a3f5c; margin-bottom: 1.3rem; font-size: 0.95rem; line-height: 1.6; }
+
+.howto {
+  background: var(--card);
+  border-radius: 4px;
+  padding: 1.7rem 1.8rem;
+  margin-bottom: 0.5rem;
+  border-left: 4px solid var(--magenta);
+}
+.howto h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.25rem; margin-bottom: 1.2rem; color: var(--night2); }
+.howto-steps { display: flex; flex-direction: column; gap: 1rem; }
+.step { display: flex; align-items: flex-start; gap: 1rem; }
+.step-num {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--night2);
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.76rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.1rem;
+}
+.step-text { font-size: 0.93rem; line-height: 1.55; }
+.howto .note {
+  margin-top: 1.2rem;
+  padding: 0.85rem 1.05rem;
+  background: var(--paper);
+  border-radius: 4px;
+  font-size: 0.84rem;
+  color: #4a3f5c;
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  line-height: 1.55;
+}
+.howto .note-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--correct);
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+
+/* ── TWO-COLUMN ACTIVITY GRID ───────────────────────────────── */
+.activity-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.8rem;
+  align-items: start;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.board-col { position: sticky; top: 1rem; }
+.board-panel {
+  background: var(--night);
+  border-radius: 4px;
+  padding: 1.1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+.board-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.05rem;
+  color: #f2ecfa;
+  margin-bottom: 0.25rem;
+}
+.board-sub { font-size: 0.74rem; color: #b7a3d0; margin-bottom: 0.85rem; }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.8rem;
+  margin-bottom: 0.85rem;
+  font-size: 0.72rem;
+  color: #e4d9f2;
+}
+.legend-item { display: flex; align-items: center; gap: 0.35rem; }
+.swatch { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+
+#board {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.7rem;
+}
+.tile {
+  background: var(--paper);
+  border: 1px solid rgba(26,18,36,0.12);
+  border-radius: 3px;
+  padding: 0.48rem 0.68rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s;
+  position: relative;
+}
+.tile:hover:not(.used) { transform: translateY(-2px); }
+.tile.adj { border-left: 4px solid var(--magenta); }
+.tile.noun { border-left: 4px solid var(--gold); }
+.tile.verb { border-left: 4px solid var(--cyan); }
+.tile-word { font-family: var(--font-display); font-weight: 400; font-size: 0.86rem; margin-bottom: 0.05rem; }
+.tile-pos { font-family: var(--font-mono); font-size: 0.56rem; text-transform: uppercase; color: var(--rule); margin-bottom: 0.2rem; }
+.tile-def { font-size: 0.71rem; color: #4a3f5c; line-height: 1.35; }
+.tile-count {
+  display: inline-block;
+  margin-top: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--correct);
+  background: #fff;
+  border: 1px solid var(--correct);
+  border-radius: 3px;
+  padding: 0.08rem 0.35rem;
+}
+.tile.selected { outline: 2.5px solid var(--cyan); outline-offset: 1px; box-shadow: 0 0 0 5px rgba(53,230,217,0.2); }
+.tile.used { opacity: 0.35; cursor: not-allowed; }
+.tile.used .tile-tag { display: inline; }
+.tile-tag {
+  display: none;
+  font-family: var(--font-mono); font-size: 0.56rem; color: var(--correct); font-weight: 700;
+  position: absolute; top: 0.4rem; right: 0.5rem;
+}
+
+.board-status {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--night);
+  background: var(--cyan);
+  border-radius: 20px;
+  padding: 0.42rem;
+  font-weight: 700;
+}
+
+/* ── LYRICS SHEET ────────────────────────────────────────────── */
+.songsheet {
+  background: var(--paper);
+  border-radius: 4px;
+  padding: 1.9rem 2rem;
+  margin-bottom: 1.6rem;
+  border-left: 4px solid var(--night2);
+}
+.verselabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--correct);
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  display: block;
+}
+.lyric-line {
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+}
+.lyric-line.adlib { color: #9b8bad; font-style: italic; font-size: 0.94rem; }
+.lyric-block { margin-bottom: 1.7rem; }
+.lyric-block:last-child { margin-bottom: 0; }
+
+.blank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 122px;
+  min-height: 2.1rem;
+  text-align: center;
+  background: var(--card);
+  border: 1.5px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.25rem 0.7rem;
+  margin: 0.15rem 0.2rem;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #7b6d90;
+  transition: all 0.14s ease;
+  vertical-align: middle;
+}
+.blank:hover { transform: translateY(-2px); background: #fff; border-color: var(--magenta); }
+.blank:active { transform: translateY(0); }
+.blank.filled { color: var(--night2); background: #fff; border-color: var(--cyan); font-style: normal; }
+.blank.correct { color: var(--correct); background: var(--light-correct); border-color: var(--correct); }
+.blank.wrong { color: var(--wrong); background: var(--light-wrong); border-color: var(--wrong); }
+.blank-hint {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--wrong);
+  background: var(--light-wrong);
+  border: 1.5px dashed var(--wrong);
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+  margin: 0.15rem 0.2rem;
+  vertical-align: middle;
+}
+
+/* ── CONTROLS ────────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  gap: 0.9rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2.2rem 0;
+}
+.btn {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.86rem;
+  padding: 0.75rem 1.6rem;
+  border-radius: 24px;
+  border: 1.5px solid var(--night2);
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--paper);
+  color: var(--night2);
+}
+.btn.primary { background: var(--night2); color: var(--cyan); border-color: var(--night2); }
+.btn.primary:hover { background: var(--night); transform: translateY(-1px); }
+.btn.ghost:hover { background: var(--card); transform: translateY(-1px); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+#score-bar {
+  display: none;
+  text-align: center;
+  background: var(--night);
+  color: #fff;
+  border-radius: 4px;
+  padding: 1.9rem;
+  margin: 1rem 0 2.4rem;
+}
+#score-bar.show { display: block; }
+#score-num { font-family: var(--font-display); font-weight: 400; font-size: 2.6rem; color: var(--magenta); }
+#score-title { font-family: var(--font-display); font-weight: 400; font-size: 1.15rem; margin: 0.4rem 0; }
+#score-msg { font-size: 0.9rem; margin-bottom: 0.3rem; color: #d4c4e8; }
+
+/* ── GLOSSARY RECAP ──────────────────────────────────────────── */
+.glossary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.gcard {
+  background: var(--paper);
+  border-radius: 3px;
+  padding: 1.05rem 1.25rem;
+  border-top: 3px solid var(--cyan);
+}
+.gterm { font-family: var(--font-display); font-weight: 400; font-size: 0.98rem; color: var(--night2); }
+.gpos { font-family: var(--font-mono); font-size: 0.65rem; color: var(--rule); text-transform: uppercase; margin-bottom: 0.35rem; }
+.gdef { font-size: 0.86rem; color: #4a3f5c; margin-bottom: 0.5rem; line-height: 1.5; }
+.gline { font-size: 0.83rem; font-style: italic; color: var(--correct); }
+
+.about {
+  background: var(--card);
+  border-radius: 4px;
+  padding: 1.25rem 1.6rem;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+  line-height: 1.65;
+}
+.about strong { color: var(--night2); }
+
+.tail { max-width: 880px; margin: 0 auto; }
+
+footer {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--rule);
+  margin-top: 3rem;
+}
+
+@media (max-width: 860px) {
+  .activity-grid { grid-template-columns: 1fr; }
+  .board-col { position: static; order: -1; margin-bottom: 1.6rem; }
+  .board-panel { max-height: none; }
+  #board { flex-direction: row; flex-wrap: wrap; }
+  .tile { flex: 1 1 200px; }
+}
+@media (max-width: 600px) {
+  .headline { font-size: 1.9rem; }
+  .songsheet { padding: 1.4rem 1.2rem; }
+  .blank { min-width: 88px; font-size: 0.9rem; }
+  .howto { padding: 1.3rem 1.3rem; }
+  .howto .note { flex-direction: column; gap: 0.2rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="masthead-rays" width="420" height="220" viewBox="0 0 420 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <g stroke="#ff3d9a" stroke-width="2">
+      <line x1="210" y1="220" x2="30" y2="10"/>
+      <line x1="210" y1="220" x2="100" y2="0"/>
+      <line x1="210" y1="220" x2="210" y2="0"/>
+      <line x1="210" y1="220" x2="320" y2="0"/>
+      <line x1="210" y1="220" x2="390" y2="10"/>
+    </g>
+    <g stroke="#35e6d9" stroke-width="1.4" opacity="0.7">
+      <line x1="210" y1="220" x2="65" y2="0"/>
+      <line x1="210" y1="220" x2="155" y2="0"/>
+      <line x1="210" y1="220" x2="265" y2="0"/>
+      <line x1="210" y1="220" x2="355" y2="0"/>
+    </g>
+    <circle cx="210" cy="220" r="46" fill="#2d1240" stroke="#d9b25a" stroke-width="2"/>
+  </svg>
+  <p class="eyebrow">English language class · song activity · B1-B2</p>
+  <h1 class="headline">Leave Me Alone</h1>
+  <p class="artist">by I DONT KNOW HOW BUT THEY FOUND ME</p>
+  <p class="deck">A song about the moment you stop being polite with someone who's used up all your patience, dressed up in glam-rock swagger. Fill in the lyrics using the word board on the right.</p>
+  <div class="factrow">
+    <span class="fact">Genre: New Wave / Glam Rock</span>
+    <span class="fact">Theme: Cutting Someone Off</span>
+    <span class="fact">Level: B1-B2</span>
+  </div>
+</header>
+
+<main class="page">
+
+<div class="intro-block">
+  <h2 class="sectitle">Fill in the Blanks</h2>
+  <p class="subtitle">Listen to the song with your teacher, then complete the lyrics using the words on the board. The blanks are spread across the whole song, so keep an eye out all the way to the end. The board stays on the right so you can check it while you scroll.</p>
+
+  <div class="howto">
+    <h3>How to play</h3>
+    <div class="howto-steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <p class="step-text">Read the short definition on each tile in the word board first, so you know what a word means before you use it.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <p class="step-text">Click a word tile to select it. It lights up in cyan to show it's ready to go.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <p class="step-text">Click a blank in the lyrics to drop that word in. A couple of words come up more than once, so their tile stays active until every one of its blanks is filled.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <p class="step-text">Changed your mind? Click a filled blank again and the word hops right back to the board.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">5</span>
+        <p class="step-text">Click "Check Answers" whenever you're ready, even with a few blanks still empty. Those just count as incorrect, and you'll see the right word appear beside them.</p>
+      </div>
+    </div>
+    <p class="note"><span class="note-label">Tip</span> The board holds more words than the song has blanks. A few are distractors that don't belong anywhere in the lyrics, so trust the definitions, not just the vibe.</p>
+  </div>
+</div>
+
+<div class="activity-grid">
+
+  <div class="lyrics-col">
+    <div class="songsheet">
+
+      <div class="lyric-block">
+        <span class="verselabel">Verse 1</span>
+        <div class="lyric-line"><span class="blank" data-answer="big shot" data-blank="big1"></span>, so what?</div>
+        <div class="lyric-line">Do you wanna <span class="blank" data-answer="pretend" data-blank="pret1"></span>?</div>
+        <div class="lyric-line">You took the money</div>
+        <div class="lyric-line">But the money couldn't buy a friend</div>
+        <div class="lyric-line">Now I want you to leave me alone</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Chorus</span>
+        <div class="lyric-line">They say the <span class="blank" data-answer="devil" data-blank="dev1"></span> that you know</div>
+        <div class="lyric-line">Is better than the <span class="blank" data-answer="devil" data-blank="dev2"></span> that you don't</div>
+        <div class="lyric-line">Oh, you're a <span class="blank" data-answer="big shot" data-blank="big2"></span> here, but nobody else knows</div>
+        <div class="lyric-line">Now I want you to leave me alone</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Verse 2</span>
+        <div class="lyric-line"><span class="blank" data-answer="blind spot" data-blank="blind1"></span>, <span class="blank" data-answer="take your best shot" data-blank="best1"></span>, lucky me</div>
+        <div class="lyric-line">Go fly a kite until you're <span class="blank" data-answer="tangled" data-blank="tang1"></span> in the <span class="blank" data-answer="hanging tree" data-blank="hang1"></span></div>
+        <div class="lyric-line">Now I want you to leave me alone</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Chorus</span>
+        <div class="lyric-line">They say the devil that you know</div>
+        <div class="lyric-line">Is better than the devil that you don't</div>
+        <div class="lyric-line">Oh, you're a big shot here, but nobody else knows</div>
+        <div class="lyric-line">Now I want you to leave me alone</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Bridge</span>
+        <div class="lyric-line">Four in the morning</div>
+        <div class="lyric-line">But we're having such a lovely time</div>
+        <div class="lyric-line"><span class="blank" data-answer="mad as a hatter" data-blank="mad1"></span> with a <span class="blank" data-answer="dagger" data-blank="dag1"></span> and a dollar sign</div>
+        <div class="lyric-line"><span class="blank" data-answer="aristocrat" data-blank="ari1"></span>, <span class="blank" data-answer="tip your hat" data-blank="tip1"></span> and break your mother's heart</div>
+        <div class="lyric-line">And when the Sun comes up</div>
+        <div class="lyric-line">You'll find a brand new God</div>
+        <div class="lyric-line adlib">(Hey, come on)</div>
+        <div class="lyric-line adlib">(A brand new God)</div>
+        <div class="lyric-line adlib">(Oh, oh)</div>
+        <div class="lyric-line">Now I want you to leave me alone</div>
+      </div>
+
+      <div class="lyric-block">
+        <span class="verselabel">Chorus</span>
+        <div class="lyric-line">They say the devil that you know</div>
+        <div class="lyric-line">Is better than the devil that you don't</div>
+        <div class="lyric-line">Oh, you're a big shot here, but nobody else knows</div>
+        <div class="lyric-line">Now I want you to leave me alone</div>
+      </div>
+
+    </div>
+
+    <div class="controls">
+      <button class="btn primary" id="check-btn" onclick="checkAnswers()">Check Answers</button>
+      <button class="btn ghost" onclick="resetAll()">Reset</button>
+    </div>
+
+    <div id="score-bar" aria-live="polite">
+      <div id="score-num">0/13</div>
+      <div id="score-title"></div>
+      <div id="score-msg"></div>
+    </div>
+
+    <div class="about">
+      <strong>About the song:</strong> "Leave Me Alone" is the debut single from I DONT KNOW HOW BUT THEY FOUND ME, a two-piece project led by Dallon Weekes, formerly of Panic! at the Disco, alongside drummer Ryan Seaman. It opens their 2020 album Razzmatazz, blending glam rock and new wave sounds with lyrics about finally cutting off someone toxic, the last civil thing you say before things stop being civil.
+    </div>
+  </div>
+
+  <aside class="board-col">
+    <div class="board-panel">
+      <div class="board-title">Word Board</div>
+      <div class="board-sub">Click a word, then click a blank.</div>
+      <div class="legend">
+        <div class="legend-item"><span class="swatch" style="background:var(--magenta)"></span>Adjective / Phrase</div>
+        <div class="legend-item"><span class="swatch" style="background:var(--gold)"></span>Noun / Phrase</div>
+        <div class="legend-item"><span class="swatch" style="background:var(--cyan)"></span>Verb / Phrase</div>
+      </div>
+      <div id="board"></div>
+      <div class="board-status" id="board-status" aria-live="polite">0 / 13 blanks filled</div>
+    </div>
+  </aside>
+
+</div>
+
+<div class="tail">
+  <h2 class="sectitle" style="margin-top:2.6rem;">Vocabulary Recap</h2>
+  <p class="subtitle">Once you've finished the activity, review the words you placed and the distractors you managed to avoid.</p>
+  <div class="glossary" id="glossary"></div>
+</div>
+
+</main>
+
+<footer>Song Activity Worksheet · Fill in the Blanks · For classroom use</footer>
+
+<script>
+const WORDS = [
+  { word: "big shot", pos: "phrase", type: "noun", def: "Someone who acts important or powerful, often self-importantly.", slots: 2, line: "Big shot, so what?" },
+  { word: "pretend", pos: "verb", type: "verb", def: "To act as if something is true when it isn't.", slots: 1, line: "Do you wanna pretend?" },
+  { word: "devil", pos: "noun", type: "noun", def: "A familiar source of trouble, used in the idiom that a known problem feels safer than an unknown one.", slots: 2, line: "They say the devil that you know." },
+  { word: "blind spot", pos: "phrase", type: "noun", def: "An area you can't see, or a flaw you don't notice in yourself.", slots: 1, line: "Blind spot, take your best shot, lucky me." },
+  { word: "take your best shot", pos: "phrase", type: "verb", def: "To make your strongest attempt, especially against someone.", slots: 1, line: "Blind spot, take your best shot, lucky me." },
+  { word: "tangled", pos: "verb", type: "verb", def: "Twisted together into a confused, knotted mess.", slots: 1, line: "Go fly a kite until you're tangled in the hanging tree." },
+  { word: "hanging tree", pos: "phrase", type: "noun", def: "A tree used for hanging people, used here as an exaggerated insult, not a real threat.", slots: 1, line: "Go fly a kite until you're tangled in the hanging tree." },
+  { word: "mad as a hatter", pos: "phrase", type: "adj", def: "Completely and wildly crazy.", slots: 1, line: "Mad as a hatter with a dagger and a dollar sign." },
+  { word: "dagger", pos: "noun", type: "noun", def: "A short knife used as a weapon.", slots: 1, line: "Mad as a hatter with a dagger and a dollar sign." },
+  { word: "aristocrat", pos: "noun", type: "noun", def: "A member of the highest social class, often born into wealth and privilege.", slots: 1, line: "Aristocrat, tip your hat and break your mother's heart." },
+  { word: "tip your hat", pos: "phrase", type: "verb", def: "To show respect or acknowledge someone, used ironically here.", slots: 1, line: "Aristocrat, tip your hat and break your mother's heart." },
+  { word: "tyrant", pos: "noun", type: "noun", def: "A ruler or person who uses power cruelly and unfairly.", slots: 0 },
+  { word: "cunning", pos: "adjective", type: "adj", def: "Clever in a sly, deceptive way.", slots: 0 },
+  { word: "reckoning", pos: "noun", type: "noun", def: "A time when past actions are judged and consequences arrive.", slots: 0 },
+  { word: "gilded", pos: "adjective", type: "adj", def: "Covered in a thin layer of gold, or made to look more valuable than it is.", slots: 0 }
+];
+
+// Board sorted alphabetically
+const board = [...WORDS].sort((a, b) => a.word.localeCompare(b.word));
+
+const boardEl = document.getElementById('board');
+board.forEach((w, i) => {
+  const tile = document.createElement('div');
+  tile.className = `tile ${w.type}`;
+  tile.dataset.word = w.word;
+  tile.dataset.remaining = w.slots;
+  tile.dataset.slots = w.slots;
+  tile.id = `tile-${i}`;
+  tile.tabIndex = 0;
+  tile.setAttribute('role', 'button');
+  tile.setAttribute('aria-label', `${w.word}, ${w.pos}. ${w.def}`);
+  const countBadge = w.slots > 1 ? `<div class="tile-count" id="count-${w.word.replace(/\s+/g,'-')}">used in ${w.slots} places</div>` : '';
+  tile.innerHTML = `
+    <span class="tile-tag">placed</span>
+    <div class="tile-word">${w.word}</div>
+    <div class="tile-pos">${w.pos}</div>
+    <div class="tile-def">${w.def}</div>
+    ${countBadge}
+  `;
+  tile.addEventListener('click', () => selectTile(tile));
+  tile.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectTile(tile); }
+  });
+  boardEl.appendChild(tile);
+});
+
+let selectedTile = null;
+const TOTAL_BLANKS = document.querySelectorAll('.blank').length;
+let filledCount = 0;
+
+function selectTile(tile) {
+  if (tile.classList.contains('used')) return;
+  if (selectedTile === tile) {
+    tile.classList.remove('selected');
+    tile.setAttribute('aria-pressed', 'false');
+    selectedTile = null;
+    return;
+  }
+  document.querySelectorAll('.tile.selected').forEach(t => { t.classList.remove('selected'); t.setAttribute('aria-pressed', 'false'); });
+  tile.classList.add('selected');
+  tile.setAttribute('aria-pressed', 'true');
+  selectedTile = tile;
+}
+
+function updateTileBadge(tile) {
+  const word = tile.dataset.word;
+  const badge = document.getElementById(`count-${word.replace(/\s+/g,'-')}`);
+  if (!badge) return;
+  const remaining = parseInt(tile.dataset.remaining, 10);
+  const slots = parseInt(tile.dataset.slots, 10);
+  const used = slots - remaining;
+  badge.textContent = remaining > 0 ? `${used}/${slots} placed` : `all ${slots} placed`;
+}
+
+document.querySelectorAll('.blank').forEach(blank => {
+  blank.tabIndex = 0;
+  blank.setAttribute('role', 'button');
+  blank.setAttribute('aria-label', 'Empty blank. Select a word tile, then press Enter here to fill it.');
+  blank.addEventListener('click', () => handleBlankClick(blank));
+  blank.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleBlankClick(blank); }
+  });
+});
+
+function handleBlankClick(blank) {
+  removeHint(blank);
+  if (blank.classList.contains('filled')) {
+    const word = blank.dataset.word;
+    const tile = [...document.querySelectorAll('.tile')].find(t => t.dataset.word === word);
+    if (tile) {
+      tile.dataset.remaining = parseInt(tile.dataset.remaining, 10) + 1;
+      tile.classList.remove('used');
+      updateTileBadge(tile);
+    }
+    blank.textContent = '';
+    blank.classList.remove('filled', 'correct', 'wrong');
+    blank.setAttribute('aria-label', 'Empty blank. Select a word tile, then press Enter here to fill it.');
+    delete blank.dataset.word;
+    filledCount--;
+    updateStatus();
+    return;
+  }
+  if (!selectedTile) {
+    blank.style.background = '#e4d3f2';
+    setTimeout(() => { if (!blank.classList.contains('filled')) blank.style.background = ''; }, 350);
+    return;
+  }
+  const word = selectedTile.dataset.word;
+  blank.textContent = word;
+  blank.dataset.word = word;
+  blank.classList.add('filled');
+  blank.setAttribute('aria-label', `Filled with ${word}. Press Enter to clear this blank.`);
+
+  const remaining = parseInt(selectedTile.dataset.remaining, 10) - 1;
+  selectedTile.dataset.remaining = remaining;
+  updateTileBadge(selectedTile);
+  if (remaining <= 0) selectedTile.classList.add('used');
+  selectedTile.classList.remove('selected');
+  selectedTile.setAttribute('aria-pressed', 'false');
+  selectedTile = null;
+  filledCount++;
+  updateStatus();
+}
+
+function removeHint(blank) {
+  const id = blank.dataset.blank;
+  const existing = document.getElementById(`hint-${id}`);
+  if (existing) existing.remove();
+  blank.classList.remove('correct', 'wrong');
+}
+
+function updateStatus() {
+  document.getElementById('board-status').textContent = `${filledCount} / ${TOTAL_BLANKS} blanks filled`;
+}
+
+function checkAnswers() {
+  let score = 0;
+  document.querySelectorAll('.blank').forEach(blank => {
+    removeHint(blank);
+    const isCorrect = !!blank.dataset.word && blank.dataset.word === blank.dataset.answer;
+    blank.classList.add(isCorrect ? 'correct' : 'wrong');
+    if (isCorrect) {
+      score++;
+      blank.setAttribute('aria-label', `Correct: ${blank.dataset.word}.`);
+    } else {
+      const hint = document.createElement('span');
+      hint.className = 'blank-hint';
+      hint.id = `hint-${blank.dataset.blank}`;
+      hint.textContent = `correct: ${blank.dataset.answer}`;
+      blank.insertAdjacentElement('afterend', hint);
+      blank.setAttribute('aria-label', `Incorrect. The correct word is ${blank.dataset.answer}. Press Enter to clear and try again.`);
+    }
+  });
+  document.getElementById('score-num').textContent = `${score}/${TOTAL_BLANKS}`;
+  let title, msg;
+  if (score === TOTAL_BLANKS) { title = "Big Shot Energy"; msg = "Every word landed exactly where it belonged. Now go leave someone alone."; }
+  else if (score >= TOTAL_BLANKS * 0.75) { title = "Take Your Best Shot"; msg = "Strong work. Check the red blanks and see if the line around it gives the word away."; }
+  else if (score >= TOTAL_BLANKS * 0.5) { title = "Blind Spot"; msg = "Good attempt. Reread the tile definitions and try the red blanks again."; }
+  else { title = "Four In The Morning"; msg = "Reset the board and read each definition carefully before you place a word."; }
+  document.getElementById('score-title').textContent = title;
+  document.getElementById('score-msg').textContent = msg;
+  document.getElementById('score-bar').classList.add('show');
+  renderGlossary();
+  document.getElementById('score-bar').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function renderGlossary() {
+  const g = document.getElementById('glossary');
+  g.innerHTML = '';
+  WORDS.filter(w => w.slots > 0).forEach(w => {
+    const card = document.createElement('div');
+    card.className = 'gcard';
+    card.innerHTML = `
+      <div class="gterm">${w.word}</div>
+      <div class="gpos">${w.pos}</div>
+      <div class="gdef">${w.def}</div>
+      <div class="gline">"${w.line}"</div>
+    `;
+    g.appendChild(card);
+  });
+}
+
+function resetAll() {
+  document.querySelectorAll('.blank-hint').forEach(h => h.remove());
+  document.querySelectorAll('.blank').forEach(blank => {
+    blank.textContent = '';
+    blank.classList.remove('filled', 'correct', 'wrong');
+    blank.setAttribute('aria-label', 'Empty blank. Select a word tile, then press Enter here to fill it.');
+    delete blank.dataset.word;
+  });
+  document.querySelectorAll('.tile').forEach(t => {
+    t.classList.remove('used', 'selected');
+    t.setAttribute('aria-pressed', 'false');
+    t.dataset.remaining = t.dataset.slots;
+    updateTileBadge(t);
+  });
+  selectedTile = null;
+  filledCount = 0;
+  updateStatus();
+  document.getElementById('score-bar').classList.remove('show');
+  document.getElementById('glossary').innerHTML = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+updateStatus();
+</script>
+</body>
+</html>
