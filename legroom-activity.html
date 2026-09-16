@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>legroom — Vocabulary Activity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night-1:#221c1a;
+    --night-2:#2e2622;
+    --night-3:#181412;
+    --lamp:#ffb37a;
+    --lamp-soft:#ffd1a8;
+    --rose:#e08a92;
+    --text:#ece3dc;
+    --text-muted:#b7a89d;
+    --card:rgba(255,179,122,0.05);
+    --card-border:rgba(255,179,122,0.16);
+    --correct:#8fcf9f;
+    --correct-bg:rgba(143,207,159,0.14);
+    --incorrect:#e08a92;
+    --incorrect-bg:rgba(224,138,146,0.14);
+    --focus:#ffb37a;
+    --radius:14px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 50% 40% at 50% 5%, rgba(255,179,122,0.14), transparent 65%),
+      linear-gradient(180deg, var(--night-3) 0%, var(--night-1) 45%, var(--night-2) 100%);
+    color:var(--text);
+    font-family:'Work Sans', system-ui, sans-serif;
+    line-height:1.62;
+    min-height:100vh;
+  }
+
+  h1,h2,h3{
+    font-family:'Cormorant Garamond', Georgia, serif;
+    font-weight:600;
+    margin:0 0 0.4em 0;
+    color:var(--text);
+  }
+
+  a{color:var(--lamp-soft);}
+
+  .visually-hidden{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+
+  :focus-visible{
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+  }
+
+  main{max-width:1080px; margin:0 auto; padding:0 20px 80px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:78px 24px 54px;
+    text-align:center;
+    overflow:hidden;
+    border-bottom:1px solid var(--card-border);
+  }
+  .hero-art{position:absolute; inset:0; z-index:0; opacity:0.9;}
+  .hero-inner{position:relative; z-index:1;}
+  .hero .eyebrow{
+    font-family:'Work Sans', sans-serif;
+    font-size:0.82rem;
+    color:var(--rose);
+    font-style:italic;
+    margin-bottom:10px;
+  }
+  .hero h1{
+    font-size:clamp(3rem, 9vw, 5.4rem);
+    font-style:italic;
+    font-weight:600;
+    color:var(--lamp-soft);
+    text-shadow: 0 0 46px rgba(255,179,122,0.3);
+  }
+  .hero .artist{
+    font-size:1.1rem;
+    color:var(--text-muted);
+    margin-bottom:18px;
+  }
+  .hero .tagline{
+    max-width:540px;
+    margin:0 auto 26px;
+    color:var(--text-muted);
+    font-size:1.02rem;
+  }
+  .facts{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+  }
+  .fact{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    padding:8px 16px;
+    border-radius:999px;
+    font-size:0.86rem;
+    color:var(--text-muted);
+  }
+  .fact strong{color:var(--rose); font-weight:600;}
+
+  /* ---------- Sections ---------- */
+  section{padding:44px 0;}
+  .intro{border-bottom:1px solid var(--card-border);}
+  .intro p{font-size:1.05rem; color:var(--text-muted); max-width:680px;}
+
+  .howto{border-bottom:1px solid var(--card-border);}
+  .howto h2{color:var(--text);}
+  .howto ol{
+    list-style:none;
+    counter-reset:step;
+    padding:0;
+    margin:20px 0 0;
+    display:grid;
+    gap:14px;
+  }
+  .howto li{
+    counter-increment:step;
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:14px 18px;
+  }
+  .howto li::before{
+    content:counter(step);
+    flex:0 0 auto;
+    width:30px; height:30px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--lamp), var(--rose));
+    color:#221c1a;
+    font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Cormorant Garamond', serif;
+  }
+  .howto .note{
+    margin-top:16px;
+    font-size:0.92rem;
+    color:var(--text-muted);
+    font-style:italic;
+  }
+
+  /* ---------- Activity grid ---------- */
+  .activity-wrap{padding-top:44px;}
+  .activity-grid{
+    display:grid;
+    grid-template-columns: 260px 1fr;
+    gap:28px;
+    align-items:start;
+  }
+  @media (max-width: 760px){
+    .activity-grid{grid-template-columns:1fr;}
+  }
+
+  .board{
+    position:sticky;
+    top:16px;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:18px;
+  }
+  @media (max-width: 760px){
+    .board{position:relative; top:0;}
+  }
+  .board h2{font-size:1.2rem;}
+  .board .subnote{font-size:0.84rem; color:var(--text-muted); margin-bottom:14px;}
+  .tiles{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .tile{
+    min-height:40px;
+    padding:8px 14px;
+    background:rgba(255,179,122,0.08);
+    border:1px solid var(--lamp);
+    color:var(--lamp-soft);
+    border-radius:10px;
+    font-size:0.9rem;
+    font-family:'Work Sans', sans-serif;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .tile:hover{transform:translateY(-1px);}
+  .tile[aria-pressed="true"]{
+    background:var(--rose);
+    border-color:var(--rose);
+    color:#221c1a;
+    font-weight:600;
+    box-shadow: 0 4px 20px rgba(224,138,146,0.4);
+  }
+  .tile[aria-disabled="true"]{
+    opacity:0.32;
+    cursor:not-allowed;
+    text-decoration:line-through;
+  }
+  .tile .count{
+    font-size:0.7rem;
+    background:rgba(255,255,255,0.14);
+    padding:1px 6px;
+    border-radius:999px;
+  }
+  .tile[aria-pressed="true"] .count{background:rgba(0,0,0,0.2);}
+
+  .live-count{
+    margin-top:16px;
+    font-size:0.86rem;
+    color:var(--text-muted);
+    border-top:1px dashed var(--card-border);
+    padding-top:12px;
+  }
+  .live-count strong{color:var(--lamp-soft);}
+
+  /* ---------- Lyric sheet ---------- */
+  .lyrics{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:28px 30px;
+  }
+  .verse{margin-bottom:30px;}
+  .verse:last-child{margin-bottom:0;}
+  .verse h3{
+    font-size:0.82rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--rose);
+    font-family:'Work Sans', sans-serif;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .verse p{
+    margin:0 0 6px 0;
+    font-size:1.08rem;
+    color:var(--text);
+    max-width:60ch;
+  }
+
+  .blank{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:100px;
+    min-height:40px;
+    padding:4px 12px;
+    margin:0 2px;
+    background:rgba(255,255,255,0.05);
+    border:2px dashed var(--text-muted);
+    border-radius:8px;
+    color:var(--text-muted);
+    font-style:italic;
+    cursor:pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    vertical-align:middle;
+  }
+  .blank:hover{border-color:var(--lamp-soft);}
+  .blank.filled{
+    border-style:solid;
+    border-color:var(--lamp-soft);
+    color:var(--lamp-soft);
+    font-style:normal;
+    font-weight:600;
+    background:rgba(255,179,122,0.1);
+  }
+  .blank.correct{
+    border-color:var(--correct);
+    background:var(--correct-bg);
+    color:var(--correct);
+  }
+  .blank.incorrect{
+    border-color:var(--incorrect);
+    background:var(--incorrect-bg);
+    color:var(--incorrect);
+  }
+  .blank .correction{
+    display:block;
+    font-size:0.72rem;
+    font-style:normal;
+    color:var(--incorrect);
+    margin-top:2px;
+  }
+
+  /* ---------- Controls ---------- */
+  .controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    align-items:center;
+    padding:32px 0;
+    border-top:1px solid var(--card-border);
+    border-bottom:1px solid var(--card-border);
+  }
+  button.action{
+    font-family:'Work Sans', sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    padding:12px 26px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    min-height:44px;
+  }
+  .btn-check{
+    background:linear-gradient(135deg, var(--lamp), var(--rose));
+    color:#221c1a;
+    box-shadow: 0 6px 22px rgba(255,179,122,0.3);
+  }
+  .btn-reset{
+    background:transparent;
+    color:var(--text-muted);
+    border:1px solid var(--card-border);
+  }
+  .controls .status{
+    font-size:0.92rem;
+    color:var(--text-muted);
+  }
+
+  /* ---------- Score ---------- */
+  .score-panel{
+    display:none;
+    padding:36px 0;
+    border-bottom:1px solid var(--card-border);
+  }
+  .score-panel.visible{display:block;}
+  .score-panel .score-num{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:3rem;
+    color:var(--lamp-soft);
+  }
+  .score-panel .score-msg{
+    max-width:600px;
+    font-size:1.05rem;
+    color:var(--text);
+    margin-top:8px;
+  }
+
+  /* ---------- About ---------- */
+  .about{border-bottom:1px solid var(--card-border);}
+  .about .card{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:22px 26px;
+    max-width:680px;
+  }
+  .about h2{color:var(--text);}
+  .about p{color:var(--text-muted); margin:0;}
+
+  /* ---------- Recap ---------- */
+  .recap{display:none;}
+  .recap.visible{display:block;}
+  .recap h2{color:var(--text);}
+  .recap-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:16px;
+    margin-top:20px;
+  }
+  .recap-item{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:16px 18px;
+  }
+  .recap-item .word{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1.25rem;
+    color:var(--rose);
+  }
+  .recap-item .pos{
+    display:inline-block;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--text-muted);
+    background:rgba(255,255,255,0.06);
+    padding:2px 8px;
+    border-radius:999px;
+    margin:6px 0 8px;
+  }
+  .recap-item .def{font-size:0.92rem; color:var(--text); margin-bottom:8px;}
+  .recap-item .line{
+    font-size:0.84rem;
+    color:var(--text-muted);
+    font-style:italic;
+    border-left:2px solid var(--lamp);
+    padding-left:10px;
+  }
+
+  footer{
+    text-align:center;
+    padding:30px 20px 10px;
+    color:var(--text-muted);
+    font-size:0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="hero-art" viewBox="0 0 1080 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <circle cx="540" cy="90" r="70" fill="var(--lamp)" opacity="0.1"/>
+    <circle cx="540" cy="90" r="44" fill="var(--lamp)" opacity="0.16"/>
+    <path d="M 500 90 L 580 90 L 610 200 L 470 200 Z" fill="var(--lamp)" opacity="0.08"/>
+    <line x1="540" y1="200" x2="540" y2="280" stroke="var(--text-muted)" stroke-width="3" opacity="0.3"/>
+    <line x1="480" y1="280" x2="600" y2="280" stroke="var(--text-muted)" stroke-width="3" opacity="0.3"/>
+    <line x1="150" y1="230" x2="420" y2="230" stroke="var(--text-muted)" stroke-width="2" opacity="0.2" stroke-dasharray="6 8"/>
+    <line x1="660" y1="230" x2="930" y2="230" stroke="var(--text-muted)" stroke-width="2" opacity="0.2" stroke-dasharray="6 8"/>
+  </svg>
+  <div class="hero-inner">
+    <p class="eyebrow">song vocabulary activity &middot; B1&ndash;B2</p>
+    <h1>legroom</h1>
+    <p class="artist">Adan Diaz</p>
+    <p class="tagline">A quiet, late-night song about the specific, physical ways someone's absence shows up afterward.</p>
+    <div class="facts">
+      <span class="fact"><strong>Genre:</strong> Bedroom pop / lo-fi R&amp;B</span>
+      <span class="fact"><strong>Theme:</strong> Missing someone's presence</span>
+      <span class="fact"><strong>Level:</strong> B1&ndash;B2</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="intro">
+    <h2>What you'll do</h2>
+    <p>Read through the lyrics of "legroom" and fill in the missing words using the board on the side. Every blank has one correct answer taken straight from the song. When you're done, check your answers and see how well you know the track, plus a quick reference to every word you just practiced.</p>
+  </section>
+
+  <section class="howto">
+    <h2>How to play</h2>
+    <ol>
+      <li>Click a word on the board to select it. It will light up to show it's chosen.</li>
+      <li>Click a blank in the lyrics to drop that word into it. Click a filled blank again to pull the word back out.</li>
+      <li>Changed your mind about a tile before placing it? Click it again to deselect.</li>
+      <li>Once you're happy with your answers, click Check Answers.</li>
+    </ol>
+    <p class="note">The board has more words than blanks. Some are there to test you, not to be used.</p>
+  </section>
+
+  <section class="activity-wrap">
+    <div class="activity-grid">
+      <div class="board" aria-label="Word bank">
+        <h2>Word board</h2>
+        <p class="subnote">Click a word, then click a blank to place it.</p>
+        <div class="tiles" id="tiles"></div>
+        <div class="live-count" id="liveCount" aria-live="polite">
+          <strong id="filledCount">0</strong> of <strong id="totalCount">0</strong> blanks filled
+        </div>
+      </div>
+
+      <div class="lyrics" id="lyrics">
+
+        <div class="verse">
+          <h3>Chorus</h3>
+          <p>I just want your <span class="blank" data-id="b1" data-answer="company" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>To come sit right in front of me</p>
+          <p>You don't need to say a thing</p>
+          <p>No <span class="blank" data-id="b2" data-answer="commitment" tabindex="0" role="button" aria-pressed="false"></span>, no wedding ring</p>
+          <p>I've been kinda <span class="blank" data-id="b3" data-answer="sleep-deprived" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Just hopin' you might <span class="blank" data-id="b4" data-answer="stay the night" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Miss your <span class="blank" data-id="b5" data-answer="presence" tabindex="0" role="button" aria-pressed="false"></span> in my bedroom</p>
+          <p>Now I lay with too much <span class="blank" data-id="b6" data-answer="legroom" tabindex="0" role="button" aria-pressed="false"></span></p>
+        </div>
+
+        <div class="verse">
+          <h3>Verse 1</h3>
+          <p>Head up on my chest</p>
+          <p>I'm not tired, just wanna rest</p>
+          <p>I miss you sayin' hey to me</p>
+          <p>When there's nothin' to say to me</p>
+          <p>You just stayed the night</p>
+          <p>You gotta leave and go get dressed</p>
+          <p>Last night you left <span class="blank" data-id="b7" data-answer="a couple things" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Your rings are on my pillow sheet</p>
+        </div>
+
+        <div class="verse">
+          <h3>Chorus</h3>
+          <p>I just want your <span class="blank" data-id="b8" data-answer="company" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>To come sit right in front of me</p>
+          <p>You don't need to say a thing</p>
+          <p>No <span class="blank" data-id="b9" data-answer="commitment" tabindex="0" role="button" aria-pressed="false"></span>, no wedding ring</p>
+          <p>I've been kinda <span class="blank" data-id="b10" data-answer="sleep-deprived" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Just hopin' you might <span class="blank" data-id="b11" data-answer="stay the night" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Miss your <span class="blank" data-id="b12" data-answer="presence" tabindex="0" role="button" aria-pressed="false"></span> in my bedroom</p>
+          <p>Now I lay with too much <span class="blank" data-id="b13" data-answer="legroom" tabindex="0" role="button" aria-pressed="false"></span></p>
+        </div>
+
+        <div class="verse">
+          <h3>Verse 2</h3>
+          <p>My car's been <span class="blank" data-id="b14" data-answer="feeling empty" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>And my seats, they haven't moved</p>
+          <p>I can't find a song to play</p>
+          <p>Keep <span class="blank" data-id="b15" data-answer="messin' with" tabindex="0" role="button" aria-pressed="false"></span> the tune</p>
+          <p>Got so <span class="blank" data-id="b16" data-answer="used to" tabindex="0" role="button" aria-pressed="false"></span> doing trips</p>
+          <p>With you just right beside</p>
+          <p>It's only been a day or two</p>
+          <p>It <span class="blank" data-id="b17" data-answer="sucks" tabindex="0" role="button" aria-pressed="false"></span> to say goodbye, bye</p>
+        </div>
+
+        <div class="verse">
+          <h3>Chorus</h3>
+          <p>I just want your <span class="blank" data-id="b18" data-answer="company" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>To come sit right in front of me</p>
+          <p>You don't need to say a thing</p>
+          <p>No <span class="blank" data-id="b19" data-answer="commitment" tabindex="0" role="button" aria-pressed="false"></span>, no wedding ring</p>
+          <p>I've been kinda <span class="blank" data-id="b20" data-answer="sleep-deprived" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Just hopin' you might <span class="blank" data-id="b21" data-answer="stay the night" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Miss your <span class="blank" data-id="b22" data-answer="presence" tabindex="0" role="button" aria-pressed="false"></span> in my bedroom</p>
+          <p>Now I lay with too much <span class="blank" data-id="b23" data-answer="legroom" tabindex="0" role="button" aria-pressed="false"></span></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="controls">
+    <button class="action btn-check" id="checkBtn">Check Answers</button>
+    <button class="action btn-reset" id="resetBtn">Reset</button>
+    <span class="status" id="statusText"></span>
+  </section>
+
+  <section class="score-panel" id="scorePanel" aria-live="polite">
+    <div class="score-num" id="scoreNum"></div>
+    <p class="score-msg" id="scoreMsg"></p>
+  </section>
+
+  <section class="about">
+    <h2>About the song</h2>
+    <div class="card">
+      <p>"legroom" is by Adan Diaz. It's a quiet, intimate song about the specific, physical ways someone's absence shows up afterward: an empty side of the bed, an untouched car seat, more space than you know what to do with.</p>
+    </div>
+  </section>
+
+  <section class="recap" id="recapSection">
+    <h2>Vocabulary recap</h2>
+    <div class="recap-grid" id="recapGrid"></div>
+  </section>
+
+</main>
+
+<footer>Built for English language practice. Lyrics used for educational purposes.</footer>
+
+<script>
+(function(){
+  const targetWords = [
+    { word:"a couple things", pos:"phrase", def:"a small, unspecified number of items, a few things.", line:"Last night you left a couple things" },
+    { word:"commitment", pos:"noun", def:"a serious promise or obligation to stay with someone or do something long-term.", line:"No commitment, no wedding ring" },
+    { word:"company", pos:"noun", def:"the experience of being with another person, companionship.", line:"I just want your company" },
+    { word:"feeling empty", pos:"phrase", def:"feeling a sense of emptiness or loss, often emotional rather than physical.", line:"My car's been feeling empty" },
+    { word:"legroom", pos:"noun", def:"the space to stretch your legs, used here for the empty space left behind.", line:"Now I lay with too much legroom" },
+    { word:"messin' with", pos:"phrasal verb, informal", def:"fiddling or tinkering with something, trying different things.", line:"Keep messin' with the tune" },
+    { word:"presence", pos:"noun", def:"the fact of someone being there with you, felt even without them speaking.", line:"Miss your presence in my bedroom" },
+    { word:"sleep-deprived", pos:"adjective", def:"not getting enough sleep, tired from lack of rest.", line:"I've been kinda sleep-deprived" },
+    { word:"stay the night", pos:"idiom", def:"to spend the whole night at someone's place, usually with them.", line:"Just hopin' you might stay the night" },
+    { word:"sucks", pos:"verb, informal", def:"a casual way to say something is unpleasant or disappointing.", line:"It sucks to say goodbye, bye" },
+    { word:"used to", pos:"phrase", def:"describes something that was a regular habit or state in the past.", line:"Got so used to doing trips" }
+  ];
+
+  const distractorWords = ["fading", "hollow", "lingering", "restless", "yearning"];
+
+  const blanks = Array.from(document.querySelectorAll(".blank"));
+
+  const usage = {};
+  blanks.forEach(b => {
+    const ans = b.dataset.answer.toLowerCase();
+    usage[ans] = (usage[ans] || 0) + 1;
+  });
+
+  const tileData = [];
+  targetWords.forEach(t => {
+    tileData.push({ word:t.word, total: usage[t.word.toLowerCase()] || 0, used:0, isTarget:true });
+  });
+  distractorWords.forEach(w => {
+    tileData.push({ word:w, total:0, used:0, isTarget:false });
+  });
+  tileData.sort((a,b) => a.word.localeCompare(b.word));
+
+  const tilesContainer = document.getElementById("tiles");
+  const tileEls = {};
+
+  tileData.forEach(t => {
+    const el = document.createElement("div");
+    el.className = "tile";
+    el.tabIndex = 0;
+    el.setAttribute("role", "button");
+    el.setAttribute("aria-pressed", "false");
+    el.dataset.word = t.word;
+    renderTile(el, t);
+    el.addEventListener("click", () => onTileActivate(t, el));
+    el.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onTileActivate(t, el); }
+    });
+    tilesContainer.appendChild(el);
+    tileEls[t.word] = el;
+  });
+
+  function renderTile(el, t){
+    el.innerHTML = "";
+    const label = document.createElement("span");
+    label.textContent = t.word;
+    el.appendChild(label);
+    if (t.isTarget && t.total > 1){
+      const count = document.createElement("span");
+      count.className = "count";
+      count.textContent = (t.total - t.used) + "x";
+      el.appendChild(count);
+    }
+    const remaining = t.isTarget ? (t.total - t.used) : (t.used === 0 ? 1 : 0);
+    const disabled = t.isTarget ? remaining <= 0 : t.used > 0;
+    el.setAttribute("aria-disabled", disabled ? "true" : "false");
+    el.setAttribute("aria-label", t.word + (disabled ? ", already used" : ", available"));
+  }
+
+  let selected = null;
+
+  function onTileActivate(t, el){
+    const remaining = t.isTarget ? (t.total - t.used) : (t.used === 0 ? 1 : 0);
+    if (remaining <= 0) return;
+    if (selected && selected.word === t.word){
+      selected = null;
+      el.setAttribute("aria-pressed", "false");
+      return;
+    }
+    if (selected){
+      tileEls[selected.word].setAttribute("aria-pressed", "false");
+    }
+    selected = t;
+    el.setAttribute("aria-pressed", "true");
+  }
+
+  const filledCountEl = document.getElementById("filledCount");
+  const totalCountEl = document.getElementById("totalCount");
+  totalCountEl.textContent = blanks.length;
+
+  function updateLiveCount(){
+    const filled = blanks.filter(b => b.dataset.filled === "1").length;
+    filledCountEl.textContent = filled;
+  }
+
+  function findTileFor(word){
+    return tileData.find(t => t.word.toLowerCase() === word.toLowerCase());
+  }
+
+  blanks.forEach(b => {
+    b.addEventListener("click", () => onBlankActivate(b));
+    b.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onBlankActivate(b); }
+    });
+  });
+
+  function onBlankActivate(b){
+    const isFilled = b.dataset.filled === "1";
+    if (isFilled){
+      const placedWord = b.dataset.placed;
+      const t = findTileFor(placedWord);
+      if (t){
+        t.used = Math.max(0, t.used - 1);
+        renderTile(tileEls[t.word], t);
+      }
+      b.textContent = "";
+      b.dataset.filled = "0";
+      b.dataset.placed = "";
+      b.classList.remove("filled", "correct", "incorrect");
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", "empty blank");
+      updateLiveCount();
+      return;
+    }
+    if (!selected) return;
+    b.textContent = selected.word;
+    b.dataset.filled = "1";
+    b.dataset.placed = selected.word;
+    b.classList.add("filled");
+    b.classList.remove("correct", "incorrect");
+    b.setAttribute("aria-pressed", "true");
+    b.setAttribute("aria-label", "blank filled with " + selected.word);
+
+    selected.used += 1;
+    renderTile(tileEls[selected.word], selected);
+    tileEls[selected.word].setAttribute("aria-pressed", "false");
+    selected = null;
+    updateLiveCount();
+  }
+
+  const checkBtn = document.getElementById("checkBtn");
+  const resetBtn = document.getElementById("resetBtn");
+  const statusText = document.getElementById("statusText");
+  const scorePanel = document.getElementById("scorePanel");
+  const scoreNum = document.getElementById("scoreNum");
+  const scoreMsg = document.getElementById("scoreMsg");
+  const recapSection = document.getElementById("recapSection");
+  const recapGrid = document.getElementById("recapGrid");
+
+  checkBtn.addEventListener("click", () => {
+    let correct = 0;
+    blanks.forEach(b => {
+      const answer = b.dataset.answer.toLowerCase();
+      const placed = (b.dataset.placed || "").toLowerCase();
+      b.classList.remove("correct", "incorrect");
+      const existingCorrection = b.querySelector(".correction");
+      if (existingCorrection) existingCorrection.remove();
+
+      if (placed === answer && placed !== ""){
+        b.classList.add("correct");
+        b.setAttribute("aria-label", "blank filled with " + b.dataset.placed + ", correct");
+        correct++;
+      } else {
+        b.classList.add("incorrect");
+        const label = placed === "" ? "empty blank, incorrect" : "blank filled with " + b.dataset.placed + ", incorrect";
+        b.setAttribute("aria-label", label + ". Correct answer: " + b.dataset.answer);
+        const corr = document.createElement("span");
+        corr.className = "correction";
+        corr.textContent = "Correct: " + b.dataset.answer;
+        b.appendChild(corr);
+      }
+    });
+
+    const total = blanks.length;
+    const pct = correct / total;
+    scoreNum.textContent = correct + " / " + total;
+
+    let msg;
+    if (pct === 1){
+      msg = "Every blank filled, no legroom left for mistakes. You caught every bit of it.";
+    } else if (pct >= 0.75){
+      msg = "Most of it's there. A couple of words are still missing from the room, go back and find them.";
+    } else if (pct >= 0.5){
+      msg = "You're getting there, but there's still some empty space in this one. Check what's marked and fill it back in.";
+    } else {
+      msg = "Still a lot of legroom left on this one. Look at what's highlighted below and try again.";
+    }
+    scoreMsg.textContent = msg;
+    scorePanel.classList.add("visible");
+    statusText.textContent = "Checked: " + correct + " of " + total + " correct.";
+
+    buildRecap();
+    recapSection.classList.add("visible");
+  });
+
+  function buildRecap(){
+    recapGrid.innerHTML = "";
+    targetWords.forEach(t => {
+      const item = document.createElement("div");
+      item.className = "recap-item";
+      item.innerHTML =
+        '<div class="word">' + t.word + '</div>' +
+        '<span class="pos">' + t.pos + '</span>' +
+        '<p class="def">' + t.def + '</p>' +
+        '<p class="line">"' + t.line + '"</p>';
+      recapGrid.appendChild(item);
+    });
+  }
+
+  resetBtn.addEventListener("click", () => {
+    blanks.forEach(b => {
+      b.textContent = "";
+      b.dataset.filled = "0";
+      b.dataset.placed = "";
+      b.classList.remove("filled", "correct", "incorrect");
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", "empty blank");
+      const existingCorrection = b.querySelector(".correction");
+      if (existingCorrection) existingCorrection.remove();
+    });
+    tileData.forEach(t => {
+      t.used = 0;
+      renderTile(tileEls[t.word], t);
+    });
+    selected = null;
+    scorePanel.classList.remove("visible");
+    recapSection.classList.remove("visible");
+    statusText.textContent = "Board reset.";
+    updateLiveCount();
+  });
+
+  blanks.forEach(b => {
+    b.setAttribute("aria-label", "empty blank");
+    b.dataset.filled = "0";
+    b.dataset.placed = "";
+  });
+  updateLiveCount();
+})();
+</script>
+
+</body>
+</html>

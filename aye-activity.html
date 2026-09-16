@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aye — Vocabulary Activity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#eceae4;
+    --paper-2:#dfdbcd;
+    --paper-3:#f5f3ee;
+    --ink:#16171a;
+    --ink-soft:#5b5d62;
+    --red:#d6273c;
+    --red-dark:#a81f30;
+    --card:#ffffff;
+    --card-border:#c9c4b4;
+    --correct:#2f7d4f;
+    --correct-bg:rgba(47,125,79,0.1);
+    --incorrect:#d6273c;
+    --incorrect-bg:rgba(214,39,60,0.09);
+    --focus:#d6273c;
+    --radius:2px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image: radial-gradient(rgba(22,23,26,0.05) 1px, transparent 1px);
+    background-size:10px 10px;
+    color:var(--ink);
+    font-family:'IBM Plex Mono', 'Courier New', monospace;
+    line-height:1.65;
+    min-height:100vh;
+  }
+
+  h1,h2,h3{
+    font-family:'Archivo Black', system-ui, sans-serif;
+    font-weight:400;
+    margin:0 0 0.4em 0;
+    color:var(--ink);
+  }
+
+  a{color:var(--red-dark);}
+
+  .visually-hidden{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+
+  :focus-visible{
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+  }
+
+  main{max-width:1080px; margin:0 auto; padding:0 20px 80px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:70px 24px 48px;
+    text-align:center;
+    overflow:hidden;
+    border-bottom:3px solid var(--ink);
+  }
+  .hero-art{position:absolute; inset:0; z-index:0; opacity:0.95;}
+  .hero-inner{position:relative; z-index:1;}
+  .hero .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:var(--red-dark);
+    letter-spacing:0.08em;
+    margin-bottom:10px;
+    font-weight:700;
+  }
+  .hero h1{
+    font-size:clamp(3rem, 10vw, 6rem);
+    color:var(--ink);
+    letter-spacing:0.02em;
+  }
+  .hero .artist{
+    font-size:1rem;
+    color:var(--ink-soft);
+    margin-bottom:18px;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    font-weight:700;
+  }
+  .hero .tagline{
+    max-width:560px;
+    margin:0 auto 26px;
+    color:var(--ink-soft);
+    font-size:1rem;
+  }
+  .facts{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+  }
+  .fact{
+    background:var(--card);
+    border:2px solid var(--ink);
+    padding:7px 14px;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+  }
+  .fact strong{color:var(--red-dark); font-weight:700;}
+
+  /* ---------- Sections ---------- */
+  section{padding:42px 0;}
+  .intro{border-bottom:2px solid var(--ink);}
+  .intro p{font-size:1.02rem; color:var(--ink-soft); max-width:680px;}
+
+  .howto{border-bottom:2px solid var(--ink);}
+  .howto h2{color:var(--ink); font-size:1.5rem;}
+  .howto ol{
+    list-style:none;
+    counter-reset:step;
+    padding:0;
+    margin:20px 0 0;
+    display:grid;
+    gap:12px;
+  }
+  .howto li{
+    counter-increment:step;
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+    background:var(--card);
+    border:2px solid var(--ink);
+    padding:14px 18px;
+  }
+  .howto li::before{
+    content:counter(step);
+    flex:0 0 auto;
+    width:28px; height:28px;
+    background:var(--red);
+    color:#fff;
+    font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .howto .note{
+    margin-top:16px;
+    font-size:0.88rem;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- Activity grid ---------- */
+  .activity-wrap{padding-top:42px;}
+  .activity-grid{
+    display:grid;
+    grid-template-columns: 260px 1fr;
+    gap:26px;
+    align-items:start;
+  }
+  @media (max-width: 760px){
+    .activity-grid{grid-template-columns:1fr;}
+  }
+
+  .board{
+    position:sticky;
+    top:16px;
+    background:var(--card);
+    border:2px solid var(--ink);
+    padding:18px;
+  }
+  @media (max-width: 760px){
+    .board{position:relative; top:0;}
+  }
+  .board h2{font-size:1.2rem;}
+  .board .subnote{font-size:0.82rem; color:var(--ink-soft); margin-bottom:14px; font-family:'IBM Plex Mono', monospace;}
+  .tiles{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .tile{
+    min-height:40px;
+    padding:8px 14px;
+    background:var(--paper-3);
+    border:2px solid var(--ink);
+    color:var(--ink);
+    font-size:0.86rem;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .tile:hover{transform:translate(-1px,-1px); box-shadow:2px 2px 0 var(--ink);}
+  .tile[aria-pressed="true"]{
+    background:var(--red);
+    border-color:var(--red);
+    color:#fff;
+    box-shadow:2px 2px 0 var(--ink);
+  }
+  .tile[aria-disabled="true"]{
+    opacity:0.3;
+    cursor:not-allowed;
+    text-decoration:line-through;
+  }
+  .tile .count{
+    font-size:0.68rem;
+    background:rgba(22,23,26,0.1);
+    padding:1px 6px;
+    border-radius:999px;
+  }
+  .tile[aria-pressed="true"] .count{background:rgba(255,255,255,0.28);}
+
+  .live-count{
+    margin-top:16px;
+    font-size:0.84rem;
+    color:var(--ink-soft);
+    border-top:2px dashed var(--ink);
+    padding-top:12px;
+  }
+  .live-count strong{color:var(--red-dark);}
+
+  /* ---------- Lyric sheet ---------- */
+  .lyrics{
+    background:var(--card);
+    border:2px solid var(--ink);
+    padding:28px 30px;
+  }
+  .verse{margin-bottom:28px;}
+  .verse:last-child{margin-bottom:0;}
+  .verse h3{
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+    color:var(--red-dark);
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:700;
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .verse p{
+    margin:0 0 6px 0;
+    font-size:1.02rem;
+    color:var(--ink);
+    max-width:64ch;
+  }
+
+  .blank{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:100px;
+    min-height:40px;
+    padding:4px 12px;
+    margin:0 2px;
+    background:var(--paper-2);
+    border:2px dashed var(--ink-soft);
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    vertical-align:middle;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .blank:hover{border-color:var(--red-dark);}
+  .blank.filled{
+    border-style:solid;
+    border-color:var(--red-dark);
+    color:var(--red-dark);
+    font-weight:700;
+    background:rgba(168,31,48,0.08);
+  }
+  .blank.correct{
+    border-color:var(--correct);
+    background:var(--correct-bg);
+    color:var(--correct);
+  }
+  .blank.incorrect{
+    border-color:var(--incorrect);
+    background:var(--incorrect-bg);
+    color:var(--incorrect);
+  }
+  .blank .correction{
+    display:block;
+    font-size:0.7rem;
+    color:var(--incorrect);
+    margin-top:2px;
+  }
+
+  /* ---------- Controls ---------- */
+  .controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    align-items:center;
+    padding:32px 0;
+    border-top:2px solid var(--ink);
+    border-bottom:2px solid var(--ink);
+  }
+  button.action{
+    font-family:'Archivo Black', sans-serif;
+    font-size:0.95rem;
+    padding:12px 26px;
+    border:2px solid var(--ink);
+    cursor:pointer;
+    min-height:44px;
+  }
+  .btn-check{
+    background:var(--red);
+    color:#fff;
+    box-shadow:4px 4px 0 var(--ink);
+  }
+  .btn-reset{
+    background:var(--card);
+    color:var(--ink-soft);
+  }
+  .controls .status{
+    font-size:0.88rem;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  /* ---------- Score ---------- */
+  .score-panel{
+    display:none;
+    padding:34px 0;
+    border-bottom:2px solid var(--ink);
+  }
+  .score-panel.visible{display:block;}
+  .score-panel .score-num{
+    font-family:'Archivo Black', sans-serif;
+    font-size:2.8rem;
+    color:var(--red-dark);
+  }
+  .score-panel .score-msg{
+    max-width:600px;
+    font-size:1.02rem;
+    color:var(--ink);
+    margin-top:8px;
+  }
+
+  /* ---------- About ---------- */
+  .about .card{
+    background:var(--card);
+    border:2px solid var(--ink);
+    padding:22px 26px;
+    max-width:680px;
+  }
+  .about h2{font-size:1.5rem;}
+  .about p{color:var(--ink-soft); margin:0;}
+
+  /* ---------- Recap ---------- */
+  .recap{display:none;}
+  .recap.visible{display:block;}
+  .recap h2{font-size:1.5rem;}
+  .recap-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:16px;
+    margin-top:20px;
+  }
+  .recap-item{
+    background:var(--card);
+    border:2px solid var(--ink);
+    padding:16px 18px;
+  }
+  .recap-item .word{
+    font-family:'Archivo Black', sans-serif;
+    font-size:1.05rem;
+    color:var(--red-dark);
+  }
+  .recap-item .pos{
+    display:inline-block;
+    font-size:0.66rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--ink-soft);
+    background:var(--paper-2);
+    padding:2px 8px;
+    margin:6px 0 8px;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .recap-item .def{font-size:0.9rem; color:var(--ink); margin-bottom:8px;}
+  .recap-item .line{
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    font-style:italic;
+    border-left:3px solid var(--red);
+    padding-left:10px;
+  }
+
+  footer{
+    text-align:center;
+    padding:30px 20px 10px;
+    color:var(--ink-soft);
+    font-size:0.78rem;
+    font-family:'IBM Plex Mono', monospace;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="hero-art" viewBox="0 0 1080 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <rect x="120" y="70" width="180" height="18" fill="var(--ink)" opacity="0.85"/>
+    <rect x="120" y="100" width="260" height="18" fill="var(--ink)" opacity="0.85"/>
+    <rect x="120" y="130" width="140" height="18" fill="var(--ink)" opacity="0.85"/>
+    <rect x="700" y="60" width="220" height="18" fill="var(--red)" opacity="0.85"/>
+    <rect x="700" y="90" width="160" height="18" fill="var(--ink)" opacity="0.85"/>
+    <rect x="700" y="120" width="200" height="18" fill="var(--ink)" opacity="0.85"/>
+    <circle cx="540" cy="130" r="46" fill="none" stroke="var(--red)" stroke-width="3" opacity="0.7"/>
+    <circle cx="540" cy="130" r="14" fill="var(--red)" opacity="0.5"/>
+  </svg>
+  <div class="hero-inner">
+    <p class="eyebrow">song vocabulary activity &middot; B2</p>
+    <h1>Aye</h1>
+    <p class="artist">Sam Fender</p>
+    <p class="tagline">A dense, angry piece of social commentary that moves through history, media spin, and class resentment before spiraling into exhausted self-doubt.</p>
+    <div class="facts">
+      <span class="fact"><strong>Genre:</strong> Rock / social commentary</span>
+      <span class="fact"><strong>Theme:</strong> Power, media & disillusionment</span>
+      <span class="fact"><strong>Level:</strong> B2</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="intro">
+    <h2>What you'll do</h2>
+    <p>Read through the lyrics of "Aye" and fill in the missing words using the board on the side. Every blank has one correct answer taken straight from the song. This track deals with heavy, real-world subject matter and uses strong language, so read it with that in mind. When you're done, check your answers and see how well you tracked the language, plus a quick reference to every word you just practiced.</p>
+  </section>
+
+  <section class="howto">
+    <h2>How to play</h2>
+    <ol>
+      <li>Click a word on the board to select it. It will light up to show it's chosen.</li>
+      <li>Click a blank in the lyrics to drop that word into it. Click a filled blank again to pull the word back out.</li>
+      <li>Changed your mind about a tile before placing it? Click it again to deselect.</li>
+      <li>Once you're happy with your answers, click Check Answers.</li>
+    </ol>
+    <p class="note">The board has more words than blanks. Some are there to test you, not to be used.</p>
+  </section>
+
+  <section class="activity-wrap">
+    <div class="activity-grid">
+      <div class="board" aria-label="Word bank">
+        <h2>Word board</h2>
+        <p class="subnote">Click a word, then click a blank to place it.</p>
+        <div class="tiles" id="tiles"></div>
+        <div class="live-count" id="liveCount" aria-live="polite">
+          <strong id="filledCount">0</strong> of <strong id="totalCount">0</strong> blanks filled
+        </div>
+      </div>
+
+      <div class="lyrics" id="lyrics">
+
+        <div class="verse">
+          <h3>Verse 1</h3>
+          <p>They don't act up for the camera</p>
+          <p>They just sit back and command them</p>
+          <p>And collect and <span class="blank" data-id="b1" data-answer="deflect" tabindex="0" role="button" aria-pressed="false"></span> and abandon</p>
+          <p>They even wrote all the Ten Commandments</p>
+          <p>They watched Jesus get nailed to the cross</p>
+          <p>In real time and in their heads</p>
+          <p>They watched Boudica fall to the Romans</p>
+          <p>They watched Lennon as they shot him dead</p>
+          <p>They watched Jackie pick up Kennedy's head</p>
+          <p>They watched kids go to Epstein's bed</p>
+          <p>They watched Hollywood <span class="blank" data-id="b2" data-answer="whitewash" tabindex="0" role="button" aria-pressed="false"></span> remake movies</p>
+          <p>Of napalm falling like water on rock</p>
+          <p>They watched the atom bomb reduce two cities to dust</p>
+          <p>And paint the whole <span class="blank" data-id="b3" data-answer="narrative" tabindex="0" role="button" aria-pressed="false"></span> as totally just</p>
+        </div>
+
+        <div class="verse">
+          <h3>Verse 2</h3>
+          <p>They fly drones above our heads</p>
+          <p>That paint the ground black and red</p>
+          <p>Children's eyes <span class="blank" data-id="b4" data-answer="clasped" tabindex="0" role="button" aria-pressed="false"></span> in <span class="blank" data-id="b5" data-answer="dread" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>They all knew where it led</p>
+          <p>Trade ties <span class="blank" data-id="b6" data-answer="steeped in" tabindex="0" role="button" aria-pressed="false"></span> <span class="blank" data-id="b7" data-answer="guile" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>They knew the fall was coming all the while</p>
+          <p>And they double down on misery</p>
+          <p>The age old <span class="blank" data-id="b8" data-answer="blatant" tabindex="0" role="button" aria-pressed="false"></span> mystery</p>
+          <p><span class="blank" data-id="b9" data-answer="subterfuge" tabindex="0" role="button" aria-pressed="false"></span> in synergy</p>
+        </div>
+
+        <div class="verse">
+          <h3>Refrain</h3>
+          <p>Poor hate the poor</p>
+          <p>Hate the poor</p>
+          <p>Hate the poor</p>
+          <p>Hate the poor</p>
+          <p>Poor hate the poor</p>
+          <p>Hate the poor</p>
+          <p>Hate the poor</p>
+          <p>Hate the poor</p>
+        </div>
+
+        <div class="verse">
+          <h3>Bridge</h3>
+          <p>It's a blame game</p>
+          <p>It's a fame trap</p>
+          <p>It's the <span class="blank" data-id="b10" data-answer="martyrdom" tabindex="0" role="button" aria-pressed="false"></span> of the spoken</p>
+          <p>It's the last breath of the awoken</p>
+          <p>And the woke kids are just dickheads</p>
+          <p>And the dickheads are all ages</p>
+          <p>And everybody's pointing at somebody's sweetheart</p>
+          <p>I'm a <span class="blank" data-id="b11" data-answer="scumbag" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Making my peace with the internal <span class="blank" data-id="b12" data-answer="drag" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Making my thesis on the <span class="blank" data-id="b13" data-answer="faceless" tabindex="0" role="button" aria-pressed="false"></span> man</p>
+          <p>He's got the whole world in his fucking hands</p>
+        </div>
+
+        <div class="verse">
+          <h3>Refrain</h3>
+          <p>I don't have time for <span class="blank" data-id="b14" data-answer="the very few" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>They never had time for me and you</p>
+          <p>I don't have time for the very few</p>
+          <p>They never have time for me and you</p>
+          <p>I don't have time for <span class="blank" data-id="b15" data-answer="the very few" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>They never have time for me and you</p>
+          <p>I don't have time for the very few</p>
+          <p>They never have time for me and you</p>
+          <p>I don't have time for <span class="blank" data-id="b16" data-answer="the very few" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>They never have time for me and you</p>
+        </div>
+
+        <div class="verse">
+          <h3>Outro</h3>
+          <p>I'm not a fucking patriot anymore</p>
+          <p>I'm not a fucking singer anymore</p>
+          <p>I'm not a fucking liberal anymore</p>
+          <p>I'm not a fucking anything or anyone</p>
+          <p>I'm not a fucking anything or</p>
+          <p>I'm not a fucking anything</p>
+          <p>I'm not a fucking</p>
+          <p>I'm not a</p>
+          <p>I'm not</p>
+          <p>Aye</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="controls">
+    <button class="action btn-check" id="checkBtn">Check Answers</button>
+    <button class="action btn-reset" id="resetBtn">Reset</button>
+    <span class="status" id="statusText"></span>
+  </section>
+
+  <section class="score-panel" id="scorePanel" aria-live="polite">
+    <div class="score-num" id="scoreNum"></div>
+    <p class="score-msg" id="scoreMsg"></p>
+  </section>
+
+  <section class="about">
+    <h2>About the song</h2>
+    <div class="card">
+      <p>"Aye" is by Sam Fender. It's a dense, furious piece of social commentary that moves through historical violence, media spin, and class resentment before spiraling into a kind of exhausted self-negation by the end. The lyrics reference real historical events and figures directly, so some lines are heavy by design.</p>
+    </div>
+  </section>
+
+  <section class="recap" id="recapSection">
+    <h2>Vocabulary recap</h2>
+    <div class="recap-grid" id="recapGrid"></div>
+  </section>
+
+</main>
+
+<footer>Built for English language practice. Lyrics used for educational purposes.</footer>
+
+<script>
+(function(){
+  const targetWords = [
+    { word:"blatant", pos:"adjective", def:"completely obvious, done without any attempt to hide it.", line:"The age old blatant mystery" },
+    { word:"clasped", pos:"verb", def:"held or gripped tightly.", line:"Children's eyes clasped in dread" },
+    { word:"deflect", pos:"verb", def:"to turn something away from its target, or to avoid a question or criticism directly.", line:"And collect and deflect and abandon" },
+    { word:"drag", pos:"noun, informal", def:"a heavy, tiring feeling or burden.", line:"Making my peace with the internal drag" },
+    { word:"dread", pos:"noun", def:"a strong feeling of fear about something that might happen.", line:"Children's eyes clasped in dread" },
+    { word:"faceless", pos:"adjective", def:"without a clear individual identity, anonymous.", line:"Making my thesis on the faceless man" },
+    { word:"guile", pos:"noun", def:"clever but deceptive behavior, used to trick or manipulate someone.", line:"Trade ties steeped in guile" },
+    { word:"martyrdom", pos:"noun", def:"suffering or death for a cause, or being made to look like a victim for one.", line:"It's the martyrdom of the spoken" },
+    { word:"narrative", pos:"noun", def:"a particular way of telling or explaining a series of events.", line:"And paint the whole narrative as totally just" },
+    { word:"scumbag", pos:"noun, informal", def:"an insulting word for someone considered dishonest or unpleasant.", line:"I'm a scumbag" },
+    { word:"steeped in", pos:"phrase", def:"deeply filled with or influenced by something.", line:"Trade ties steeped in guile" },
+    { word:"subterfuge", pos:"noun", def:"deceptive tricks or strategies used to hide the truth or avoid something.", line:"Subterfuge in synergy" },
+    { word:"the very few", pos:"phrase", def:"a small, powerful, or privileged group of people.", line:"I don't have time for the very few" },
+    { word:"whitewash", pos:"verb", def:"to cover up or downplay uncomfortable facts, especially about wrongdoing.", line:"They watched Hollywood whitewash remake movies" }
+  ];
+
+  const distractorWords = ["complicit", "indifferent", "propaganda", "resentment", "scapegoat"];
+
+  const blanks = Array.from(document.querySelectorAll(".blank"));
+
+  const usage = {};
+  blanks.forEach(b => {
+    const ans = b.dataset.answer.toLowerCase();
+    usage[ans] = (usage[ans] || 0) + 1;
+  });
+
+  const tileData = [];
+  targetWords.forEach(t => {
+    tileData.push({ word:t.word, total: usage[t.word.toLowerCase()] || 0, used:0, isTarget:true });
+  });
+  distractorWords.forEach(w => {
+    tileData.push({ word:w, total:0, used:0, isTarget:false });
+  });
+  tileData.sort((a,b) => a.word.localeCompare(b.word));
+
+  const tilesContainer = document.getElementById("tiles");
+  const tileEls = {};
+
+  tileData.forEach(t => {
+    const el = document.createElement("div");
+    el.className = "tile";
+    el.tabIndex = 0;
+    el.setAttribute("role", "button");
+    el.setAttribute("aria-pressed", "false");
+    el.dataset.word = t.word;
+    renderTile(el, t);
+    el.addEventListener("click", () => onTileActivate(t, el));
+    el.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onTileActivate(t, el); }
+    });
+    tilesContainer.appendChild(el);
+    tileEls[t.word] = el;
+  });
+
+  function renderTile(el, t){
+    el.innerHTML = "";
+    const label = document.createElement("span");
+    label.textContent = t.word;
+    el.appendChild(label);
+    if (t.isTarget && t.total > 1){
+      const count = document.createElement("span");
+      count.className = "count";
+      count.textContent = (t.total - t.used) + "x";
+      el.appendChild(count);
+    }
+    const remaining = t.isTarget ? (t.total - t.used) : (t.used === 0 ? 1 : 0);
+    const disabled = t.isTarget ? remaining <= 0 : t.used > 0;
+    el.setAttribute("aria-disabled", disabled ? "true" : "false");
+    el.setAttribute("aria-label", t.word + (disabled ? ", already used" : ", available"));
+  }
+
+  let selected = null;
+
+  function onTileActivate(t, el){
+    const remaining = t.isTarget ? (t.total - t.used) : (t.used === 0 ? 1 : 0);
+    if (remaining <= 0) return;
+    if (selected && selected.word === t.word){
+      selected = null;
+      el.setAttribute("aria-pressed", "false");
+      return;
+    }
+    if (selected){
+      tileEls[selected.word].setAttribute("aria-pressed", "false");
+    }
+    selected = t;
+    el.setAttribute("aria-pressed", "true");
+  }
+
+  const filledCountEl = document.getElementById("filledCount");
+  const totalCountEl = document.getElementById("totalCount");
+  totalCountEl.textContent = blanks.length;
+
+  function updateLiveCount(){
+    const filled = blanks.filter(b => b.dataset.filled === "1").length;
+    filledCountEl.textContent = filled;
+  }
+
+  function findTileFor(word){
+    return tileData.find(t => t.word.toLowerCase() === word.toLowerCase());
+  }
+
+  blanks.forEach(b => {
+    b.addEventListener("click", () => onBlankActivate(b));
+    b.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onBlankActivate(b); }
+    });
+  });
+
+  function onBlankActivate(b){
+    const isFilled = b.dataset.filled === "1";
+    if (isFilled){
+      const placedWord = b.dataset.placed;
+      const t = findTileFor(placedWord);
+      if (t){
+        t.used = Math.max(0, t.used - 1);
+        renderTile(tileEls[t.word], t);
+      }
+      b.textContent = "";
+      b.dataset.filled = "0";
+      b.dataset.placed = "";
+      b.classList.remove("filled", "correct", "incorrect");
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", "empty blank");
+      updateLiveCount();
+      return;
+    }
+    if (!selected) return;
+    b.textContent = selected.word;
+    b.dataset.filled = "1";
+    b.dataset.placed = selected.word;
+    b.classList.add("filled");
+    b.classList.remove("correct", "incorrect");
+    b.setAttribute("aria-pressed", "true");
+    b.setAttribute("aria-label", "blank filled with " + selected.word);
+
+    selected.used += 1;
+    renderTile(tileEls[selected.word], selected);
+    tileEls[selected.word].setAttribute("aria-pressed", "false");
+    selected = null;
+    updateLiveCount();
+  }
+
+  const checkBtn = document.getElementById("checkBtn");
+  const resetBtn = document.getElementById("resetBtn");
+  const statusText = document.getElementById("statusText");
+  const scorePanel = document.getElementById("scorePanel");
+  const scoreNum = document.getElementById("scoreNum");
+  const scoreMsg = document.getElementById("scoreMsg");
+  const recapSection = document.getElementById("recapSection");
+  const recapGrid = document.getElementById("recapGrid");
+
+  checkBtn.addEventListener("click", () => {
+    let correct = 0;
+    blanks.forEach(b => {
+      const answer = b.dataset.answer.toLowerCase();
+      const placed = (b.dataset.placed || "").toLowerCase();
+      b.classList.remove("correct", "incorrect");
+      const existingCorrection = b.querySelector(".correction");
+      if (existingCorrection) existingCorrection.remove();
+
+      if (placed === answer && placed !== ""){
+        b.classList.add("correct");
+        b.setAttribute("aria-label", "blank filled with " + b.dataset.placed + ", correct");
+        correct++;
+      } else {
+        b.classList.add("incorrect");
+        const label = placed === "" ? "empty blank, incorrect" : "blank filled with " + b.dataset.placed + ", incorrect";
+        b.setAttribute("aria-label", label + ". Correct answer: " + b.dataset.answer);
+        const corr = document.createElement("span");
+        corr.className = "correction";
+        corr.textContent = "Correct: " + b.dataset.answer;
+        b.appendChild(corr);
+      }
+    });
+
+    const total = blanks.length;
+    const pct = correct / total;
+    scoreNum.textContent = correct + " / " + total;
+
+    let msg;
+    if (pct === 1){
+      msg = "Every blank uncovered, nothing left redacted. You read straight through the whole narrative.";
+    } else if (pct >= 0.75){
+      msg = "You caught most of the story. A few lines are still redacted, go back and read them again.";
+    } else if (pct >= 0.5){
+      msg = "You're piecing the narrative together, but parts of it are still blacked out. Check what's marked and try again.";
+    } else {
+      msg = "Most of this is still redacted. Look at what's highlighted below and read it through again.";
+    }
+    scoreMsg.textContent = msg;
+    scorePanel.classList.add("visible");
+    statusText.textContent = "Checked: " + correct + " of " + total + " correct.";
+
+    buildRecap();
+    recapSection.classList.add("visible");
+  });
+
+  function buildRecap(){
+    recapGrid.innerHTML = "";
+    targetWords.forEach(t => {
+      const item = document.createElement("div");
+      item.className = "recap-item";
+      item.innerHTML =
+        '<div class="word">' + t.word + '</div>' +
+        '<span class="pos">' + t.pos + '</span>' +
+        '<p class="def">' + t.def + '</p>' +
+        '<p class="line">"' + t.line + '"</p>';
+      recapGrid.appendChild(item);
+    });
+  }
+
+  resetBtn.addEventListener("click", () => {
+    blanks.forEach(b => {
+      b.textContent = "";
+      b.dataset.filled = "0";
+      b.dataset.placed = "";
+      b.classList.remove("filled", "correct", "incorrect");
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", "empty blank");
+      const existingCorrection = b.querySelector(".correction");
+      if (existingCorrection) existingCorrection.remove();
+    });
+    tileData.forEach(t => {
+      t.used = 0;
+      renderTile(tileEls[t.word], t);
+    });
+    selected = null;
+    scorePanel.classList.remove("visible");
+    recapSection.classList.remove("visible");
+    statusText.textContent = "Board reset.";
+    updateLiveCount();
+  });
+
+  blanks.forEach(b => {
+    b.setAttribute("aria-label", "empty blank");
+    b.dataset.filled = "0";
+    b.dataset.placed = "";
+  });
+  updateLiveCount();
+})();
+</script>
+
+</body>
+</html>

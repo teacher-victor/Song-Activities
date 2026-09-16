@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coexist — Vocabulary Activity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-a:#bfe6ff;
+    --sky-b:#e9dcff;
+    --sky-c:#ffd9e8;
+    --ink:#2c2350;
+    --ink-soft:#5c5083;
+    --pink:#ff6f9c;
+    --blue:#3aa8ff;
+    --mint:#22c99b;
+    --purple:#8a5cff;
+    --yellow:#ffcd3c;
+    --card:rgba(255,255,255,0.72);
+    --card-border:rgba(44,35,80,0.14);
+    --correct:#1f9d6e;
+    --correct-bg:rgba(34,201,155,0.16);
+    --incorrect:#e2436b;
+    --incorrect-bg:rgba(255,111,156,0.16);
+    --focus:#8a5cff;
+    --radius:16px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:linear-gradient(180deg, var(--sky-a) 0%, var(--sky-b) 45%, var(--sky-c) 100%);
+    color:var(--ink);
+    font-family:'Nunito', system-ui, sans-serif;
+    line-height:1.6;
+    min-height:100vh;
+  }
+
+  h1,h2,h3{
+    font-family:'Fredoka', system-ui, sans-serif;
+    font-weight:600;
+    margin:0 0 0.4em 0;
+    color:var(--ink);
+  }
+
+  a{color:var(--purple);}
+
+  .visually-hidden{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+
+  :focus-visible{
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+  }
+
+  main{max-width:1080px; margin:0 auto; padding:0 20px 80px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:70px 24px 50px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .hero-art{position:absolute; inset:0; z-index:0;}
+  .hero-inner{position:relative; z-index:1;}
+  .hero .eyebrow{
+    font-size:0.85rem;
+    color:var(--purple);
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  .hero h1{
+    font-size:clamp(2.8rem, 8vw, 5rem);
+    font-weight:700;
+    color:var(--ink);
+    text-shadow: 3px 3px 0 rgba(255,111,156,0.35);
+  }
+  .hero .artist{
+    font-size:1.1rem;
+    color:var(--ink-soft);
+    font-weight:600;
+    margin-bottom:16px;
+  }
+  .hero .tagline{
+    max-width:560px;
+    margin:0 auto 26px;
+    color:var(--ink-soft);
+    font-size:1.02rem;
+  }
+  .facts{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+  }
+  .fact{
+    background:rgba(255,255,255,0.75);
+    border:2px solid var(--card-border);
+    padding:8px 16px;
+    border-radius:999px;
+    font-size:0.86rem;
+    color:var(--ink-soft);
+    font-weight:600;
+  }
+  .fact strong{color:var(--pink);}
+
+  /* ---------- Sections ---------- */
+  section{padding:40px 0;}
+  .intro p{font-size:1.05rem; color:var(--ink-soft); max-width:680px;}
+
+  .howto h2{color:var(--ink);}
+  .howto ol{
+    list-style:none;
+    counter-reset:step;
+    padding:0;
+    margin:20px 0 0;
+    display:grid;
+    gap:14px;
+  }
+  .howto li{
+    counter-increment:step;
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+    background:var(--card);
+    border:2px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:14px 18px;
+    box-shadow:5px 5px 0 rgba(138,92,255,0.18);
+  }
+  .howto li::before{
+    content:counter(step);
+    flex:0 0 auto;
+    width:30px; height:30px;
+    border-radius:50%;
+    background:var(--purple);
+    color:#fff;
+    font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fredoka', sans-serif;
+  }
+  .howto .note{
+    margin-top:16px;
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    font-weight:600;
+  }
+
+  /* ---------- Activity grid ---------- */
+  .activity-wrap{padding-top:40px;}
+  .activity-grid{
+    display:grid;
+    grid-template-columns: 260px 1fr;
+    gap:28px;
+    align-items:start;
+  }
+  @media (max-width: 760px){
+    .activity-grid{grid-template-columns:1fr;}
+  }
+
+  .board{
+    position:sticky;
+    top:16px;
+    background:var(--card);
+    border:2px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:18px;
+    box-shadow:6px 6px 0 rgba(255,111,156,0.22);
+  }
+  @media (max-width: 760px){
+    .board{position:relative; top:0;}
+  }
+  .board h2{font-size:1.2rem;}
+  .board .subnote{font-size:0.84rem; color:var(--ink-soft); margin-bottom:14px;}
+  .tiles{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .tile{
+    min-height:40px;
+    padding:8px 14px;
+    background:#fff;
+    border:2px solid var(--blue);
+    color:var(--blue);
+    border-radius:999px;
+    font-size:0.9rem;
+    font-weight:700;
+    font-family:'Nunito', sans-serif;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .tile:hover{transform:translate(-1px,-1px); box-shadow:3px 3px 0 rgba(58,168,255,0.3);}
+  .tile[aria-pressed="true"]{
+    background:var(--pink);
+    border-color:var(--pink);
+    color:#fff;
+    box-shadow:3px 3px 0 rgba(226,67,107,0.4);
+  }
+  .tile[aria-disabled="true"]{
+    opacity:0.35;
+    cursor:not-allowed;
+    text-decoration:line-through;
+  }
+  .tile .count{
+    font-size:0.7rem;
+    background:rgba(58,168,255,0.15);
+    padding:1px 6px;
+    border-radius:999px;
+  }
+  .tile[aria-pressed="true"] .count{background:rgba(255,255,255,0.28); color:#fff;}
+
+  .live-count{
+    margin-top:16px;
+    font-size:0.86rem;
+    color:var(--ink-soft);
+    border-top:2px dashed var(--card-border);
+    padding-top:12px;
+    font-weight:600;
+  }
+  .live-count strong{color:var(--purple);}
+
+  /* ---------- Lyric sheet ---------- */
+  .lyrics{
+    background:var(--card);
+    border:2px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:28px 30px;
+    box-shadow:6px 6px 0 rgba(58,168,255,0.2);
+  }
+  .verse{margin-bottom:28px;}
+  .verse:last-child{margin-bottom:0;}
+  .verse h3{
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--purple);
+    font-family:'Nunito', sans-serif;
+    font-weight:800;
+    margin-bottom:10px;
+  }
+  .verse p{
+    margin:0 0 6px 0;
+    font-size:1.06rem;
+    color:var(--ink);
+    max-width:62ch;
+  }
+
+  .blank{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:96px;
+    min-height:40px;
+    padding:4px 12px;
+    margin:0 2px;
+    background:rgba(255,255,255,0.6);
+    border:2px dashed var(--ink-soft);
+    border-radius:10px;
+    color:var(--ink-soft);
+    font-weight:600;
+    cursor:pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    vertical-align:middle;
+  }
+  .blank:hover{border-color:var(--purple);}
+  .blank.filled{
+    border-style:solid;
+    border-color:var(--purple);
+    color:var(--purple);
+    background:rgba(138,92,255,0.1);
+  }
+  .blank.correct{
+    border-color:var(--correct);
+    background:var(--correct-bg);
+    color:var(--correct);
+  }
+  .blank.incorrect{
+    border-color:var(--incorrect);
+    background:var(--incorrect-bg);
+    color:var(--incorrect);
+  }
+  .blank .correction{
+    display:block;
+    font-size:0.72rem;
+    font-weight:700;
+    color:var(--incorrect);
+    margin-top:2px;
+  }
+
+  /* ---------- Controls ---------- */
+  .controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    align-items:center;
+    padding:32px 0;
+  }
+  button.action{
+    font-family:'Fredoka', sans-serif;
+    font-weight:600;
+    font-size:0.98rem;
+    padding:12px 26px;
+    border-radius:999px;
+    border:2px solid transparent;
+    cursor:pointer;
+    min-height:44px;
+  }
+  .btn-check{
+    background:var(--pink);
+    color:#fff;
+    box-shadow:4px 4px 0 rgba(226,67,107,0.35);
+  }
+  .btn-reset{
+    background:#fff;
+    color:var(--ink-soft);
+    border-color:var(--card-border);
+  }
+  .controls .status{
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    font-weight:600;
+  }
+
+  /* ---------- Score ---------- */
+  .score-panel{
+    display:none;
+    padding:34px 0;
+  }
+  .score-panel.visible{display:block;}
+  .score-panel .score-num{
+    font-family:'Fredoka', sans-serif;
+    font-size:3rem;
+    color:var(--pink);
+  }
+  .score-panel .score-msg{
+    max-width:600px;
+    font-size:1.05rem;
+    color:var(--ink);
+    margin-top:8px;
+  }
+
+  /* ---------- About ---------- */
+  .about .card{
+    background:var(--card);
+    border:2px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:22px 26px;
+    box-shadow:5px 5px 0 rgba(34,201,155,0.2);
+    max-width:680px;
+  }
+  .about p{color:var(--ink-soft); margin:0;}
+
+  /* ---------- Recap ---------- */
+  .recap{display:none;}
+  .recap.visible{display:block;}
+  .recap-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:16px;
+    margin-top:20px;
+  }
+  .recap-item{
+    background:var(--card);
+    border:2px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:16px 18px;
+    box-shadow:4px 4px 0 rgba(138,92,255,0.18);
+  }
+  .recap-item .word{
+    font-family:'Fredoka', sans-serif;
+    font-size:1.2rem;
+    color:var(--pink);
+  }
+  .recap-item .pos{
+    display:inline-block;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--ink-soft);
+    background:rgba(58,168,255,0.14);
+    padding:2px 8px;
+    border-radius:999px;
+    margin:6px 0 8px;
+    font-weight:700;
+  }
+  .recap-item .def{font-size:0.92rem; color:var(--ink); margin-bottom:8px;}
+  .recap-item .line{
+    font-size:0.84rem;
+    color:var(--ink-soft);
+    font-style:italic;
+    border-left:3px solid var(--pink);
+    padding-left:10px;
+  }
+
+  footer{
+    text-align:center;
+    padding:30px 20px 10px;
+    color:var(--ink-soft);
+    font-size:0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="hero-art" viewBox="0 0 1080 320" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <circle cx="860" cy="60" r="50" fill="var(--yellow)" opacity="0.55"/>
+    <ellipse cx="200" cy="90" rx="90" ry="30" fill="#ffffff" opacity="0.55"/>
+    <ellipse cx="260" cy="70" rx="60" ry="24" fill="#ffffff" opacity="0.5"/>
+    <ellipse cx="820" cy="150" rx="80" ry="26" fill="#ffffff" opacity="0.4"/>
+    <circle cx="540" cy="280" r="10" fill="var(--pink)" opacity="0.6"/>
+    <circle cx="560" cy="230" r="7" fill="var(--blue)" opacity="0.6"/>
+    <circle cx="520" cy="190" r="6" fill="var(--mint)" opacity="0.6"/>
+    <circle cx="545" cy="150" r="5" fill="var(--purple)" opacity="0.6"/>
+    <circle cx="530" cy="110" r="4" fill="var(--yellow)" opacity="0.6"/>
+    <path d="M 480 320 Q 540 200 600 320" stroke="var(--purple)" stroke-width="3" fill="none" opacity="0.25"/>
+  </svg>
+  <div class="hero-inner">
+    <p class="eyebrow">song vocabulary activity &middot; B1&ndash;B2</p>
+    <h1>Coexist</h1>
+    <p class="artist">Wild Party</p>
+    <p class="tagline">A song about the easy, floaty feeling of falling for someone and deciding to stick around, through laughter, through the worst of it, through everything.</p>
+    <div class="facts">
+      <span class="fact"><strong>Genre:</strong> Indie pop</span>
+      <span class="fact"><strong>Theme:</strong> Falling in love & staying present</span>
+      <span class="fact"><strong>Level:</strong> B1&ndash;B2</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="intro">
+    <h2>What you'll do</h2>
+    <p>Read through the lyrics of "Coexist" and fill in the missing words using the board on the side. Every blank has one correct answer taken straight from the song. When you're finished, check your answers and see how well you know the track, plus a quick reference to every word you just practiced.</p>
+  </section>
+
+  <section class="howto">
+    <h2>How to play</h2>
+    <ol>
+      <li>Click a word on the board to select it. It will light up to show it's chosen.</li>
+      <li>Click a blank in the lyrics to drop that word into it. Click a filled blank again to pull the word back out.</li>
+      <li>Changed your mind about a tile before placing it? Click it again to deselect.</li>
+      <li>Once you're happy with your answers, click Check Answers.</li>
+    </ol>
+    <p class="note">The board has more words than blanks. Some are there to test you, not to be used.</p>
+  </section>
+
+  <section class="activity-wrap">
+    <div class="activity-grid">
+      <div class="board" aria-label="Word bank">
+        <h2>Word board</h2>
+        <p class="subnote">Click a word, then click a blank to place it.</p>
+        <div class="tiles" id="tiles"></div>
+        <div class="live-count" id="liveCount" aria-live="polite">
+          <strong id="filledCount">0</strong> of <strong id="totalCount">0</strong> blanks filled
+        </div>
+      </div>
+
+      <div class="lyrics" id="lyrics">
+
+        <div class="verse">
+          <h3>Verse 1</h3>
+          <p>Everybody thinks this, everybody thinks that</p>
+          <p>With a <span class="blank" data-id="b1" data-answer="bag of tricks" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Got something on my lips light blue in the summer</p>
+          <p>Hopin' this will last forever</p>
+          <p>On my knees <span class="blank" data-id="b2" data-answer="floatin'" tabindex="0" role="button" aria-pressed="false"></span> up to heaven's door</p>
+          <p>With all my close <span class="blank" data-id="b3" data-answer="acquaintances" tabindex="0" role="button" aria-pressed="false"></span> <span class="blank" data-id="b4" data-answer="accounted for" tabindex="0" role="button" aria-pressed="false"></span></p>
+        </div>
+
+        <div class="verse">
+          <h3>Chorus</h3>
+          <p>And that's why that I'm <span class="blank" data-id="b5" data-answer="convinced" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>That you and I <span class="blank" data-id="b6" data-answer="coexist" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Like <span class="blank" data-id="b7" data-answer="laughter" tabindex="0" role="button" aria-pressed="false"></span> and <span class="blank" data-id="b8" data-answer="pixie sticks" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>We make what we feel and we feel this</p>
+          <p>We make what we feel and we feel this</p>
+        </div>
+
+        <div class="verse">
+          <h3>Verse 2</h3>
+          <p>So take my heart, don't break it, baby, talk talk talk</p>
+          <p>And don't mention what we feel through the day</p>
+          <p>'Cause any moment we can fill it up with how we feel in our heads</p>
+          <p>On my knees <span class="blank" data-id="b9" data-answer="floatin'" tabindex="0" role="button" aria-pressed="false"></span> up to heaven's door</p>
+          <p>With all my close <span class="blank" data-id="b10" data-answer="acquaintances" tabindex="0" role="button" aria-pressed="false"></span> <span class="blank" data-id="b11" data-answer="accounted for" tabindex="0" role="button" aria-pressed="false"></span></p>
+        </div>
+
+        <div class="verse">
+          <h3>Chorus</h3>
+          <p>And that's why that I'm <span class="blank" data-id="b12" data-answer="convinced" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>That you and I <span class="blank" data-id="b13" data-answer="coexist" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Like <span class="blank" data-id="b14" data-answer="laughter" tabindex="0" role="button" aria-pressed="false"></span> and <span class="blank" data-id="b15" data-answer="pixie sticks" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>We make what we feel and we feel</p>
+          <p>At night we just sit and talk about everything we got</p>
+          <p>Like how everything just <span class="blank" data-id="b16" data-answer="clicks" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>We make what we feel and we feel this</p>
+          <p>We make what we feel and we feel this</p>
+        </div>
+
+        <div class="verse">
+          <h3>Bridge</h3>
+          <p>I'm shakin' my head, I'm hangin' my clothes</p>
+          <p>I'm takin' each breath like it's the last that I hold</p>
+          <p>Not makin' much money, shut up, it's not funny</p>
+          <p>Just wanna <span class="blank" data-id="b17" data-answer="prepare" tabindex="0" role="button" aria-pressed="false"></span>, so she won't ever be scared</p>
+          <p>And I'm a <span class="blank" data-id="b18" data-answer="lover" tabindex="0" role="button" aria-pressed="false"></span> through the best</p>
+          <p>And I'm a <span class="blank" data-id="b19" data-answer="lover" tabindex="0" role="button" aria-pressed="false"></span> through the worst</p>
+          <p>And I'm a <span class="blank" data-id="b20" data-answer="lover" tabindex="0" role="button" aria-pressed="false"></span> when she's <span class="blank" data-id="b21" data-answer="pissed" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>And I'm a lover 'til it hurts</p>
+          <p>I'm gonna love you through the worst</p>
+          <p>I'm gonna love you through the worst</p>
+        </div>
+
+        <div class="verse">
+          <h3>Chorus</h3>
+          <p>And that's why that I'm <span class="blank" data-id="b22" data-answer="convinced" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>That you and I <span class="blank" data-id="b23" data-answer="coexist" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Like <span class="blank" data-id="b24" data-answer="laughter" tabindex="0" role="button" aria-pressed="false"></span> and <span class="blank" data-id="b25" data-answer="pixie sticks" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>We make what we feel and we feel</p>
+          <p>At night we just sit and talk about everything we got</p>
+          <p>Like how everything just <span class="blank" data-id="b26" data-answer="clicks" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>We make what we feel and we feel this</p>
+          <p>(We make what we feel, we make what we feel)</p>
+          <p>We make what we feel and we feel this</p>
+          <p>(We make what we feel, we make, we make)</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="controls">
+    <button class="action btn-check" id="checkBtn">Check Answers</button>
+    <button class="action btn-reset" id="resetBtn">Reset</button>
+    <span class="status" id="statusText"></span>
+  </section>
+
+  <section class="score-panel" id="scorePanel" aria-live="polite">
+    <div class="score-num" id="scoreNum"></div>
+    <p class="score-msg" id="scoreMsg"></p>
+  </section>
+
+  <section class="about">
+    <h2>About the song</h2>
+    <div class="card">
+      <p>"Coexist" is by Wild Party. The song leans into that early, easy rush of falling for someone: floating feelings, shared laughter, and a promise to stay through the good moments and the hard ones.</p>
+    </div>
+  </section>
+
+  <section class="recap" id="recapSection">
+    <h2>Vocabulary recap</h2>
+    <div class="recap-grid" id="recapGrid"></div>
+  </section>
+
+</main>
+
+<footer>Built for English language practice. Lyrics used for educational purposes.</footer>
+
+<script>
+(function(){
+  const targetWords = [
+    { word:"accounted for", pos:"phrase", def:"included and confirmed as present or safe.", line:"With all my close acquaintances accounted for" },
+    { word:"acquaintances", pos:"noun", def:"people you know but aren't especially close to, less than friends.", line:"With all my close acquaintances accounted for" },
+    { word:"bag of tricks", pos:"idiom", def:"a set of clever methods or skills you can pull out when you need them.", line:"With a bat and a bag of tricks" },
+    { word:"clicks", pos:"verb", def:"when something clicks, it suddenly makes sense or feels completely right.", line:"Like how everything just clicks" },
+    { word:"coexist", pos:"verb", def:"to exist together at the same time without conflict.", line:"That you and I coexist" },
+    { word:"convinced", pos:"adjective", def:"completely sure that something is true.", line:"And that's why that I'm convinced" },
+    { word:"floatin'", pos:"verb", def:"moving gently through the air, without any effort.", line:"On my knees floatin' up to heaven's door" },
+    { word:"laughter", pos:"noun", def:"the sound of people laughing.", line:"Like laughter and pixie sticks" },
+    { word:"lover", pos:"noun", def:"someone who loves and is loved by another person, a romantic partner.", line:"And I'm a lover through the best" },
+    { word:"pissed", pos:"adjective, informal", def:"a casual way to say very angry. Fine in speech, too informal for writing.", line:"And I'm a lover when she's pissed" },
+    { word:"pixie sticks", pos:"noun", def:"a candy that's just flavored sugar in a straw, playful and sweet.", line:"Like laughter and pixie sticks" },
+    { word:"prepare", pos:"verb", def:"to get something or yourself ready ahead of time.", line:"Just wanna prepare, so she won't ever be scared" }
+  ];
+
+  const distractorWords = ["companions", "devoted", "infatuated", "tangled", "weightless"];
+
+  const blanks = Array.from(document.querySelectorAll(".blank"));
+
+  const usage = {};
+  blanks.forEach(b => {
+    const ans = b.dataset.answer.toLowerCase();
+    usage[ans] = (usage[ans] || 0) + 1;
+  });
+
+  const tileData = [];
+  targetWords.forEach(t => {
+    tileData.push({ word:t.word, total: usage[t.word.toLowerCase()] || 0, used:0, isTarget:true });
+  });
+  distractorWords.forEach(w => {
+    tileData.push({ word:w, total:0, used:0, isTarget:false });
+  });
+  tileData.sort((a,b) => a.word.localeCompare(b.word));
+
+  const tilesContainer = document.getElementById("tiles");
+  const tileEls = {};
+
+  tileData.forEach(t => {
+    const el = document.createElement("div");
+    el.className = "tile";
+    el.tabIndex = 0;
+    el.setAttribute("role", "button");
+    el.setAttribute("aria-pressed", "false");
+    el.dataset.word = t.word;
+    renderTile(el, t);
+    el.addEventListener("click", () => onTileActivate(t, el));
+    el.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onTileActivate(t, el); }
+    });
+    tilesContainer.appendChild(el);
+    tileEls[t.word] = el;
+  });
+
+  function renderTile(el, t){
+    el.innerHTML = "";
+    const label = document.createElement("span");
+    label.textContent = t.word;
+    el.appendChild(label);
+    if (t.isTarget && t.total > 1){
+      const count = document.createElement("span");
+      count.className = "count";
+      count.textContent = (t.total - t.used) + "x";
+      el.appendChild(count);
+    }
+    const remaining = t.isTarget ? (t.total - t.used) : (t.used === 0 ? 1 : 0);
+    const disabled = t.isTarget ? remaining <= 0 : t.used > 0;
+    el.setAttribute("aria-disabled", disabled ? "true" : "false");
+    el.setAttribute("aria-label", t.word + (disabled ? ", already used" : ", available"));
+  }
+
+  let selected = null;
+
+  function onTileActivate(t, el){
+    const remaining = t.isTarget ? (t.total - t.used) : (t.used === 0 ? 1 : 0);
+    if (remaining <= 0) return;
+    if (selected && selected.word === t.word){
+      selected = null;
+      el.setAttribute("aria-pressed", "false");
+      return;
+    }
+    if (selected){
+      tileEls[selected.word].setAttribute("aria-pressed", "false");
+    }
+    selected = t;
+    el.setAttribute("aria-pressed", "true");
+  }
+
+  const filledCountEl = document.getElementById("filledCount");
+  const totalCountEl = document.getElementById("totalCount");
+  totalCountEl.textContent = blanks.length;
+
+  function updateLiveCount(){
+    const filled = blanks.filter(b => b.dataset.filled === "1").length;
+    filledCountEl.textContent = filled;
+  }
+
+  function findTileFor(word){
+    return tileData.find(t => t.word.toLowerCase() === word.toLowerCase());
+  }
+
+  blanks.forEach(b => {
+    b.addEventListener("click", () => onBlankActivate(b));
+    b.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onBlankActivate(b); }
+    });
+  });
+
+  function onBlankActivate(b){
+    const isFilled = b.dataset.filled === "1";
+    if (isFilled){
+      const placedWord = b.dataset.placed;
+      const t = findTileFor(placedWord);
+      if (t){
+        t.used = Math.max(0, t.used - 1);
+        renderTile(tileEls[t.word], t);
+      }
+      b.textContent = "";
+      b.dataset.filled = "0";
+      b.dataset.placed = "";
+      b.classList.remove("filled", "correct", "incorrect");
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", "empty blank");
+      updateLiveCount();
+      return;
+    }
+    if (!selected) return;
+    b.textContent = selected.word;
+    b.dataset.filled = "1";
+    b.dataset.placed = selected.word;
+    b.classList.add("filled");
+    b.classList.remove("correct", "incorrect");
+    b.setAttribute("aria-pressed", "true");
+    b.setAttribute("aria-label", "blank filled with " + selected.word);
+
+    selected.used += 1;
+    renderTile(tileEls[selected.word], selected);
+    tileEls[selected.word].setAttribute("aria-pressed", "false");
+    selected = null;
+    updateLiveCount();
+  }
+
+  const checkBtn = document.getElementById("checkBtn");
+  const resetBtn = document.getElementById("resetBtn");
+  const statusText = document.getElementById("statusText");
+  const scorePanel = document.getElementById("scorePanel");
+  const scoreNum = document.getElementById("scoreNum");
+  const scoreMsg = document.getElementById("scoreMsg");
+  const recapSection = document.getElementById("recapSection");
+  const recapGrid = document.getElementById("recapGrid");
+
+  checkBtn.addEventListener("click", () => {
+    let correct = 0;
+    blanks.forEach(b => {
+      const answer = b.dataset.answer.toLowerCase();
+      const placed = (b.dataset.placed || "").toLowerCase();
+      b.classList.remove("correct", "incorrect");
+      const existingCorrection = b.querySelector(".correction");
+      if (existingCorrection) existingCorrection.remove();
+
+      if (placed === answer && placed !== ""){
+        b.classList.add("correct");
+        b.setAttribute("aria-label", "blank filled with " + b.dataset.placed + ", correct");
+        correct++;
+      } else {
+        b.classList.add("incorrect");
+        const label = placed === "" ? "empty blank, incorrect" : "blank filled with " + b.dataset.placed + ", incorrect";
+        b.setAttribute("aria-label", label + ". Correct answer: " + b.dataset.answer);
+        const corr = document.createElement("span");
+        corr.className = "correction";
+        corr.textContent = "Correct: " + b.dataset.answer;
+        b.appendChild(corr);
+      }
+    });
+
+    const total = blanks.length;
+    const pct = correct / total;
+    scoreNum.textContent = correct + " / " + total;
+
+    let msg;
+    if (pct === 1){
+      msg = "Every blank clicks into place, just like you said it would. You and this vocabulary coexist perfectly.";
+    } else if (pct >= 0.75){
+      msg = "Most of it clicked. A couple of words floated just out of reach, so take a second look at what's marked and you'll have it locked in.";
+    } else if (pct >= 0.5){
+      msg = "You've got the feeling right, even if a few words got tangled up along the way. Check what's highlighted and give it another go.";
+    } else {
+      msg = "This one didn't quite click yet, and that's alright. Look at what's marked below and try floating through it again.";
+    }
+    scoreMsg.textContent = msg;
+    scorePanel.classList.add("visible");
+    statusText.textContent = "Checked: " + correct + " of " + total + " correct.";
+
+    buildRecap();
+    recapSection.classList.add("visible");
+  });
+
+  function buildRecap(){
+    recapGrid.innerHTML = "";
+    targetWords.forEach(t => {
+      const item = document.createElement("div");
+      item.className = "recap-item";
+      item.innerHTML =
+        '<div class="word">' + t.word + '</div>' +
+        '<span class="pos">' + t.pos + '</span>' +
+        '<p class="def">' + t.def + '</p>' +
+        '<p class="line">"' + t.line + '"</p>';
+      recapGrid.appendChild(item);
+    });
+  }
+
+  resetBtn.addEventListener("click", () => {
+    blanks.forEach(b => {
+      b.textContent = "";
+      b.dataset.filled = "0";
+      b.dataset.placed = "";
+      b.classList.remove("filled", "correct", "incorrect");
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", "empty blank");
+      const existingCorrection = b.querySelector(".correction");
+      if (existingCorrection) existingCorrection.remove();
+    });
+    tileData.forEach(t => {
+      t.used = 0;
+      renderTile(tileEls[t.word], t);
+    });
+    selected = null;
+    scorePanel.classList.remove("visible");
+    recapSection.classList.remove("visible");
+    statusText.textContent = "Board reset.";
+    updateLiveCount();
+  });
+
+  blanks.forEach(b => {
+    b.setAttribute("aria-label", "empty blank");
+    b.dataset.filled = "0";
+    b.dataset.placed = "";
+  });
+  updateLiveCount();
+})();
+</script>
+
+</body>
+</html>

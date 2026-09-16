@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hours — Vocabulary Activity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --base-1:#20242b;
+    --base-2:#2b313b;
+    --base-3:#171a1f;
+    --amber:#f2b134;
+    --amber-soft:#f7c869;
+    --violet:#8f8fb3;
+    --text:#eceef2;
+    --text-muted:#9aa0ac;
+    --card:rgba(143,143,179,0.06);
+    --card-border:rgba(143,143,179,0.2);
+    --correct:#5fc98a;
+    --correct-bg:rgba(95,201,138,0.14);
+    --incorrect:#e2697a;
+    --incorrect-bg:rgba(226,105,122,0.14);
+    --focus:#f2b134;
+    --radius:12px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 55% 45% at 50% -5%, rgba(242,177,52,0.08), transparent 60%),
+      linear-gradient(180deg, var(--base-3) 0%, var(--base-1) 45%, var(--base-2) 100%);
+    color:var(--text);
+    font-family:'Rubik', system-ui, sans-serif;
+    line-height:1.6;
+    min-height:100vh;
+  }
+
+  h1,h2,h3{
+    font-family:'Space Grotesk', system-ui, sans-serif;
+    font-weight:600;
+    margin:0 0 0.4em 0;
+    color:var(--text);
+  }
+
+  a{color:var(--amber-soft);}
+
+  .visually-hidden{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+
+  :focus-visible{
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+  }
+
+  main{max-width:1080px; margin:0 auto; padding:0 20px 80px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:76px 24px 52px;
+    text-align:center;
+    overflow:hidden;
+    border-bottom:1px solid var(--card-border);
+  }
+  .hero-art{position:absolute; inset:0; z-index:0; opacity:0.9;}
+  .hero-inner{position:relative; z-index:1;}
+  .hero .eyebrow{
+    font-family:'Rubik', sans-serif;
+    font-size:0.82rem;
+    color:var(--violet);
+    letter-spacing:0.06em;
+    margin-bottom:10px;
+    font-weight:500;
+  }
+  .hero h1{
+    font-size:clamp(2.8rem, 8vw, 5.2rem);
+    color:var(--text);
+    text-shadow: 0 0 40px rgba(242,177,52,0.2);
+  }
+  .hero .artist{
+    font-size:1.05rem;
+    color:var(--text-muted);
+    margin-bottom:18px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+  }
+  .hero .tagline{
+    max-width:540px;
+    margin:0 auto 26px;
+    color:var(--text-muted);
+    font-size:1.02rem;
+  }
+  .facts{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+  }
+  .fact{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    padding:8px 16px;
+    border-radius:999px;
+    font-size:0.85rem;
+    color:var(--text-muted);
+  }
+  .fact strong{color:var(--amber-soft); font-weight:600;}
+
+  /* ---------- Sections ---------- */
+  section{padding:44px 0;}
+  .intro{border-bottom:1px solid var(--card-border);}
+  .intro p{font-size:1.05rem; color:var(--text-muted); max-width:680px;}
+
+  .howto{border-bottom:1px solid var(--card-border);}
+  .howto h2{color:var(--text);}
+  .howto ol{
+    list-style:none;
+    counter-reset:step;
+    padding:0;
+    margin:20px 0 0;
+    display:grid;
+    gap:12px;
+  }
+  .howto li{
+    counter-increment:step;
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:14px 18px;
+  }
+  .howto li::before{
+    content:counter(step);
+    flex:0 0 auto;
+    width:30px; height:30px;
+    border-radius:50%;
+    background:var(--amber);
+    color:var(--base-3);
+    font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk', sans-serif;
+  }
+  .howto .note{
+    margin-top:16px;
+    font-size:0.9rem;
+    color:var(--text-muted);
+    font-style:italic;
+  }
+
+  /* ---------- Activity grid ---------- */
+  .activity-wrap{padding-top:44px;}
+  .activity-grid{
+    display:grid;
+    grid-template-columns: 260px 1fr;
+    gap:26px;
+    align-items:start;
+  }
+  @media (max-width: 760px){
+    .activity-grid{grid-template-columns:1fr;}
+  }
+
+  .board{
+    position:sticky;
+    top:16px;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:18px;
+  }
+  @media (max-width: 760px){
+    .board{position:relative; top:0;}
+  }
+  .board h2{font-size:1.15rem;}
+  .board .subnote{font-size:0.84rem; color:var(--text-muted); margin-bottom:14px;}
+  .tiles{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .tile{
+    min-height:40px;
+    padding:8px 14px;
+    background:rgba(143,143,179,0.1);
+    border:1px solid var(--violet);
+    color:var(--violet);
+    border-radius:8px;
+    font-size:0.88rem;
+    font-family:'Rubik', sans-serif;
+    font-weight:500;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .tile:hover{transform:translateY(-1px);}
+  .tile[aria-pressed="true"]{
+    background:var(--amber);
+    border-color:var(--amber);
+    color:var(--base-3);
+    font-weight:700;
+    box-shadow: 0 4px 20px rgba(242,177,52,0.4);
+  }
+  .tile[aria-disabled="true"]{
+    opacity:0.32;
+    cursor:not-allowed;
+    text-decoration:line-through;
+  }
+  .tile .count{
+    font-size:0.68rem;
+    background:rgba(255,255,255,0.12);
+    padding:1px 6px;
+    border-radius:999px;
+  }
+  .tile[aria-pressed="true"] .count{background:rgba(0,0,0,0.2);}
+
+  .live-count{
+    margin-top:16px;
+    font-size:0.86rem;
+    color:var(--text-muted);
+    border-top:1px dashed var(--card-border);
+    padding-top:12px;
+  }
+  .live-count strong{color:var(--amber-soft);}
+
+  /* ---------- Lyric sheet ---------- */
+  .lyrics{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:28px 30px;
+  }
+  .verse{margin-bottom:28px;}
+  .verse:last-child{margin-bottom:0;}
+  .verse h3{
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    color:var(--amber-soft);
+    font-family:'Rubik', sans-serif;
+    font-weight:600;
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .verse p{
+    margin:0 0 6px 0;
+    font-size:1.06rem;
+    color:var(--text);
+    max-width:60ch;
+  }
+
+  .blank{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:104px;
+    min-height:40px;
+    padding:4px 12px;
+    margin:0 2px;
+    background:rgba(255,255,255,0.04);
+    border:2px dashed var(--text-muted);
+    border-radius:8px;
+    color:var(--text-muted);
+    font-style:italic;
+    cursor:pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    vertical-align:middle;
+  }
+  .blank:hover{border-color:var(--amber-soft);}
+  .blank.filled{
+    border-style:solid;
+    border-color:var(--amber-soft);
+    color:var(--amber-soft);
+    font-style:normal;
+    font-weight:600;
+    background:rgba(242,177,52,0.1);
+  }
+  .blank.correct{
+    border-color:var(--correct);
+    background:var(--correct-bg);
+    color:var(--correct);
+  }
+  .blank.incorrect{
+    border-color:var(--incorrect);
+    background:var(--incorrect-bg);
+    color:var(--incorrect);
+  }
+  .blank .correction{
+    display:block;
+    font-size:0.72rem;
+    font-style:normal;
+    color:var(--incorrect);
+    margin-top:2px;
+  }
+
+  /* ---------- Controls ---------- */
+  .controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    align-items:center;
+    padding:32px 0;
+    border-top:1px solid var(--card-border);
+    border-bottom:1px solid var(--card-border);
+  }
+  button.action{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:0.95rem;
+    padding:12px 26px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    min-height:44px;
+  }
+  .btn-check{
+    background:var(--amber);
+    color:var(--base-3);
+    box-shadow: 0 6px 22px rgba(242,177,52,0.3);
+  }
+  .btn-reset{
+    background:transparent;
+    color:var(--text-muted);
+    border:1px solid var(--card-border);
+  }
+  .controls .status{
+    font-size:0.92rem;
+    color:var(--text-muted);
+  }
+
+  /* ---------- Score ---------- */
+  .score-panel{
+    display:none;
+    padding:36px 0;
+    border-bottom:1px solid var(--card-border);
+  }
+  .score-panel.visible{display:block;}
+  .score-panel .score-num{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:3rem;
+    color:var(--amber-soft);
+  }
+  .score-panel .score-msg{
+    max-width:600px;
+    font-size:1.05rem;
+    color:var(--text);
+    margin-top:8px;
+  }
+
+  /* ---------- About ---------- */
+  .about{border-bottom:1px solid var(--card-border);}
+  .about .card{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:22px 26px;
+    max-width:680px;
+  }
+  .about h2{color:var(--text);}
+  .about p{color:var(--text-muted); margin:0;}
+
+  /* ---------- Recap ---------- */
+  .recap{display:none;}
+  .recap.visible{display:block;}
+  .recap h2{color:var(--text);}
+  .recap-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:16px;
+    margin-top:20px;
+  }
+  .recap-item{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:16px 18px;
+  }
+  .recap-item .word{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.15rem;
+    color:var(--amber-soft);
+  }
+  .recap-item .pos{
+    display:inline-block;
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--text-muted);
+    background:rgba(255,255,255,0.06);
+    padding:2px 8px;
+    border-radius:999px;
+    margin:6px 0 8px;
+  }
+  .recap-item .def{font-size:0.92rem; color:var(--text); margin-bottom:8px;}
+  .recap-item .line{
+    font-size:0.84rem;
+    color:var(--text-muted);
+    font-style:italic;
+    border-left:2px solid var(--violet);
+    padding-left:10px;
+  }
+
+  footer{
+    text-align:center;
+    padding:30px 20px 10px;
+    color:var(--text-muted);
+    font-size:0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="hero-art" viewBox="0 0 1080 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <circle cx="540" cy="150" r="90" fill="none" stroke="var(--violet)" stroke-width="2" opacity="0.4"/>
+    <path d="M 540 150 L 540 90 M 540 150 L 590 170" stroke="var(--amber)" stroke-width="3" opacity="0.7" stroke-linecap="round"/>
+    <path d="M 540 60 Q 620 90 620 150 Q 620 210 540 240 Q 460 210 460 150 Q 460 110 500 90" stroke="var(--amber)" stroke-width="2" fill="none" opacity="0.25" stroke-dasharray="4 6"/>
+    <circle cx="540" cy="150" r="4" fill="var(--amber)" opacity="0.8"/>
+    <circle cx="200" cy="70" r="2" fill="var(--violet)" opacity="0.6"/>
+    <circle cx="880" cy="90" r="2" fill="var(--violet)" opacity="0.6"/>
+    <circle cx="150" cy="220" r="2" fill="var(--amber)" opacity="0.5"/>
+    <circle cx="930" cy="210" r="2" fill="var(--amber)" opacity="0.5"/>
+  </svg>
+  <div class="hero-inner">
+    <p class="eyebrow">song vocabulary activity &middot; B1&ndash;B2</p>
+    <h1>Hours</h1>
+    <p class="artist">again&amp;again</p>
+    <p class="tagline">A song that circles back on itself the way its subject does, stuck in the same routine, watching hours blur into days.</p>
+    <div class="facts">
+      <span class="fact"><strong>Genre:</strong> Alt-pop / electronic</span>
+      <span class="fact"><strong>Theme:</strong> Feeling stuck in routine & time anxiety</span>
+      <span class="fact"><strong>Level:</strong> B1&ndash;B2</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="intro">
+    <h2>What you'll do</h2>
+    <p>Read through the lyrics of "Hours" and fill in the missing words using the board on the side. Every blank has one correct answer taken straight from the song. When you're done, check your answers and see how well you broke the loop, plus a quick reference to every word you just practiced.</p>
+  </section>
+
+  <section class="howto">
+    <h2>How to play</h2>
+    <ol>
+      <li>Click a word on the board to select it. It will light up to show it's chosen.</li>
+      <li>Click a blank in the lyrics to drop that word into it. Click a filled blank again to pull the word back out.</li>
+      <li>Changed your mind about a tile before placing it? Click it again to deselect.</li>
+      <li>Once you're happy with your answers, click Check Answers.</li>
+    </ol>
+    <p class="note">The board has more words than blanks. Some are there to test you, not to be used.</p>
+  </section>
+
+  <section class="activity-wrap">
+    <div class="activity-grid">
+      <div class="board" aria-label="Word bank">
+        <h2>Word board</h2>
+        <p class="subnote">Click a word, then click a blank to place it.</p>
+        <div class="tiles" id="tiles"></div>
+        <div class="live-count" id="liveCount" aria-live="polite">
+          <strong id="filledCount">0</strong> of <strong id="totalCount">0</strong> blanks filled
+        </div>
+      </div>
+
+      <div class="lyrics" id="lyrics">
+
+        <div class="verse">
+          <h3>Intro</h3>
+          <p>Lately, it's been <span class="blank" data-id="b1" data-answer="on my brain" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Won't you give me a second</p>
+          <p>Hours don't turn into days</p>
+          <p>It's hard to keep up with but</p>
+        </div>
+
+        <div class="verse">
+          <h3>Pre-Chorus</h3>
+          <p>Lately, it's been on my brain</p>
+          <p><span class="blank" data-id="b2" data-answer="would you mind" tabindex="0" role="button" aria-pressed="false"></span> letting me know</p>
+          <p>If hours don't turn into days</p>
+          <p>It's like I'm stuck inside a</p>
+        </div>
+
+        <div class="verse">
+          <h3>Chorus</h3>
+          <p>Lately, it's been <span class="blank" data-id="b3" data-answer="on my brain" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Would you mind letting me know</p>
+          <p>If hours don't turn into days</p>
+          <p>Because our time is ticking short</p>
+          <p>Pace, keep up the pace</p>
+          <p>My foot been stomping to the floor</p>
+          <p>Just to find my <span class="blank" data-id="b4" data-answer="escape" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>It's like I'm <span class="blank" data-id="b5" data-answer="stuck inside a" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p><span class="blank" data-id="b6" data-answer="plateau" tabindex="0" role="button" aria-pressed="false"></span></p>
+        </div>
+
+        <div class="verse">
+          <h3>Verse</h3>
+          <p>Got here a few months ago, I'm wondering</p>
+          <p>Just where'd the time go?</p>
+          <p>My days are <span class="blank" data-id="b7" data-answer="blending" tabindex="0" role="button" aria-pressed="false"></span> into weeks</p>
+          <p>I'm tired of the same old damn <span class="blank" data-id="b8" data-answer="routine" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Wake up, breakfast, live the dream</p>
+          <p>I forget how I convinced myself that this is it</p>
+          <p>And now I wanna scream</p>
+          <p>Out past</p>
+          <p>The <span class="blank" data-id="b9" data-answer="barriers" tabindex="0" role="button" aria-pressed="false"></span> and traps</p>
+          <p>Me carrying this mass</p>
+          <p>Is <span class="blank" data-id="b10" data-answer="tearing me to shreds" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>I'm so far away from what I need</p>
+          <p>From here it's hard to breathe</p>
+          <p>Tell me when I'll be free 'cause</p>
+        </div>
+
+        <div class="verse">
+          <h3>Chorus</h3>
+          <p>Lately, it's been <span class="blank" data-id="b11" data-answer="on my brain" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p><span class="blank" data-id="b12" data-answer="would you mind" tabindex="0" role="button" aria-pressed="false"></span> letting me know</p>
+          <p>If hours don't turn into days</p>
+          <p>Because our time is ticking short</p>
+          <p>Pace, keep up the pace</p>
+          <p>My foot been stomping to the floor</p>
+          <p>Just to find my <span class="blank" data-id="b13" data-answer="escape" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>It's like I'm <span class="blank" data-id="b14" data-answer="stuck inside a" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p><span class="blank" data-id="b15" data-answer="loophole" tabindex="0" role="button" aria-pressed="false"></span></p>
+        </div>
+
+        <div class="verse">
+          <h3>Bridge</h3>
+          <p>Feel like I'm <span class="blank" data-id="b16" data-answer="losing sight of" tabindex="0" role="button" aria-pressed="false"></span> my goal</p>
+          <p>I've been so <span class="blank" data-id="b17" data-answer="thoughtless" tabindex="0" role="button" aria-pressed="false"></span>, got no control</p>
+          <p>(Control, control)</p>
+          <p>But when the seasons pass</p>
+          <p>I'll be here waiting, sleeping through the daylight</p>
+          <p>I don't even wanna open my eyes</p>
+          <p>Shut inside my head</p>
+          <p>I'm lying looking for a place to cope</p>
+          <p>Time is my <span class="blank" data-id="b18" data-answer="pilot" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>I am hoping she don't lose control</p>
+        </div>
+
+        <div class="verse">
+          <h3>Chorus</h3>
+          <p>Lately, it's been on my brain</p>
+          <p>Would you mind letting me know</p>
+          <p>If hours don't turn into days</p>
+          <p>Because our time is ticking short</p>
+          <p>Pace, keep up the pace</p>
+          <p>My foot been stomping to the floor</p>
+          <p>Just to find my escape</p>
+          <p>It's like I'm stuck inside a</p>
+        </div>
+
+        <div class="verse">
+          <h3>Chorus</h3>
+          <p>Lately, it's been on my brain</p>
+          <p><span class="blank" data-id="b19" data-answer="would you mind" tabindex="0" role="button" aria-pressed="false"></span> letting me know</p>
+          <p>If hours don't turn into days</p>
+          <p>Because our time is ticking short</p>
+          <p>Pace, keep up the pace</p>
+          <p>My foot been stomping to the floor</p>
+          <p>Just to find my <span class="blank" data-id="b20" data-answer="escape" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>It's like I'm <span class="blank" data-id="b21" data-answer="stuck inside a" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Yeah</p>
+        </div>
+
+        <div class="verse">
+          <h3>Outro</h3>
+          <p>Can't <span class="blank" data-id="b22" data-answer="fall behind" tabindex="0" role="button" aria-pressed="false"></span> again, nah</p>
+          <p>Won't fall till it's my ending</p>
+          <p>Will I find time again?</p>
+          <p>So I'll make it where I'm <span class="blank" data-id="b23" data-answer="destined" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>I can't <span class="blank" data-id="b24" data-answer="fall behind" tabindex="0" role="button" aria-pressed="false"></span> again, nah</p>
+          <p>Won't fall till it's my ending</p>
+          <p>Will I find time again?</p>
+          <p>So I'll make it where I'm <span class="blank" data-id="b25" data-answer="destined" tabindex="0" role="button" aria-pressed="false"></span></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="controls">
+    <button class="action btn-check" id="checkBtn">Check Answers</button>
+    <button class="action btn-reset" id="resetBtn">Reset</button>
+    <span class="status" id="statusText"></span>
+  </section>
+
+  <section class="score-panel" id="scorePanel" aria-live="polite">
+    <div class="score-num" id="scoreNum"></div>
+    <p class="score-msg" id="scoreMsg"></p>
+  </section>
+
+  <section class="about">
+    <h2>About the song</h2>
+    <div class="card">
+      <p>"Hours" is by again&amp;again. The song circles back on itself the way its subject does, stuck in the same routine, watching hours blur into days without any real progress, looking for a way out.</p>
+    </div>
+  </section>
+
+  <section class="recap" id="recapSection">
+    <h2>Vocabulary recap</h2>
+    <div class="recap-grid" id="recapGrid"></div>
+  </section>
+
+</main>
+
+<footer>Built for English language practice. Lyrics used for educational purposes.</footer>
+
+<script>
+(function(){
+  const targetWords = [
+    { word:"barriers", pos:"noun", def:"things that block your way or stop you from making progress.", line:"The barriers and traps" },
+    { word:"blending", pos:"verb", def:"mixing together so thoroughly that separate parts become hard to tell apart.", line:"My days are blending into weeks" },
+    { word:"destined", pos:"adjective", def:"certain to happen or become something, as if by fate.", line:"So I'll make it where I'm destined" },
+    { word:"escape", pos:"noun", def:"a way of getting free from something unpleasant or confining.", line:"Just to find my escape" },
+    { word:"fall behind", pos:"idiom", def:"to fail to keep up with the pace or progress of something.", line:"Can't fall behind again, nah" },
+    { word:"loophole", pos:"noun", def:"a small gap or flaw that lets you avoid a rule or escape a situation.", line:"It's like I'm stuck inside a loophole" },
+    { word:"losing sight of", pos:"idiom", def:"gradually forgetting or no longer focusing on something important.", line:"Feel like I'm losing sight of my goal" },
+    { word:"on my brain", pos:"idiom", def:"constantly in your thoughts, hard to stop thinking about.", line:"Lately, it's been on my brain" },
+    { word:"pilot", pos:"noun", def:"the person who controls and steers a vehicle, used here as a metaphor for who's in control.", line:"Time is my pilot" },
+    { word:"plateau", pos:"noun", def:"a period where something stops changing or improving, staying level.", line:"It's like I'm stuck inside a plateau" },
+    { word:"routine", pos:"noun", def:"a fixed, regular way of doing things, repeated the same way each time.", line:"I'm tired of the same old damn routine" },
+    { word:"stuck inside a", pos:"phrase", def:"trapped or confined within something, unable to get out.", line:"It's like I'm stuck inside a" },
+    { word:"tearing me to shreds", pos:"idiom", def:"causing intense emotional or physical damage, destroying someone completely.", line:"Is tearing me to shreds" },
+    { word:"thoughtless", pos:"adjective", def:"done without careful thinking, or not considering others' feelings.", line:"I've been so thoughtless, got no control" },
+    { word:"would you mind", pos:"idiom, polite request", def:"a polite way to ask someone to do something or to ask for permission.", line:"Would you mind letting me know" }
+  ];
+
+  const distractorWords = ["disoriented", "monotonous", "overdue", "stagnant", "unraveling"];
+
+  const blanks = Array.from(document.querySelectorAll(".blank"));
+
+  const usage = {};
+  blanks.forEach(b => {
+    const ans = b.dataset.answer.toLowerCase();
+    usage[ans] = (usage[ans] || 0) + 1;
+  });
+
+  const tileData = [];
+  targetWords.forEach(t => {
+    tileData.push({ word:t.word, total: usage[t.word.toLowerCase()] || 0, used:0, isTarget:true });
+  });
+  distractorWords.forEach(w => {
+    tileData.push({ word:w, total:0, used:0, isTarget:false });
+  });
+  tileData.sort((a,b) => a.word.localeCompare(b.word));
+
+  const tilesContainer = document.getElementById("tiles");
+  const tileEls = {};
+
+  tileData.forEach(t => {
+    const el = document.createElement("div");
+    el.className = "tile";
+    el.tabIndex = 0;
+    el.setAttribute("role", "button");
+    el.setAttribute("aria-pressed", "false");
+    el.dataset.word = t.word;
+    renderTile(el, t);
+    el.addEventListener("click", () => onTileActivate(t, el));
+    el.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onTileActivate(t, el); }
+    });
+    tilesContainer.appendChild(el);
+    tileEls[t.word] = el;
+  });
+
+  function renderTile(el, t){
+    el.innerHTML = "";
+    const label = document.createElement("span");
+    label.textContent = t.word;
+    el.appendChild(label);
+    if (t.isTarget && t.total > 1){
+      const count = document.createElement("span");
+      count.className = "count";
+      count.textContent = (t.total - t.used) + "x";
+      el.appendChild(count);
+    }
+    const remaining = t.isTarget ? (t.total - t.used) : (t.used === 0 ? 1 : 0);
+    const disabled = t.isTarget ? remaining <= 0 : t.used > 0;
+    el.setAttribute("aria-disabled", disabled ? "true" : "false");
+    el.setAttribute("aria-label", t.word + (disabled ? ", already used" : ", available"));
+  }
+
+  let selected = null;
+
+  function onTileActivate(t, el){
+    const remaining = t.isTarget ? (t.total - t.used) : (t.used === 0 ? 1 : 0);
+    if (remaining <= 0) return;
+    if (selected && selected.word === t.word){
+      selected = null;
+      el.setAttribute("aria-pressed", "false");
+      return;
+    }
+    if (selected){
+      tileEls[selected.word].setAttribute("aria-pressed", "false");
+    }
+    selected = t;
+    el.setAttribute("aria-pressed", "true");
+  }
+
+  const filledCountEl = document.getElementById("filledCount");
+  const totalCountEl = document.getElementById("totalCount");
+  totalCountEl.textContent = blanks.length;
+
+  function updateLiveCount(){
+    const filled = blanks.filter(b => b.dataset.filled === "1").length;
+    filledCountEl.textContent = filled;
+  }
+
+  function findTileFor(word){
+    return tileData.find(t => t.word.toLowerCase() === word.toLowerCase());
+  }
+
+  blanks.forEach(b => {
+    b.addEventListener("click", () => onBlankActivate(b));
+    b.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onBlankActivate(b); }
+    });
+  });
+
+  function onBlankActivate(b){
+    const isFilled = b.dataset.filled === "1";
+    if (isFilled){
+      const placedWord = b.dataset.placed;
+      const t = findTileFor(placedWord);
+      if (t){
+        t.used = Math.max(0, t.used - 1);
+        renderTile(tileEls[t.word], t);
+      }
+      b.textContent = "";
+      b.dataset.filled = "0";
+      b.dataset.placed = "";
+      b.classList.remove("filled", "correct", "incorrect");
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", "empty blank");
+      updateLiveCount();
+      return;
+    }
+    if (!selected) return;
+    b.textContent = selected.word;
+    b.dataset.filled = "1";
+    b.dataset.placed = selected.word;
+    b.classList.add("filled");
+    b.classList.remove("correct", "incorrect");
+    b.setAttribute("aria-pressed", "true");
+    b.setAttribute("aria-label", "blank filled with " + selected.word);
+
+    selected.used += 1;
+    renderTile(tileEls[selected.word], selected);
+    tileEls[selected.word].setAttribute("aria-pressed", "false");
+    selected = null;
+    updateLiveCount();
+  }
+
+  const checkBtn = document.getElementById("checkBtn");
+  const resetBtn = document.getElementById("resetBtn");
+  const statusText = document.getElementById("statusText");
+  const scorePanel = document.getElementById("scorePanel");
+  const scoreNum = document.getElementById("scoreNum");
+  const scoreMsg = document.getElementById("scoreMsg");
+  const recapSection = document.getElementById("recapSection");
+  const recapGrid = document.getElementById("recapGrid");
+
+  checkBtn.addEventListener("click", () => {
+    let correct = 0;
+    blanks.forEach(b => {
+      const answer = b.dataset.answer.toLowerCase();
+      const placed = (b.dataset.placed || "").toLowerCase();
+      b.classList.remove("correct", "incorrect");
+      const existingCorrection = b.querySelector(".correction");
+      if (existingCorrection) existingCorrection.remove();
+
+      if (placed === answer && placed !== ""){
+        b.classList.add("correct");
+        b.setAttribute("aria-label", "blank filled with " + b.dataset.placed + ", correct");
+        correct++;
+      } else {
+        b.classList.add("incorrect");
+        const label = placed === "" ? "empty blank, incorrect" : "blank filled with " + b.dataset.placed + ", incorrect";
+        b.setAttribute("aria-label", label + ". Correct answer: " + b.dataset.answer);
+        const corr = document.createElement("span");
+        corr.className = "correction";
+        corr.textContent = "Correct: " + b.dataset.answer;
+        b.appendChild(corr);
+      }
+    });
+
+    const total = blanks.length;
+    const pct = correct / total;
+    scoreNum.textContent = correct + " / " + total;
+
+    let msg;
+    if (pct === 1){
+      msg = "Every blank found, no loophole missed. You made it all the way through the loop.";
+    } else if (pct >= 0.75){
+      msg = "You kept the pace on most of it. A few words are still stuck in the loop, go back and find them.";
+    } else if (pct >= 0.5){
+      msg = "You're keeping up, but part of this is still stuck on repeat. Check what's marked and try again.";
+    } else {
+      msg = "This one's still stuck in the loop. Look at what's highlighted below and give it another pass.";
+    }
+    scoreMsg.textContent = msg;
+    scorePanel.classList.add("visible");
+    statusText.textContent = "Checked: " + correct + " of " + total + " correct.";
+
+    buildRecap();
+    recapSection.classList.add("visible");
+  });
+
+  function buildRecap(){
+    recapGrid.innerHTML = "";
+    targetWords.forEach(t => {
+      const item = document.createElement("div");
+      item.className = "recap-item";
+      item.innerHTML =
+        '<div class="word">' + t.word + '</div>' +
+        '<span class="pos">' + t.pos + '</span>' +
+        '<p class="def">' + t.def + '</p>' +
+        '<p class="line">"' + t.line + '"</p>';
+      recapGrid.appendChild(item);
+    });
+  }
+
+  resetBtn.addEventListener("click", () => {
+    blanks.forEach(b => {
+      b.textContent = "";
+      b.dataset.filled = "0";
+      b.dataset.placed = "";
+      b.classList.remove("filled", "correct", "incorrect");
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", "empty blank");
+      const existingCorrection = b.querySelector(".correction");
+      if (existingCorrection) existingCorrection.remove();
+    });
+    tileData.forEach(t => {
+      t.used = 0;
+      renderTile(tileEls[t.word], t);
+    });
+    selected = null;
+    scorePanel.classList.remove("visible");
+    recapSection.classList.remove("visible");
+    statusText.textContent = "Board reset.";
+    updateLiveCount();
+  });
+
+  blanks.forEach(b => {
+    b.setAttribute("aria-label", "empty blank");
+    b.dataset.filled = "0";
+    b.dataset.placed = "";
+  });
+  updateLiveCount();
+})();
+</script>
+
+</body>
+</html>

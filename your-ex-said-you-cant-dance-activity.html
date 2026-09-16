@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Ex Said You Can't Dance — Vocabulary Activity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --stage-1:#1b1420;
+    --stage-2:#2a1f30;
+    --stage-3:#120d16;
+    --gold:#ffcc4d;
+    --violet:#a855f7;
+    --pink:#ff4d8d;
+    --text:#f7f0fa;
+    --text-muted:#b7a8c4;
+    --card:rgba(255,255,255,0.05);
+    --card-border:rgba(255,255,255,0.12);
+    --correct:#5fd98a;
+    --correct-bg:rgba(95,217,138,0.14);
+    --incorrect:#ff6f8f;
+    --incorrect-bg:rgba(255,111,143,0.14);
+    --focus:#ffcc4d;
+    --radius:12px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 55% 45% at 50% -5%, rgba(255,204,77,0.16), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 20%, rgba(168,85,247,0.14), transparent 60%),
+      linear-gradient(180deg, var(--stage-3) 0%, var(--stage-1) 45%, var(--stage-2) 100%);
+    color:var(--text);
+    font-family:'DM Sans', system-ui, sans-serif;
+    line-height:1.6;
+    min-height:100vh;
+  }
+
+  h1,h2,h3{
+    font-family:'Bungee', system-ui, sans-serif;
+    font-weight:400;
+    margin:0 0 0.4em 0;
+  }
+
+  a{color:var(--gold);}
+
+  .visually-hidden{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+
+  :focus-visible{
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+  }
+
+  main{max-width:1080px; margin:0 auto; padding:0 20px 80px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:76px 24px 54px;
+    text-align:center;
+    overflow:hidden;
+    border-bottom:1px solid var(--card-border);
+  }
+  .hero-art{position:absolute; inset:0; z-index:0; opacity:0.9;}
+  .hero-inner{position:relative; z-index:1;}
+  .hero .eyebrow{
+    font-family:'DM Sans', sans-serif;
+    font-size:0.82rem;
+    color:var(--violet);
+    letter-spacing:0.06em;
+    margin-bottom:10px;
+    font-weight:700;
+  }
+  .hero h1{
+    font-size:clamp(2rem, 6vw, 3.6rem);
+    color:var(--gold);
+    text-shadow: 0 0 40px rgba(255,204,77,0.4);
+    line-height:1.15;
+  }
+  .hero .artist{
+    font-size:1.05rem;
+    color:var(--text-muted);
+    margin-bottom:18px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    font-weight:700;
+  }
+  .hero .tagline{
+    max-width:540px;
+    margin:0 auto 26px;
+    color:var(--text-muted);
+    font-size:1.02rem;
+  }
+  .facts{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+  }
+  .fact{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    padding:8px 16px;
+    border-radius:999px;
+    font-size:0.85rem;
+    color:var(--text-muted);
+  }
+  .fact strong{color:var(--pink); font-weight:700;}
+
+  /* ---------- Sections ---------- */
+  section{padding:44px 0;}
+  .intro{border-bottom:1px solid var(--card-border);}
+  .intro p{font-size:1.05rem; color:var(--text-muted); max-width:680px;}
+
+  .howto{border-bottom:1px solid var(--card-border);}
+  .howto h2{color:var(--text); font-size:1.4rem;}
+  .howto ol{
+    list-style:none;
+    counter-reset:step;
+    padding:0;
+    margin:20px 0 0;
+    display:grid;
+    gap:12px;
+  }
+  .howto li{
+    counter-increment:step;
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:14px 18px;
+  }
+  .howto li::before{
+    content:counter(step);
+    flex:0 0 auto;
+    width:30px; height:30px;
+    border-radius:50%;
+    background:var(--gold);
+    color:var(--stage-1);
+    font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Bungee', sans-serif;
+    font-size:0.9rem;
+  }
+  .howto .note{
+    margin-top:16px;
+    font-size:0.9rem;
+    color:var(--text-muted);
+    font-style:italic;
+  }
+
+  /* ---------- Activity grid ---------- */
+  .activity-wrap{padding-top:44px;}
+  .activity-grid{
+    display:grid;
+    grid-template-columns: 260px 1fr;
+    gap:26px;
+    align-items:start;
+  }
+  @media (max-width: 760px){
+    .activity-grid{grid-template-columns:1fr;}
+  }
+
+  .board{
+    position:sticky;
+    top:16px;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:18px;
+  }
+  @media (max-width: 760px){
+    .board{position:relative; top:0;}
+  }
+  .board h2{font-size:1.15rem;}
+  .board .subnote{font-size:0.84rem; color:var(--text-muted); margin-bottom:14px;}
+  .tiles{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .tile{
+    min-height:40px;
+    padding:8px 14px;
+    background:rgba(168,85,247,0.1);
+    border:1px solid var(--violet);
+    color:var(--violet);
+    border-radius:8px;
+    font-size:0.88rem;
+    font-family:'DM Sans', sans-serif;
+    font-weight:600;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .tile:hover{transform:translateY(-1px);}
+  .tile[aria-pressed="true"]{
+    background:var(--gold);
+    border-color:var(--gold);
+    color:var(--stage-1);
+    font-weight:700;
+    box-shadow: 0 4px 20px rgba(255,204,77,0.45);
+  }
+  .tile[aria-disabled="true"]{
+    opacity:0.32;
+    cursor:not-allowed;
+    text-decoration:line-through;
+  }
+  .tile .count{
+    font-size:0.68rem;
+    background:rgba(255,255,255,0.14);
+    padding:1px 6px;
+    border-radius:999px;
+  }
+  .tile[aria-pressed="true"] .count{background:rgba(0,0,0,0.2);}
+
+  .live-count{
+    margin-top:16px;
+    font-size:0.86rem;
+    color:var(--text-muted);
+    border-top:1px dashed var(--card-border);
+    padding-top:12px;
+  }
+  .live-count strong{color:var(--gold);}
+
+  /* ---------- Lyric sheet ---------- */
+  .lyrics{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:28px 30px;
+  }
+  .verse{margin-bottom:28px;}
+  .verse:last-child{margin-bottom:0;}
+  .verse h3{
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    color:var(--pink);
+    font-family:'DM Sans', sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .verse p{
+    margin:0 0 6px 0;
+    font-size:1.06rem;
+    color:var(--text);
+    max-width:60ch;
+  }
+
+  .blank{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:106px;
+    min-height:40px;
+    padding:4px 12px;
+    margin:0 2px;
+    background:rgba(255,255,255,0.04);
+    border:2px dashed var(--text-muted);
+    border-radius:8px;
+    color:var(--text-muted);
+    font-style:italic;
+    cursor:pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    vertical-align:middle;
+  }
+  .blank:hover{border-color:var(--gold);}
+  .blank.filled{
+    border-style:solid;
+    border-color:var(--gold);
+    color:var(--gold);
+    font-style:normal;
+    font-weight:700;
+    background:rgba(255,204,77,0.1);
+  }
+  .blank.correct{
+    border-color:var(--correct);
+    background:var(--correct-bg);
+    color:var(--correct);
+  }
+  .blank.incorrect{
+    border-color:var(--incorrect);
+    background:var(--incorrect-bg);
+    color:var(--incorrect);
+  }
+  .blank .correction{
+    display:block;
+    font-size:0.72rem;
+    font-style:normal;
+    color:var(--incorrect);
+    margin-top:2px;
+  }
+
+  /* ---------- Controls ---------- */
+  .controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    align-items:center;
+    padding:32px 0;
+    border-top:1px solid var(--card-border);
+    border-bottom:1px solid var(--card-border);
+  }
+  button.action{
+    font-family:'Bungee', sans-serif;
+    font-size:0.92rem;
+    padding:12px 26px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    min-height:44px;
+  }
+  .btn-check{
+    background:var(--gold);
+    color:var(--stage-1);
+    box-shadow: 0 6px 22px rgba(255,204,77,0.35);
+  }
+  .btn-reset{
+    background:transparent;
+    color:var(--text-muted);
+    border:1px solid var(--card-border);
+    font-family:'DM Sans', sans-serif;
+    font-weight:700;
+  }
+  .controls .status{
+    font-size:0.92rem;
+    color:var(--text-muted);
+  }
+
+  /* ---------- Score ---------- */
+  .score-panel{
+    display:none;
+    padding:36px 0;
+    border-bottom:1px solid var(--card-border);
+  }
+  .score-panel.visible{display:block;}
+  .score-panel .score-num{
+    font-family:'Bungee', sans-serif;
+    font-size:2.8rem;
+    color:var(--violet);
+  }
+  .score-panel .score-msg{
+    max-width:600px;
+    font-size:1.05rem;
+    color:var(--text);
+    margin-top:8px;
+  }
+
+  /* ---------- About ---------- */
+  .about{border-bottom:1px solid var(--card-border);}
+  .about .card{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:22px 26px;
+    max-width:680px;
+  }
+  .about h2{color:var(--text); font-size:1.4rem;}
+  .about p{color:var(--text-muted); margin:0;}
+
+  /* ---------- Recap ---------- */
+  .recap{display:none;}
+  .recap.visible{display:block;}
+  .recap h2{color:var(--text); font-size:1.4rem;}
+  .recap-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:16px;
+    margin-top:20px;
+  }
+  .recap-item{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:16px 18px;
+  }
+  .recap-item .word{
+    font-family:'Bungee', sans-serif;
+    font-size:1.05rem;
+    color:var(--gold);
+  }
+  .recap-item .pos{
+    display:inline-block;
+    font-size:0.66rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--text-muted);
+    background:rgba(255,255,255,0.06);
+    padding:2px 8px;
+    border-radius:999px;
+    margin:6px 0 8px;
+  }
+  .recap-item .def{font-size:0.92rem; color:var(--text); margin-bottom:8px;}
+  .recap-item .line{
+    font-size:0.84rem;
+    color:var(--text-muted);
+    font-style:italic;
+    border-left:2px solid var(--violet);
+    padding-left:10px;
+  }
+
+  footer{
+    text-align:center;
+    padding:30px 20px 10px;
+    color:var(--text-muted);
+    font-size:0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="hero-art" viewBox="0 0 1080 320" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <polygon points="540,20 420,320 660,320" fill="var(--gold)" opacity="0.08"/>
+    <polygon points="540,20 470,320 610,320" fill="var(--gold)" opacity="0.1"/>
+    <path d="M 500 300 L 500 220 L 480 260 M 500 220 L 520 260 M 500 220 L 500 180 M 500 180 L 480 150 M 500 180 L 520 150" stroke="var(--violet)" stroke-width="4" fill="none" opacity="0.6" stroke-linecap="round"/>
+    <circle cx="200" cy="80" r="3" fill="var(--gold)" opacity="0.7"/>
+    <circle cx="240" cy="120" r="2" fill="#fff" opacity="0.7"/>
+    <circle cx="850" cy="90" r="3" fill="var(--violet)" opacity="0.7"/>
+    <circle cx="900" cy="140" r="2" fill="#fff" opacity="0.7"/>
+    <circle cx="160" cy="180" r="2" fill="var(--pink)" opacity="0.6"/>
+    <circle cx="920" cy="200" r="2" fill="var(--gold)" opacity="0.6"/>
+  </svg>
+  <div class="hero-inner">
+    <p class="eyebrow">song vocabulary activity &middot; B1&ndash;B2</p>
+    <h1>Your Ex Said You Can't Dance</h1>
+    <p class="artist">The Real Zebos</p>
+    <p class="tagline">A crowd-pleasing anthem about proving a doubter wrong, one move at a time, right in front of everyone.</p>
+    <div class="facts">
+      <span class="fact"><strong>Genre:</strong> Indie pop-rock</span>
+      <span class="fact"><strong>Theme:</strong> Confidence & proving someone wrong</span>
+      <span class="fact"><strong>Level:</strong> B1&ndash;B2</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="intro">
+    <h2>What you'll do</h2>
+    <p>Read through the lyrics of "Your Ex Said You Can't Dance" and fill in the missing words using the board on the side. Every blank has one correct answer taken straight from the song. When you're done, check your answers and see how well you moved, plus a quick reference to every word you just practiced.</p>
+  </section>
+
+  <section class="howto">
+    <h2>How to play</h2>
+    <ol>
+      <li>Click a word on the board to select it. It will light up to show it's chosen.</li>
+      <li>Click a blank in the lyrics to drop that word into it. Click a filled blank again to pull the word back out.</li>
+      <li>Changed your mind about a tile before placing it? Click it again to deselect.</li>
+      <li>Once you're happy with your answers, click Check Answers.</li>
+    </ol>
+    <p class="note">The board has more words than blanks. Some are there to test you, not to be used.</p>
+  </section>
+
+  <section class="activity-wrap">
+    <div class="activity-grid">
+      <div class="board" aria-label="Word bank">
+        <h2>Word board</h2>
+        <p class="subnote">Click a word, then click a blank to place it.</p>
+        <div class="tiles" id="tiles"></div>
+        <div class="live-count" id="liveCount" aria-live="polite">
+          <strong id="filledCount">0</strong> of <strong id="totalCount">0</strong> blanks filled
+        </div>
+      </div>
+
+      <div class="lyrics" id="lyrics">
+
+        <div class="verse">
+          <h3>Verse 1</h3>
+          <p>You were six-foot tall in the <span class="blank" data-id="b1" data-answer="mosh pit" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Lord knows I've been that man</p>
+          <p>Keep your head low, <span class="blank" data-id="b2" data-answer="blend in" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>But looks like you've got other plans</p>
+          <p>Roll your sweater sleeves up</p>
+          <p>Put your drink on the counter</p>
+          <p>Give the people what they want</p>
+          <p>What they want is a man who will give</p>
+          <p>Everything he's got</p>
+          <p><span class="blank" data-id="b3" data-answer="steal the show" tabindex="0" role="button" aria-pressed="false"></span> from the <span class="blank" data-id="b4" data-answer="opener" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Your ex said you can't dance</p>
+          <p>Now you're showing her</p>
+        </div>
+
+        <div class="verse">
+          <h3>Chorus</h3>
+          <p>Oh, you're a <span class="blank" data-id="b5" data-answer="dancing dream" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>A <span class="blank" data-id="b6" data-answer="mean machine" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>A <span class="blank" data-id="b7" data-answer="ballerina" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Oh, and the camera phones are <span class="blank" data-id="b8" data-answer="flashing" tabindex="0" role="button" aria-pressed="false"></span> now</p>
+          <p><span class="blank" data-id="b9" data-answer="leave it all on the floor" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>You can leave it</p>
+          <p>Leave it all on the floor</p>
+          <p>You can leave it all</p>
+          <p>Leave it all on the floor</p>
+          <p>What else is in store?</p>
+          <p>(<span class="blank" data-id="b10" data-answer="all eyes on you" tabindex="0" role="button" aria-pressed="false"></span>, <span class="blank" data-id="b11" data-answer="all eyes on you" tabindex="0" role="button" aria-pressed="false"></span>)</p>
+          <p>They're <span class="blank" data-id="b12" data-answer="begging for more" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>(More! More! More! More!)</p>
+        </div>
+
+        <div class="verse">
+          <h3>Verse 2</h3>
+          <p>Well, you got <span class="blank" data-id="b13" data-answer="spin moves" tabindex="0" role="button" aria-pressed="false"></span>, handstands</p>
+          <p>Making all the fans chant</p>
+          <p>We came here to listen</p>
+          <p>Now we'd rather watch this man dance</p>
+          <p>You're their sweetie pie, <span class="blank" data-id="b14" data-answer="golden boy" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>You're their buttercup</p>
+          <p>Your ex said you can't dance</p>
+          <p>Now you shut her up</p>
+        </div>
+
+        <div class="verse">
+          <h3>Chorus</h3>
+          <p>Oh, you're a <span class="blank" data-id="b15" data-answer="dancing dream" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>A <span class="blank" data-id="b16" data-answer="mean machine" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>A <span class="blank" data-id="b17" data-answer="ballerina" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Oh, and the camera phones are <span class="blank" data-id="b18" data-answer="flashing" tabindex="0" role="button" aria-pressed="false"></span> now</p>
+          <p><span class="blank" data-id="b19" data-answer="leave it all on the floor" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>You can leave it</p>
+          <p>Leave it all on the floor</p>
+          <p>You can leave it all</p>
+          <p>Leave it all on the floor</p>
+        </div>
+
+        <div class="verse">
+          <h3>Chorus</h3>
+          <p>Oh, you're a <span class="blank" data-id="b20" data-answer="dancing dream" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>A <span class="blank" data-id="b21" data-answer="mean machine" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>A <span class="blank" data-id="b22" data-answer="ballerina" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Oh, and the camera phones are <span class="blank" data-id="b23" data-answer="flashing" tabindex="0" role="button" aria-pressed="false"></span> now</p>
+          <p><span class="blank" data-id="b24" data-answer="leave it all on the floor" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>You can leave it</p>
+          <p>Leave it all on the floor</p>
+          <p>You can leave it all</p>
+          <p>Leave it all on the floor</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="controls">
+    <button class="action btn-check" id="checkBtn">Check Answers</button>
+    <button class="action btn-reset" id="resetBtn">Reset</button>
+    <span class="status" id="statusText"></span>
+  </section>
+
+  <section class="score-panel" id="scorePanel" aria-live="polite">
+    <div class="score-num" id="scoreNum"></div>
+    <p class="score-msg" id="scoreMsg"></p>
+  </section>
+
+  <section class="about">
+    <h2>About the song</h2>
+    <div class="card">
+      <p>"Your Ex Said You Can't Dance" is by The Real Zebos. It's a confident, crowd-pleasing anthem about proving a doubter wrong right on the dance floor, aimed straight at somebody's ex.</p>
+    </div>
+  </section>
+
+  <section class="recap" id="recapSection">
+    <h2>Vocabulary recap</h2>
+    <div class="recap-grid" id="recapGrid"></div>
+  </section>
+
+</main>
+
+<footer>Built for English language practice. Lyrics used for educational purposes.</footer>
+
+<script>
+(function(){
+  const targetWords = [
+    { word:"all eyes on you", pos:"idiom", def:"everyone is watching you, you're the center of attention.", line:"(All eyes on you, all eyes on you)" },
+    { word:"ballerina", pos:"noun", def:"a female ballet dancer, used here to praise someone's graceful movement.", line:"A ballerina" },
+    { word:"begging for more", pos:"idiom", def:"wanting something so much you can't get enough of it.", line:"They're begging for more" },
+    { word:"blend in", pos:"phrasal verb", def:"to look or act like everyone else so you don't stand out.", line:"Keep your head low, blend in" },
+    { word:"dancing dream", pos:"phrase", def:"someone who dances so well they seem almost unreal.", line:"Oh, you're a dancing dream" },
+    { word:"flashing", pos:"verb", def:"giving off quick, bright bursts of light.", line:"Oh, and the camera phones are flashing now" },
+    { word:"golden boy", pos:"idiom", def:"someone who is very popular, successful, and admired by everyone.", line:"You're their sweetie pie, golden boy" },
+    { word:"leave it all on the floor", pos:"idiom", def:"to give everything you've got, holding nothing back.", line:"Leave it all on the floor" },
+    { word:"mean machine", pos:"idiom, informal", def:"someone or something impressively skilled, fast, or powerful.", line:"A mean machine" },
+    { word:"mosh pit", pos:"noun", def:"the crowded area near the stage at a concert where people push and dance roughly to the music.", line:"You were six-foot tall in the mosh pit" },
+    { word:"opener", pos:"noun", def:"the act or artist who performs first, before the main performer.", line:"Steal the show from the opener" },
+    { word:"spin moves", pos:"noun", def:"dance or sports moves that involve turning quickly.", line:"Well, you got spin moves, handstands" },
+    { word:"steal the show", pos:"idiom", def:"to get more attention and praise than anyone else in a performance.", line:"Steal the show from the opener" }
+  ];
+
+  const distractorWords = ["graceful", "nonchalant", "showoff", "spotlight", "swagger"];
+
+  const blanks = Array.from(document.querySelectorAll(".blank"));
+
+  const usage = {};
+  blanks.forEach(b => {
+    const ans = b.dataset.answer.toLowerCase();
+    usage[ans] = (usage[ans] || 0) + 1;
+  });
+
+  const tileData = [];
+  targetWords.forEach(t => {
+    tileData.push({ word:t.word, total: usage[t.word.toLowerCase()] || 0, used:0, isTarget:true });
+  });
+  distractorWords.forEach(w => {
+    tileData.push({ word:w, total:0, used:0, isTarget:false });
+  });
+  tileData.sort((a,b) => a.word.localeCompare(b.word));
+
+  const tilesContainer = document.getElementById("tiles");
+  const tileEls = {};
+
+  tileData.forEach(t => {
+    const el = document.createElement("div");
+    el.className = "tile";
+    el.tabIndex = 0;
+    el.setAttribute("role", "button");
+    el.setAttribute("aria-pressed", "false");
+    el.dataset.word = t.word;
+    renderTile(el, t);
+    el.addEventListener("click", () => onTileActivate(t, el));
+    el.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onTileActivate(t, el); }
+    });
+    tilesContainer.appendChild(el);
+    tileEls[t.word] = el;
+  });
+
+  function renderTile(el, t){
+    el.innerHTML = "";
+    const label = document.createElement("span");
+    label.textContent = t.word;
+    el.appendChild(label);
+    if (t.isTarget && t.total > 1){
+      const count = document.createElement("span");
+      count.className = "count";
+      count.textContent = (t.total - t.used) + "x";
+      el.appendChild(count);
+    }
+    const remaining = t.isTarget ? (t.total - t.used) : (t.used === 0 ? 1 : 0);
+    const disabled = t.isTarget ? remaining <= 0 : t.used > 0;
+    el.setAttribute("aria-disabled", disabled ? "true" : "false");
+    el.setAttribute("aria-label", t.word + (disabled ? ", already used" : ", available"));
+  }
+
+  let selected = null;
+
+  function onTileActivate(t, el){
+    const remaining = t.isTarget ? (t.total - t.used) : (t.used === 0 ? 1 : 0);
+    if (remaining <= 0) return;
+    if (selected && selected.word === t.word){
+      selected = null;
+      el.setAttribute("aria-pressed", "false");
+      return;
+    }
+    if (selected){
+      tileEls[selected.word].setAttribute("aria-pressed", "false");
+    }
+    selected = t;
+    el.setAttribute("aria-pressed", "true");
+  }
+
+  const filledCountEl = document.getElementById("filledCount");
+  const totalCountEl = document.getElementById("totalCount");
+  totalCountEl.textContent = blanks.length;
+
+  function updateLiveCount(){
+    const filled = blanks.filter(b => b.dataset.filled === "1").length;
+    filledCountEl.textContent = filled;
+  }
+
+  function findTileFor(word){
+    return tileData.find(t => t.word.toLowerCase() === word.toLowerCase());
+  }
+
+  blanks.forEach(b => {
+    b.addEventListener("click", () => onBlankActivate(b));
+    b.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onBlankActivate(b); }
+    });
+  });
+
+  function onBlankActivate(b){
+    const isFilled = b.dataset.filled === "1";
+    if (isFilled){
+      const placedWord = b.dataset.placed;
+      const t = findTileFor(placedWord);
+      if (t){
+        t.used = Math.max(0, t.used - 1);
+        renderTile(tileEls[t.word], t);
+      }
+      b.textContent = "";
+      b.dataset.filled = "0";
+      b.dataset.placed = "";
+      b.classList.remove("filled", "correct", "incorrect");
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", "empty blank");
+      updateLiveCount();
+      return;
+    }
+    if (!selected) return;
+    b.textContent = selected.word;
+    b.dataset.filled = "1";
+    b.dataset.placed = selected.word;
+    b.classList.add("filled");
+    b.classList.remove("correct", "incorrect");
+    b.setAttribute("aria-pressed", "true");
+    b.setAttribute("aria-label", "blank filled with " + selected.word);
+
+    selected.used += 1;
+    renderTile(tileEls[selected.word], selected);
+    tileEls[selected.word].setAttribute("aria-pressed", "false");
+    selected = null;
+    updateLiveCount();
+  }
+
+  const checkBtn = document.getElementById("checkBtn");
+  const resetBtn = document.getElementById("resetBtn");
+  const statusText = document.getElementById("statusText");
+  const scorePanel = document.getElementById("scorePanel");
+  const scoreNum = document.getElementById("scoreNum");
+  const scoreMsg = document.getElementById("scoreMsg");
+  const recapSection = document.getElementById("recapSection");
+  const recapGrid = document.getElementById("recapGrid");
+
+  checkBtn.addEventListener("click", () => {
+    let correct = 0;
+    blanks.forEach(b => {
+      const answer = b.dataset.answer.toLowerCase();
+      const placed = (b.dataset.placed || "").toLowerCase();
+      b.classList.remove("correct", "incorrect");
+      const existingCorrection = b.querySelector(".correction");
+      if (existingCorrection) existingCorrection.remove();
+
+      if (placed === answer && placed !== ""){
+        b.classList.add("correct");
+        b.setAttribute("aria-label", "blank filled with " + b.dataset.placed + ", correct");
+        correct++;
+      } else {
+        b.classList.add("incorrect");
+        const label = placed === "" ? "empty blank, incorrect" : "blank filled with " + b.dataset.placed + ", incorrect";
+        b.setAttribute("aria-label", label + ". Correct answer: " + b.dataset.answer);
+        const corr = document.createElement("span");
+        corr.className = "correction";
+        corr.textContent = "Correct: " + b.dataset.answer;
+        b.appendChild(corr);
+      }
+    });
+
+    const total = blanks.length;
+    const pct = correct / total;
+    scoreNum.textContent = correct + " / " + total;
+
+    let msg;
+    if (pct === 1){
+      msg = "Every blank landed, you left nothing on the floor. Your ex can eat those words now.";
+    } else if (pct >= 0.75){
+      msg = "Most of it landed clean. A couple of steps got missed, go back and nail the rest.";
+    } else if (pct >= 0.5){
+      msg = "You're finding the rhythm, but a few moves are off. Check what's marked and go again.";
+    } else {
+      msg = "Rough set tonight, and that's alright. Look at what's highlighted below and get back on the floor.";
+    }
+    scoreMsg.textContent = msg;
+    scorePanel.classList.add("visible");
+    statusText.textContent = "Checked: " + correct + " of " + total + " correct.";
+
+    buildRecap();
+    recapSection.classList.add("visible");
+  });
+
+  function buildRecap(){
+    recapGrid.innerHTML = "";
+    targetWords.forEach(t => {
+      const item = document.createElement("div");
+      item.className = "recap-item";
+      item.innerHTML =
+        '<div class="word">' + t.word + '</div>' +
+        '<span class="pos">' + t.pos + '</span>' +
+        '<p class="def">' + t.def + '</p>' +
+        '<p class="line">"' + t.line + '"</p>';
+      recapGrid.appendChild(item);
+    });
+  }
+
+  resetBtn.addEventListener("click", () => {
+    blanks.forEach(b => {
+      b.textContent = "";
+      b.dataset.filled = "0";
+      b.dataset.placed = "";
+      b.classList.remove("filled", "correct", "incorrect");
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", "empty blank");
+      const existingCorrection = b.querySelector(".correction");
+      if (existingCorrection) existingCorrection.remove();
+    });
+    tileData.forEach(t => {
+      t.used = 0;
+      renderTile(tileEls[t.word], t);
+    });
+    selected = null;
+    scorePanel.classList.remove("visible");
+    recapSection.classList.remove("visible");
+    statusText.textContent = "Board reset.";
+    updateLiveCount();
+  });
+
+  blanks.forEach(b => {
+    b.setAttribute("aria-label", "empty blank");
+    b.dataset.filled = "0";
+    b.dataset.placed = "";
+  });
+  updateLiveCount();
+})();
+</script>
+
+</body>
+</html>

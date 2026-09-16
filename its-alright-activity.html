@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>it's alright — Vocabulary Activity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4f2ec;
+    --paper-2:#eae6da;
+    --ink:#24262b;
+    --ink-soft:#5a5d63;
+    --blue:#2d3fa0;
+    --pink:#ff5da2;
+    --orange:#ff9f43;
+    --yellow:#ffe066;
+    --tape:#d7cfc0;
+    --card:#ffffff;
+    --card-border:#dcd8cb;
+    --correct:#2f9e5c;
+    --correct-bg:rgba(47,158,92,0.1);
+    --incorrect:#e0475c;
+    --incorrect-bg:rgba(224,71,92,0.1);
+    --focus:#2d3fa0;
+    --radius:2px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      radial-gradient(rgba(36,38,43,0.035) 1px, transparent 1px);
+    background-size:14px 14px;
+    color:var(--ink);
+    font-family:'Space Mono', 'Courier New', monospace;
+    line-height:1.6;
+    min-height:100vh;
+  }
+
+  h1,h2,h3{
+    font-family:'Permanent Marker', cursive;
+    font-weight:400;
+    margin:0 0 0.4em 0;
+    color:var(--ink);
+  }
+
+  a{color:var(--blue);}
+
+  .visually-hidden{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+
+  :focus-visible{
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+  }
+
+  main{max-width:1080px; margin:0 auto; padding:0 20px 80px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:70px 24px 46px;
+    text-align:center;
+    overflow:hidden;
+    border-bottom:2px solid var(--ink);
+  }
+  .hero-art{position:absolute; inset:0; z-index:0; opacity:0.9;}
+  .hero-inner{position:relative; z-index:1;}
+  .hero .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.8rem;
+    color:var(--blue);
+    letter-spacing:0.04em;
+    margin-bottom:10px;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 8vw, 4.8rem);
+    color:var(--ink);
+    position:relative;
+    display:inline-block;
+  }
+  .hero h1 .hl{
+    background:linear-gradient(180deg, transparent 55%, var(--yellow) 55%);
+    padding:0 4px;
+  }
+  .hero .artist{
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    margin-bottom:16px;
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+  }
+  .hero .tagline{
+    max-width:540px;
+    margin:0 auto 26px;
+    color:var(--ink-soft);
+    font-size:1rem;
+  }
+  .facts{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+  }
+  .fact{
+    background:var(--card);
+    border:2px solid var(--ink);
+    padding:7px 14px;
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    transform:rotate(-1deg);
+  }
+  .fact:nth-child(2){transform:rotate(1deg);}
+  .fact:nth-child(3){transform:rotate(-0.5deg);}
+  .fact strong{color:var(--pink); font-weight:700;}
+
+  /* ---------- Sections ---------- */
+  section{padding:42px 0;}
+  .intro{border-bottom:2px dashed var(--ink);}
+  .intro p{font-size:1.02rem; color:var(--ink-soft); max-width:680px;}
+
+  .howto{border-bottom:2px dashed var(--ink);}
+  .howto h2{color:var(--ink);}
+  .howto ol{
+    list-style:none;
+    counter-reset:step;
+    padding:0;
+    margin:20px 0 0;
+    display:grid;
+    gap:12px;
+  }
+  .howto li{
+    counter-increment:step;
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+    background:var(--card);
+    border:2px solid var(--ink);
+    padding:14px 18px;
+    box-shadow:4px 4px 0 var(--tape);
+  }
+  .howto li::before{
+    content:counter(step);
+    flex:0 0 auto;
+    width:28px; height:28px;
+    background:var(--pink);
+    color:#fff;
+    font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Mono', monospace;
+    border-radius:50%;
+  }
+  .howto .note{
+    margin-top:16px;
+    font-size:0.88rem;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- Activity grid ---------- */
+  .activity-wrap{padding-top:42px;}
+  .activity-grid{
+    display:grid;
+    grid-template-columns: 260px 1fr;
+    gap:26px;
+    align-items:start;
+  }
+  @media (max-width: 760px){
+    .activity-grid{grid-template-columns:1fr;}
+  }
+
+  .board{
+    position:sticky;
+    top:16px;
+    background:var(--card);
+    border:2px solid var(--ink);
+    padding:18px;
+    box-shadow:5px 5px 0 var(--blue);
+  }
+  @media (max-width: 760px){
+    .board{position:relative; top:0;}
+  }
+  .board h2{font-size:1.3rem;}
+  .board .subnote{font-size:0.82rem; color:var(--ink-soft); margin-bottom:14px; font-family:'Space Mono', monospace;}
+  .tiles{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .tile{
+    min-height:40px;
+    padding:8px 14px;
+    background:var(--paper);
+    border:2px solid var(--ink);
+    color:var(--ink);
+    font-size:0.86rem;
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .tile:hover{transform:translate(-2px,-2px); box-shadow:2px 2px 0 var(--ink);}
+  .tile[aria-pressed="true"]{
+    background:var(--pink);
+    border-color:var(--pink);
+    color:#fff;
+    box-shadow:2px 2px 0 var(--ink);
+  }
+  .tile[aria-disabled="true"]{
+    opacity:0.3;
+    cursor:not-allowed;
+    text-decoration:line-through;
+  }
+  .tile .count{
+    font-size:0.68rem;
+    background:rgba(36,38,43,0.1);
+    padding:1px 6px;
+    border-radius:999px;
+  }
+  .tile[aria-pressed="true"] .count{background:rgba(255,255,255,0.3);}
+
+  .live-count{
+    margin-top:16px;
+    font-size:0.84rem;
+    color:var(--ink-soft);
+    border-top:2px dashed var(--ink);
+    padding-top:12px;
+  }
+  .live-count strong{color:var(--blue);}
+
+  /* ---------- Lyric sheet ---------- */
+  .lyrics{
+    background:var(--card);
+    border:2px solid var(--ink);
+    padding:28px 30px;
+    box-shadow:6px 6px 0 var(--orange);
+  }
+  .verse{margin-bottom:28px;}
+  .verse:last-child{margin-bottom:0;}
+  .verse h3{
+    font-size:1.05rem;
+    color:var(--blue);
+    margin-bottom:10px;
+  }
+  .verse p{
+    margin:0 0 6px 0;
+    font-size:1.02rem;
+    color:var(--ink);
+    max-width:62ch;
+  }
+
+  .blank{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:104px;
+    min-height:40px;
+    padding:4px 12px;
+    margin:0 2px;
+    background:var(--paper-2);
+    border:2px dashed var(--ink-soft);
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    vertical-align:middle;
+    font-family:'Space Mono', monospace;
+  }
+  .blank:hover{border-color:var(--blue);}
+  .blank.filled{
+    border-style:solid;
+    border-color:var(--blue);
+    color:var(--blue);
+    font-weight:700;
+    background:rgba(45,63,160,0.08);
+  }
+  .blank.correct{
+    border-color:var(--correct);
+    background:var(--correct-bg);
+    color:var(--correct);
+  }
+  .blank.incorrect{
+    border-color:var(--incorrect);
+    background:var(--incorrect-bg);
+    color:var(--incorrect);
+  }
+  .blank .correction{
+    display:block;
+    font-size:0.7rem;
+    color:var(--incorrect);
+    margin-top:2px;
+  }
+
+  /* ---------- Controls ---------- */
+  .controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    align-items:center;
+    padding:32px 0;
+    border-top:2px dashed var(--ink);
+    border-bottom:2px dashed var(--ink);
+  }
+  button.action{
+    font-family:'Permanent Marker', cursive;
+    font-size:1.05rem;
+    padding:12px 26px;
+    border:2px solid var(--ink);
+    cursor:pointer;
+    min-height:44px;
+  }
+  .btn-check{
+    background:var(--pink);
+    color:#fff;
+    box-shadow:4px 4px 0 var(--ink);
+  }
+  .btn-reset{
+    background:var(--card);
+    color:var(--ink-soft);
+  }
+  .controls .status{
+    font-size:0.88rem;
+    color:var(--ink-soft);
+    font-family:'Space Mono', monospace;
+  }
+
+  /* ---------- Score ---------- */
+  .score-panel{
+    display:none;
+    padding:34px 0;
+    border-bottom:2px dashed var(--ink);
+  }
+  .score-panel.visible{display:block;}
+  .score-panel .score-num{
+    font-family:'Permanent Marker', cursive;
+    font-size:3rem;
+    color:var(--pink);
+  }
+  .score-panel .score-msg{
+    max-width:600px;
+    font-size:1.02rem;
+    color:var(--ink);
+    margin-top:8px;
+  }
+
+  /* ---------- About ---------- */
+  .about .card{
+    background:var(--card);
+    border:2px solid var(--ink);
+    padding:22px 26px;
+    box-shadow:5px 5px 0 var(--yellow);
+    max-width:680px;
+  }
+  .about p{color:var(--ink-soft); margin:0;}
+
+  /* ---------- Recap ---------- */
+  .recap{display:none;}
+  .recap.visible{display:block;}
+  .recap-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:16px;
+    margin-top:20px;
+  }
+  .recap-item{
+    background:var(--card);
+    border:2px solid var(--ink);
+    padding:16px 18px;
+    box-shadow:3px 3px 0 var(--blue);
+  }
+  .recap-item .word{
+    font-family:'Permanent Marker', cursive;
+    font-size:1.15rem;
+    color:var(--pink);
+  }
+  .recap-item .pos{
+    display:inline-block;
+    font-size:0.66rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--ink-soft);
+    background:var(--paper-2);
+    padding:2px 8px;
+    margin:6px 0 8px;
+    font-family:'Space Mono', monospace;
+  }
+  .recap-item .def{font-size:0.9rem; color:var(--ink); margin-bottom:8px;}
+  .recap-item .line{
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    font-style:italic;
+    border-left:3px solid var(--orange);
+    padding-left:10px;
+  }
+
+  footer{
+    text-align:center;
+    padding:30px 20px 10px;
+    color:var(--ink-soft);
+    font-size:0.78rem;
+    font-family:'Space Mono', monospace;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="hero-art" viewBox="0 0 1080 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <rect x="440" y="90" width="200" height="130" rx="6" fill="none" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="500" cy="155" r="26" fill="none" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="580" cy="155" r="26" fill="none" stroke="var(--ink)" stroke-width="3"/>
+    <circle cx="500" cy="155" r="7" fill="var(--ink)"/>
+    <circle cx="580" cy="155" r="7" fill="var(--ink)"/>
+    <line x1="460" y1="110" x2="620" y2="110" stroke="var(--ink)" stroke-width="2"/>
+    <path d="M 340 60 L 360 90 L 320 90 Z" fill="var(--pink)" opacity="0.8" transform="rotate(-8 340 75)"/>
+    <path d="M 730 220 L 760 245 L 700 245 Z" fill="var(--orange)" opacity="0.8" transform="rotate(10 730 232)"/>
+    <path d="M 200 200 q 20 -30 40 0 q 20 -30 40 0" stroke="var(--blue)" stroke-width="3" fill="none"/>
+    <line x1="180" y1="230" x2="260" y2="230" stroke="var(--ink)" stroke-width="2" stroke-dasharray="4 4"/>
+  </svg>
+  <div class="hero-inner">
+    <p class="eyebrow">song vocabulary activity &middot; B1&ndash;B2</p>
+    <h1><span class="hl">it's alright</span></h1>
+    <p class="artist">KEVIN WALKMAN</p>
+    <p class="tagline">A breakup song that keeps insisting it's fine, while every line proves it's still working through it.</p>
+    <div class="facts">
+      <span class="fact"><strong>Genre:</strong> Lo-fi / bedroom pop</span>
+      <span class="fact"><strong>Theme:</strong> Post-breakup defiance</span>
+      <span class="fact"><strong>Level:</strong> B1&ndash;B2</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="intro">
+    <h2>What you'll do</h2>
+    <p>Read through the lyrics of "it's alright" and fill in the missing words using the board on the side. Every blank has one correct answer taken straight from the song. When you're done, check your answers and see how it went, plus a quick reference to every word you just practiced.</p>
+  </section>
+
+  <section class="howto">
+    <h2>How to play</h2>
+    <ol>
+      <li>Click a word on the board to select it. It will light up to show it's chosen.</li>
+      <li>Click a blank in the lyrics to drop that word into it. Click a filled blank again to pull the word back out.</li>
+      <li>Changed your mind about a tile before placing it? Click it again to deselect.</li>
+      <li>Once you're happy with your answers, click Check Answers.</li>
+    </ol>
+    <p class="note">The board has more words than blanks. Some are there to test you, not to be used.</p>
+  </section>
+
+  <section class="activity-wrap">
+    <div class="activity-grid">
+      <div class="board" aria-label="Word bank">
+        <h2>Word board</h2>
+        <p class="subnote">Click a word, then click a blank to place it.</p>
+        <div class="tiles" id="tiles"></div>
+        <div class="live-count" id="liveCount" aria-live="polite">
+          <strong id="filledCount">0</strong> of <strong id="totalCount">0</strong> blanks filled
+        </div>
+      </div>
+
+      <div class="lyrics" id="lyrics">
+
+        <div class="verse">
+          <h3>Chorus</h3>
+          <p>And it's alright</p>
+          <p>That's the way I like it</p>
+          <p>Getting <span class="blank" data-id="b1" data-answer="crucified" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Every time you <span class="blank" data-id="b2" data-answer="cross my mind" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Maybe that's not kind</p>
+          <p>You won't like my face</p>
+          <p>I'll <span class="blank" data-id="b3" data-answer="hit you up" tabindex="0" role="button" aria-pressed="false"></span> online 'cause</p>
+          <p>Babe I've changed</p>
+          <p>I think it's <span class="blank" data-id="b4" data-answer="for the better" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>We can <span class="blank" data-id="b5" data-answer="go our ways" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Doesn't mean you're <span class="blank" data-id="b6" data-answer="off my mind" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Go and live your life</p>
+          <p>Let me write a song about you</p>
+          <p>Once or twice like</p>
+          <p>Ya da da da da da da da da da da</p>
+          <p>Ya da da da da da da da da da da dow</p>
+          <p>Ya da dow</p>
+        </div>
+
+        <div class="verse">
+          <h3>Verse 1</h3>
+          <p><span class="blank" data-id="b7" data-answer="self-loathing" tabindex="0" role="button" aria-pressed="false"></span>, thrift clothing</p>
+          <p>There's not much more to me right now</p>
+          <p>And you don't know how, and</p>
+          <p>Ripped t-shirts, in my bed skirt</p>
+          <p>I use all those nights as <span class="blank" data-id="b8" data-answer="framework" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>You weren't perfect but <span class="blank" data-id="b9" data-answer="a hell of a ride" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>You can call but</p>
+          <p>Boy <span class="blank" data-id="b10" data-answer="no promises" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>'Cause I don't gotta pick you up anymore</p>
+        </div>
+
+        <div class="verse">
+          <h3>Chorus</h3>
+          <p>And it's alright</p>
+          <p>That's the way I like it</p>
+          <p>Getting <span class="blank" data-id="b11" data-answer="crucified" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Every time you <span class="blank" data-id="b12" data-answer="cross my mind" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Maybe that's not kind</p>
+          <p>You won't like my face</p>
+          <p>I'll <span class="blank" data-id="b13" data-answer="hit you up" tabindex="0" role="button" aria-pressed="false"></span> online 'cause</p>
+          <p>Babe I've changed</p>
+          <p>I think it's <span class="blank" data-id="b14" data-answer="for the better" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>We can <span class="blank" data-id="b15" data-answer="go our ways" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Doesn't mean you're <span class="blank" data-id="b16" data-answer="off my mind" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Go and live your life</p>
+          <p>Let me write a song about you</p>
+          <p>Once or twice like</p>
+          <p>Ya da da da da da da da da da da</p>
+          <p>Ya da da da da da da da da da da dow</p>
+          <p>Ya da dow</p>
+        </div>
+
+        <div class="verse">
+          <h3>Verse 2</h3>
+          <p>And now every time I bring you up my friends <span class="blank" data-id="b17" data-answer="shoot it down" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>What a hell of a reminder of our post-loving sound</p>
+          <p>What a time to be alive</p>
+          <p>I hate it when you <span class="blank" data-id="b18" data-answer="shut down" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>And frankly I still love the tracks that we used to sing</p>
+          <p>I thought you'd fuck it up you didn't <span class="blank" data-id="b19" data-answer="ruin" tabindex="0" role="button" aria-pressed="false"></span> a thing</p>
+          <p>What a time to be alive</p>
+          <p>I swore that it was our sound</p>
+          <p>You can call but</p>
+          <p>Boy <span class="blank" data-id="b20" data-answer="no promises" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>'Cause I don't gotta pick you up anymore</p>
+        </div>
+
+        <div class="verse">
+          <h3>Chorus</h3>
+          <p>And it's alright</p>
+          <p>That's the way I like it</p>
+          <p>Getting <span class="blank" data-id="b21" data-answer="crucified" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Every time you <span class="blank" data-id="b22" data-answer="cross my mind" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Maybe that's not kind</p>
+          <p>You won't like my face</p>
+          <p>I'll <span class="blank" data-id="b23" data-answer="hit you up" tabindex="0" role="button" aria-pressed="false"></span> online 'cause</p>
+          <p>Babe I've changed</p>
+          <p>I think it's <span class="blank" data-id="b24" data-answer="for the better" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>We can <span class="blank" data-id="b25" data-answer="go our ways" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Doesn't mean you're <span class="blank" data-id="b26" data-answer="off my mind" tabindex="0" role="button" aria-pressed="false"></span></p>
+          <p>Go and live your life</p>
+          <p>Let me write a song about you</p>
+          <p>Once or twice like</p>
+          <p>Ya da da da da da da da da da da</p>
+          <p>Ya da da da da da da da da da da dow</p>
+          <p>Let me write a song about you</p>
+          <p>Once or twice like</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="controls">
+    <button class="action btn-check" id="checkBtn">Check Answers</button>
+    <button class="action btn-reset" id="resetBtn">Reset</button>
+    <span class="status" id="statusText"></span>
+  </section>
+
+  <section class="score-panel" id="scorePanel" aria-live="polite">
+    <div class="score-num" id="scoreNum"></div>
+    <p class="score-msg" id="scoreMsg"></p>
+  </section>
+
+  <section class="about">
+    <h2>About the song</h2>
+    <div class="card">
+      <p>"it's alright" is by Kevin Walkman. The song plays tough about a breakup, insisting everything's fine and there are no hard feelings, while the lyrics keep circling back to what's clearly still unresolved underneath.</p>
+    </div>
+  </section>
+
+  <section class="recap" id="recapSection">
+    <h2>Vocabulary recap</h2>
+    <div class="recap-grid" id="recapGrid"></div>
+  </section>
+
+</main>
+
+<footer>Built for English language practice. Lyrics used for educational purposes.</footer>
+
+<script>
+(function(){
+  const targetWords = [
+    { word:"a hell of a ride", pos:"idiom, informal", def:"an intense, wild experience, good or bad.", line:"You weren't perfect but a hell of a ride" },
+    { word:"crucified", pos:"verb, informal", def:"treated painfully or made to suffer, used here to exaggerate emotional pain.", line:"Getting crucified" },
+    { word:"cross my mind", pos:"idiom", def:"to suddenly appear in your thoughts.", line:"Every time you cross my mind" },
+    { word:"for the better", pos:"phrase", def:"resulting in improvement, in a positive way.", line:"I think it's for the better" },
+    { word:"framework", pos:"noun", def:"a basic structure that supports or holds something together.", line:"I use all those nights as framework" },
+    { word:"go our ways", pos:"idiom", def:"to separate and continue on with life apart from each other.", line:"We can go our ways" },
+    { word:"hit you up", pos:"phrasal verb, informal", def:"to contact someone casually, especially online or by text.", line:"I'll hit you up online 'cause" },
+    { word:"no promises", pos:"phrase", def:"a way of saying you won't guarantee anything.", line:"Boy no promises" },
+    { word:"off my mind", pos:"idiom", def:"no longer being thought about, at least for now.", line:"Doesn't mean you're off my mind" },
+    { word:"ruin", pos:"verb", def:"to spoil or destroy something completely.", line:"I thought you'd fuck it up you didn't ruin a thing" },
+    { word:"self-loathing", pos:"noun", def:"a strong dislike or hatred directed at yourself.", line:"Self loathing, thrift clothing" },
+    { word:"shoot it down", pos:"phrasal verb", def:"to reject or dismiss an idea quickly.", line:"my friends shoot it down" },
+    { word:"shut down", pos:"phrasal verb", def:"to stop communicating or become emotionally closed off.", line:"I hate it when you shut down" }
+  ];
+
+  const distractorWords = ["indifferent", "linger", "overwhelmed", "reckon", "resentment"];
+
+  const blanks = Array.from(document.querySelectorAll(".blank"));
+
+  const usage = {};
+  blanks.forEach(b => {
+    const ans = b.dataset.answer.toLowerCase();
+    usage[ans] = (usage[ans] || 0) + 1;
+  });
+
+  const tileData = [];
+  targetWords.forEach(t => {
+    tileData.push({ word:t.word, total: usage[t.word.toLowerCase()] || 0, used:0, isTarget:true });
+  });
+  distractorWords.forEach(w => {
+    tileData.push({ word:w, total:0, used:0, isTarget:false });
+  });
+  tileData.sort((a,b) => a.word.localeCompare(b.word));
+
+  const tilesContainer = document.getElementById("tiles");
+  const tileEls = {};
+
+  tileData.forEach(t => {
+    const el = document.createElement("div");
+    el.className = "tile";
+    el.tabIndex = 0;
+    el.setAttribute("role", "button");
+    el.setAttribute("aria-pressed", "false");
+    el.dataset.word = t.word;
+    renderTile(el, t);
+    el.addEventListener("click", () => onTileActivate(t, el));
+    el.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onTileActivate(t, el); }
+    });
+    tilesContainer.appendChild(el);
+    tileEls[t.word] = el;
+  });
+
+  function renderTile(el, t){
+    el.innerHTML = "";
+    const label = document.createElement("span");
+    label.textContent = t.word;
+    el.appendChild(label);
+    if (t.isTarget && t.total > 1){
+      const count = document.createElement("span");
+      count.className = "count";
+      count.textContent = (t.total - t.used) + "x";
+      el.appendChild(count);
+    }
+    const remaining = t.isTarget ? (t.total - t.used) : (t.used === 0 ? 1 : 0);
+    const disabled = t.isTarget ? remaining <= 0 : t.used > 0;
+    el.setAttribute("aria-disabled", disabled ? "true" : "false");
+    el.setAttribute("aria-label", t.word + (disabled ? ", already used" : ", available"));
+  }
+
+  let selected = null;
+
+  function onTileActivate(t, el){
+    const remaining = t.isTarget ? (t.total - t.used) : (t.used === 0 ? 1 : 0);
+    if (remaining <= 0) return;
+    if (selected && selected.word === t.word){
+      selected = null;
+      el.setAttribute("aria-pressed", "false");
+      return;
+    }
+    if (selected){
+      tileEls[selected.word].setAttribute("aria-pressed", "false");
+    }
+    selected = t;
+    el.setAttribute("aria-pressed", "true");
+  }
+
+  const filledCountEl = document.getElementById("filledCount");
+  const totalCountEl = document.getElementById("totalCount");
+  totalCountEl.textContent = blanks.length;
+
+  function updateLiveCount(){
+    const filled = blanks.filter(b => b.dataset.filled === "1").length;
+    filledCountEl.textContent = filled;
+  }
+
+  function findTileFor(word){
+    return tileData.find(t => t.word.toLowerCase() === word.toLowerCase());
+  }
+
+  blanks.forEach(b => {
+    b.addEventListener("click", () => onBlankActivate(b));
+    b.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onBlankActivate(b); }
+    });
+  });
+
+  function onBlankActivate(b){
+    const isFilled = b.dataset.filled === "1";
+    if (isFilled){
+      const placedWord = b.dataset.placed;
+      const t = findTileFor(placedWord);
+      if (t){
+        t.used = Math.max(0, t.used - 1);
+        renderTile(tileEls[t.word], t);
+      }
+      b.textContent = "";
+      b.dataset.filled = "0";
+      b.dataset.placed = "";
+      b.classList.remove("filled", "correct", "incorrect");
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", "empty blank");
+      updateLiveCount();
+      return;
+    }
+    if (!selected) return;
+    b.textContent = selected.word;
+    b.dataset.filled = "1";
+    b.dataset.placed = selected.word;
+    b.classList.add("filled");
+    b.classList.remove("correct", "incorrect");
+    b.setAttribute("aria-pressed", "true");
+    b.setAttribute("aria-label", "blank filled with " + selected.word);
+
+    selected.used += 1;
+    renderTile(tileEls[selected.word], selected);
+    tileEls[selected.word].setAttribute("aria-pressed", "false");
+    selected = null;
+    updateLiveCount();
+  }
+
+  const checkBtn = document.getElementById("checkBtn");
+  const resetBtn = document.getElementById("resetBtn");
+  const statusText = document.getElementById("statusText");
+  const scorePanel = document.getElementById("scorePanel");
+  const scoreNum = document.getElementById("scoreNum");
+  const scoreMsg = document.getElementById("scoreMsg");
+  const recapSection = document.getElementById("recapSection");
+  const recapGrid = document.getElementById("recapGrid");
+
+  checkBtn.addEventListener("click", () => {
+    let correct = 0;
+    blanks.forEach(b => {
+      const answer = b.dataset.answer.toLowerCase();
+      const placed = (b.dataset.placed || "").toLowerCase();
+      b.classList.remove("correct", "incorrect");
+      const existingCorrection = b.querySelector(".correction");
+      if (existingCorrection) existingCorrection.remove();
+
+      if (placed === answer && placed !== ""){
+        b.classList.add("correct");
+        b.setAttribute("aria-label", "blank filled with " + b.dataset.placed + ", correct");
+        correct++;
+      } else {
+        b.classList.add("incorrect");
+        const label = placed === "" ? "empty blank, incorrect" : "blank filled with " + b.dataset.placed + ", incorrect";
+        b.setAttribute("aria-label", label + ". Correct answer: " + b.dataset.answer);
+        const corr = document.createElement("span");
+        corr.className = "correction";
+        corr.textContent = "Correct: " + b.dataset.answer;
+        b.appendChild(corr);
+      }
+    });
+
+    const total = blanks.length;
+    const pct = correct / total;
+    scoreNum.textContent = correct + " / " + total;
+
+    let msg;
+    if (pct === 1){
+      msg = "Every blank filled and it's alright, that's the way you like it. Nothing got past you this time.";
+    } else if (pct >= 0.75){
+      msg = "Solid attempt. A few words still cross your mind wrong, so check what's marked and fix them up.";
+    } else if (pct >= 0.5){
+      msg = "You're getting there, even if a few words slipped off your mind. Look at what's highlighted and try again.";
+    } else {
+      msg = "Rough round, and that's alright too. Check what's marked below and give it another shot.";
+    }
+    scoreMsg.textContent = msg;
+    scorePanel.classList.add("visible");
+    statusText.textContent = "Checked: " + correct + " of " + total + " correct.";
+
+    buildRecap();
+    recapSection.classList.add("visible");
+  });
+
+  function buildRecap(){
+    recapGrid.innerHTML = "";
+    targetWords.forEach(t => {
+      const item = document.createElement("div");
+      item.className = "recap-item";
+      item.innerHTML =
+        '<div class="word">' + t.word + '</div>' +
+        '<span class="pos">' + t.pos + '</span>' +
+        '<p class="def">' + t.def + '</p>' +
+        '<p class="line">"' + t.line + '"</p>';
+      recapGrid.appendChild(item);
+    });
+  }
+
+  resetBtn.addEventListener("click", () => {
+    blanks.forEach(b => {
+      b.textContent = "";
+      b.dataset.filled = "0";
+      b.dataset.placed = "";
+      b.classList.remove("filled", "correct", "incorrect");
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", "empty blank");
+      const existingCorrection = b.querySelector(".correction");
+      if (existingCorrection) existingCorrection.remove();
+    });
+    tileData.forEach(t => {
+      t.used = 0;
+      renderTile(tileEls[t.word], t);
+    });
+    selected = null;
+    scorePanel.classList.remove("visible");
+    recapSection.classList.remove("visible");
+    statusText.textContent = "Board reset.";
+    updateLiveCount();
+  });
+
+  blanks.forEach(b => {
+    b.setAttribute("aria-label", "empty blank");
+    b.dataset.filled = "0";
+    b.dataset.placed = "";
+  });
+  updateLiveCount();
+})();
+</script>
+
+</body>
+</html>
